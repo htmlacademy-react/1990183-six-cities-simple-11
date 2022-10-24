@@ -5,7 +5,7 @@ import Sorting from '../../components/sorting/sorting';
 import RoomCard from '../../components/room-card/room-card';
 
 type MainScreenProps = {
-  placeCardCount: number;
+  roomCardCount: number;
 };
 
 function MainScreen(props: MainScreenProps) {
@@ -27,12 +27,12 @@ function MainScreen(props: MainScreenProps) {
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
 
-              <b className="places__found">{props.placeCardCount} places to stay in Amsterdam</b>
+              <b className="places__found">{props.roomCardCount} places to stay in Amsterdam</b>
 
               <Sorting />
 
               <div className="cities__places-list places__list tabs__content">
-                {Array.from({length: props.placeCardCount}).map(() => <RoomCard />)}
+                {Array.from({length: props.roomCardCount}).map(() => <RoomCard />)}
               </div>
             </section>
 

@@ -10,6 +10,6 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <App placeCardCount={PLACE_CARD_COUNT} />
+    <App roomCardCount={PLACE_CARD_COUNT} />
   </React.StrictMode>,
 );

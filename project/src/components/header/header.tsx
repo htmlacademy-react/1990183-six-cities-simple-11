@@ -1,3 +1,6 @@
+import {Link} from 'react-router-dom';
+import {AppRoute} from '../../const';
+
 function Header() {
   return (
     <header className="header">
@@ -5,7 +8,10 @@ function Header() {
         <div className="header__wrapper">
 
           <div className="header__left">
-            <a className="header__logo-link header__logo-link--active">
+            <Link
+              className="header__logo-link header__logo-link--active"
+              to={AppRoute.Root}
+            >
               <img
                 className="header__logo"
                 src="img/logo.svg"
@@ -13,7 +19,7 @@ function Header() {
                 width="81"
                 height="41"
               />
-            </a>
+            </Link>
           </div>
 
           <nav className="header__nav">
@@ -27,7 +33,7 @@ function Header() {
               </li>
 
               <li className="header__nav-item">
-                <a className="header__nav-link" href="#">
+                <a className="header__nav-link" href="#todo">
                   <span className="header__signout">Sign out</span>
                 </a>
               </li>
