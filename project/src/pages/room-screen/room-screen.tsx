@@ -4,7 +4,7 @@ import RoomHeader from '../../components/room-header/room-header';
 import RoomInside from '../../components/room-inside/room-inside';
 import Host from '../../components/host/host';
 import Reviews from '../../components/reviews/reviews';
-import RoomCard from '../../components/card-room/card-room';
+import RoomCard from '../../components/room-card/room-card';
 
 function RoomScreen() {
   return (

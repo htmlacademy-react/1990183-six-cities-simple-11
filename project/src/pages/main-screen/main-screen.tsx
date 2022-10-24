@@ -1,7 +1,8 @@
+/* eslint-disable react/jsx-key */
 import Header from '../../components/header/header';
 import LocationNav from '../../components/location-nav/location-nav';
 import Sorting from '../../components/sorting/sorting';
-import RoomCard from '../../components/card-room/card-room';
+import RoomCard from '../../components/room-card/room-card';
 
 type MainScreenProps = {
   placeCardCount: number;
@@ -31,11 +32,7 @@ function MainScreen(props: MainScreenProps) {
               <Sorting />
 
               <div className="cities__places-list places__list tabs__content">
-                <RoomCard />
-                <RoomCard />
-                <RoomCard />
-                <RoomCard />
-                <RoomCard />
+                {Array.from({length: props.placeCardCount}).map((item) => <RoomCard />)}
               </div>
             </section>
 
