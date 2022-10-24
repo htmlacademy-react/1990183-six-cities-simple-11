@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-key */
 import Header from '../../components/header/header';
 import Gallery from '../../components/gallery/gallery';
 import RoomHeader from '../../components/room-header/room-header';
@@ -34,10 +35,9 @@ function RoomScreen() {
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
+
             <div className="near-places__list places__list">
-              <RoomCard />
-              <RoomCard />
-              <RoomCard />
+              {Array.from({length: 3}).map(() => <RoomCard />)}
             </div>
           </section>
         </div>

@@ -32,7 +32,7 @@ function MainScreen(props: MainScreenProps) {
               <Sorting />
 
               <div className="cities__places-list places__list tabs__content">
-                {Array.from({length: props.placeCardCount}).map((item) => <RoomCard />)}
+                {Array.from({length: props.placeCardCount}).map(() => <RoomCard />)}
               </div>
             </section>
 
