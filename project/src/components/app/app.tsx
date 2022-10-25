@@ -30,7 +30,7 @@ function App(props: AppProps) {
         />
 
         <Route
-          path='*'
+          path={AppRoute.NotFound}
           element={<NotFoundScreen />}
         />
       </Routes>
