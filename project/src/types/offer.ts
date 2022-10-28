@@ -1,8 +1,9 @@
 import { User } from './user';
 
 export type OfferId = number;
-
 export type OfferType = string;
+export type OfferGallery = string[];
+export type OfferGoods = string[];
 
 export type Location = {
   latitude: number;
@@ -21,13 +22,13 @@ export type Offer = {
   title: string;
   description: string;
   previewImage: string;
-  images: string[];
+  images: OfferGallery;
   isPremium: boolean;
   price: number;
   rating: number;
   bedrooms: number;
   maxAdults: number;
-  goods: string[];
+  goods: OfferGoods;
   location: Location;
   city: City;
   host: User;

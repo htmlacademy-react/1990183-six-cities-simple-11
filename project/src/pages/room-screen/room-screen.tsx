@@ -1,3 +1,5 @@
+import { Offer } from '../../types/offer';
+
 import Header from '../../components/header/header';
 import Gallery from '../../components/gallery/gallery';
 import RoomHeader from '../../components/room-header/room-header';
@@ -6,7 +8,11 @@ import Host from '../../components/host/host';
 import Reviews from '../../components/reviews/reviews';
 // import RoomCard from '../../components/room-card/room-card';
 
-function RoomScreen() {
+type RoomScreenProps = {
+  offer: Offer;
+};
+
+function RoomScreen({offer}: RoomScreenProps) {
   return (
     <div className="page">
       <div style={{ display: 'none' }}>
@@ -17,13 +23,13 @@ function RoomScreen() {
 
       <main className="page__main page__main--property">
         <section className="property">
-          <Gallery />
+          <Gallery images={offer.images} alt={offer.title} />
 
           <div className="property__container container">
             <div className="property__wrapper">
-              <RoomHeader />
-              <RoomInside />
-              <Host />
+              <RoomHeader offer={offer} />
+              <RoomInside goods={offer.goods} />
+              <Host user={offer.host} />
               <Reviews />
             </div>
           </div>
@@ -33,7 +39,9 @@ function RoomScreen() {
 
         <div className="container">
           <section className="near-places places">
-            <h2 className="near-places__title">Other places in the neighbourhood</h2>
+            <h2 className="near-places__title">
+              Other places in the neighbourhood
+            </h2>
 
             <div className="near-places__list places__list">
               {/* {Array.from({length: 3}).map(() => <RoomCard />)} */}

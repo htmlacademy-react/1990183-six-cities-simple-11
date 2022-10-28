@@ -7,6 +7,7 @@ import MainScreen from '../../pages/main-screen/main-screen';
 import RoomScreen from '../../pages/room-screen/room-screen';
 import LoginScreen from '../../pages/login-screen/login-screen';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
+import { offers } from '../../mocks/offers';
 
 type AppProps = {
   roomCardCount: number;
@@ -29,7 +30,9 @@ function App(props: AppProps) {
 
         <Route
           path={AppRoute.OfferItem}
-          element={<RoomScreen />}
+          element={
+            <RoomScreen offer={offers[0]} />
+          }
         />
 
         <Route
