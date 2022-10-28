@@ -9,6 +9,6 @@ export type Review = {
   comment: string;
 };
 
-export type Reviews = {
+export type AllReviews = {
   [key: OfferId]: Review[];
 };

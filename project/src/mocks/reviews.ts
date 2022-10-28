@@ -1,7 +1,7 @@
 import { AVATAR_IMAGE_URL } from './const ';
-import { Reviews } from '../types/review';
+import { AllReviews } from '../types/review';
 
-export const reviews: Reviews = {
+export const allReviews: AllReviews = {
   1: [
     {
       id: 1,

@@ -2,16 +2,17 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import { AppRoute } from '../../const';
 import { Offer } from '../../types/offer';
+import { AllReviews } from '../../types/review';
 
 import MainScreen from '../../pages/main-screen/main-screen';
 import RoomScreen from '../../pages/room-screen/room-screen';
 import LoginScreen from '../../pages/login-screen/login-screen';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
-import { offers } from '../../mocks/offers';
 
 type AppProps = {
   roomCardCount: number;
   offers: Offer[];
+  allReviews: AllReviews;
 };
 
 function App(props: AppProps) {
@@ -31,7 +32,10 @@ function App(props: AppProps) {
         <Route
           path={AppRoute.OfferItem}
           element={
-            <RoomScreen offer={offers[0]} />
+            <RoomScreen
+              offer={props.offers[0]}
+              reviews={props.allReviews[1]}
+            />
           }
         />
 

@@ -2,6 +2,7 @@ import { User } from './user';
 
 export type OfferId = number;
 export type OfferType = string;
+export type OfferDescription = string;
 export type OfferGallery = string[];
 export type OfferGoods = string[];
 
@@ -20,7 +21,7 @@ export type Offer = {
   id: OfferId;
   type: OfferType;
   title: string;
-  description: string;
+  description: OfferDescription;
   previewImage: string;
   images: OfferGallery;
   isPremium: boolean;

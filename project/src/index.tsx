@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom/client';
 import App from './components/app/app';
 
 import { offers } from './mocks/offers';
+import { allReviews } from './mocks/reviews';
 
 const PLACE_CARD_COUNT = 5;
 
@@ -16,6 +17,7 @@ root.render(
     <App
       roomCardCount={PLACE_CARD_COUNT}
       offers={offers}
+      allReviews={allReviews}
     />
   </React.StrictMode>,
 );

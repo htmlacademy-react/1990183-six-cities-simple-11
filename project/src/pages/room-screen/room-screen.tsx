@@ -1,4 +1,5 @@
 import { Offer } from '../../types/offer';
+import { Review } from '../../types/review';
 
 import Header from '../../components/header/header';
 import Gallery from '../../components/gallery/gallery';
@@ -10,9 +11,10 @@ import Reviews from '../../components/reviews/reviews';
 
 type RoomScreenProps = {
   offer: Offer;
+  reviews: Review[];
 };
 
-function RoomScreen({offer}: RoomScreenProps) {
+function RoomScreen({offer, reviews}: RoomScreenProps) {
   return (
     <div className="page">
       <div style={{ display: 'none' }}>
@@ -29,8 +31,11 @@ function RoomScreen({offer}: RoomScreenProps) {
             <div className="property__wrapper">
               <RoomHeader offer={offer} />
               <RoomInside goods={offer.goods} />
-              <Host user={offer.host} />
-              <Reviews />
+              <Host
+                user={offer.host}
+                description={offer.description}
+              />
+              <Reviews reviews={reviews} />
             </div>
           </div>
 
