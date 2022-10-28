@@ -1,4 +1,5 @@
-/* eslint-disable react/jsx-key */
+import { Offer } from '../../types/offer';
+
 import Header from '../../components/header/header';
 import LocationNav from '../../components/location-nav/location-nav';
 import Sorting from '../../components/sorting/sorting';
@@ -6,6 +7,7 @@ import RoomCard from '../../components/room-card/room-card';
 
 type MainScreenProps = {
   roomCardCount: number;
+  offers: Offer[];
 };
 
 function MainScreen(props: MainScreenProps) {
@@ -32,7 +34,12 @@ function MainScreen(props: MainScreenProps) {
               <Sorting />
 
               <div className="cities__places-list places__list tabs__content">
-                {Array.from({length: props.roomCardCount}).map(() => <RoomCard />)}
+                {props.offers.map((offer) => (
+                  <RoomCard
+                    key={offer.id}
+                    offer={offer}
+                  />
+                ))}
               </div>
             </section>
 

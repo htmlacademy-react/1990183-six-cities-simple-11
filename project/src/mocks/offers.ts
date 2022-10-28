@@ -7,11 +7,11 @@ export const offers: Offer[] = [
     type: 'apartment',
     title: 'Beautiful & luxurious studio at great location',
     description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
-    previewImage: `${ROOM_IMAGE_URL}?w=260&h=200`,
+    previewImage: `${ROOM_IMAGE_URL}?w=260&h=200&t=${Math.random()}`,
     images: [
-      `${ROOM_IMAGE_URL}?w=260&h=200`,
-      `${ROOM_IMAGE_URL}?w=260&h=200`,
-      `${ROOM_IMAGE_URL}?w=260&h=200`,
+      `${ROOM_IMAGE_URL}?w=260&h=200&t=${Math.random()}`,
+      `${ROOM_IMAGE_URL}?w=260&h=200&t=${Math.random()}`,
+      `${ROOM_IMAGE_URL}?w=260&h=200&t=${Math.random()}`,
     ],
     bedrooms: 3,
     city: {
@@ -26,7 +26,7 @@ export const offers: Offer[] = [
       'Heating'
     ],
     host: {
-      avatarUrl: `${AVATAR_IMAGE_URL}?w=74&h=74`,
+      avatarUrl: `${AVATAR_IMAGE_URL}?w=74&h=74&t=${Math.random()}`,
       id: 3,
       isPro: true,
       name: 'Angelina'
@@ -43,17 +43,17 @@ export const offers: Offer[] = [
   },
   {
     id: 2,
-    type: 'Private room',
+    type: 'room',
     title: 'Wood and stone place',
     description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-    previewImage: `${ROOM_IMAGE_URL}?w=260&h=200`,
+    previewImage: `${ROOM_IMAGE_URL}?w=260&h=200&t=${Math.random()}`,
     images: [
-      `${ROOM_IMAGE_URL}?w=260&h=200`,
-      `${ROOM_IMAGE_URL}?w=260&h=200`,
-      `${ROOM_IMAGE_URL}?w=260&h=200`,
-      `${ROOM_IMAGE_URL}?w=260&h=200`,
-      `${ROOM_IMAGE_URL}?w=260&h=200`,
-      `${ROOM_IMAGE_URL}?w=260&h=200`,
+      `${ROOM_IMAGE_URL}?w=260&h=200&t=${Math.random()}`,
+      `${ROOM_IMAGE_URL}?w=260&h=200&t=${Math.random()}`,
+      `${ROOM_IMAGE_URL}?w=260&h=200&t=${Math.random()}`,
+      `${ROOM_IMAGE_URL}?w=260&h=200&t=${Math.random()}`,
+      `${ROOM_IMAGE_URL}?w=260&h=200&t=${Math.random()}`,
+      `${ROOM_IMAGE_URL}?w=260&h=200&t=${Math.random()}`,
     ],
     bedrooms: 1,
     city: {
@@ -72,7 +72,7 @@ export const offers: Offer[] = [
       'Dishwasher',
     ],
     host: {
-      avatarUrl: `${AVATAR_IMAGE_URL}?w=74&h=74`,
+      avatarUrl: `${AVATAR_IMAGE_URL}?w=74&h=74&t=${Math.random()}`,
       id: 1,
       isPro: false,
       name: 'Pablo'
@@ -89,15 +89,15 @@ export const offers: Offer[] = [
   },
   {
     id: 3,
-    type: 'House',
+    type: 'house',
     title: 'Canal View Prinsengracht',
     description: 'It has survived not only five centuries, but also the leap into electronic typesetting.',
-    previewImage: `${ROOM_IMAGE_URL}?w=260&h=200`,
+    previewImage: `${ROOM_IMAGE_URL}?w=260&h=200&t=${Math.random()}`,
     images: [
-      `${ROOM_IMAGE_URL}?w=260&h=200`,
-      `${ROOM_IMAGE_URL}?w=260&h=200`,
-      `${ROOM_IMAGE_URL}?w=260&h=200`,
-      `${ROOM_IMAGE_URL}?w=260&h=200`,
+      `${ROOM_IMAGE_URL}?w=260&h=200&t=${Math.random()}`,
+      `${ROOM_IMAGE_URL}?w=260&h=200&t=${Math.random()}`,
+      `${ROOM_IMAGE_URL}?w=260&h=200&t=${Math.random()}`,
+      `${ROOM_IMAGE_URL}?w=260&h=200&t=${Math.random()}`,
     ],
     bedrooms: 2,
     city: {
@@ -118,7 +118,7 @@ export const offers: Offer[] = [
       'Wi-Fi',
     ],
     host: {
-      avatarUrl: `${AVATAR_IMAGE_URL}?w=74&h=74`,
+      avatarUrl: `${AVATAR_IMAGE_URL}?w=74&h=74&t=${Math.random()}`,
       id: 4,
       isPro: true,
       name: 'Pedro'
@@ -135,13 +135,13 @@ export const offers: Offer[] = [
   },
   {
     id: 4,
-    type: 'Hotel',
+    type: 'hotel',
     title: 'Nice, cozy, warm big bed apartment',
     description: 'The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters.',
-    previewImage: `${ROOM_IMAGE_URL}?w=260&h=200`,
+    previewImage: `${ROOM_IMAGE_URL}?w=260&h=200&t=${Math.random()}`,
     images: [
-      `${ROOM_IMAGE_URL}?w=260&h=200`,
-      `${ROOM_IMAGE_URL}?w=260&h=200`,
+      `${ROOM_IMAGE_URL}?w=260&h=200&t=${Math.random()}`,
+      `${ROOM_IMAGE_URL}?w=260&h=200&t=${Math.random()}`,
     ],
     bedrooms: 4,
     city: {
@@ -159,7 +159,7 @@ export const offers: Offer[] = [
       'Cabel TV',
     ],
     host: {
-      avatarUrl: `${AVATAR_IMAGE_URL}?w=74&h=74`,
+      avatarUrl: `${AVATAR_IMAGE_URL}?w=74&h=74&t=${Math.random()}`,
       id: 5,
       isPro: false,
       name: 'Eric'
