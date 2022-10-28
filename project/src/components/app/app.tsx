@@ -33,8 +33,8 @@ function App(props: AppProps) {
           path={AppRoute.OfferItem}
           element={
             <RoomScreen
-              offer={props.offers[0]}
-              reviews={props.allReviews[1]}
+              offers={props.offers}
+              allReviews={props.allReviews}
             />
           }
         />

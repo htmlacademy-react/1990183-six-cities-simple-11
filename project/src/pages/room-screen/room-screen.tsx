@@ -1,5 +1,7 @@
-import { Offer } from '../../types/offer';
-import { Review } from '../../types/review';
+import { useParams } from 'react-router-dom';
+
+import { Offer, OfferId } from '../../types/offer';
+import { AllReviews } from '../../types/review';
 
 import Header from '../../components/header/header';
 import Gallery from '../../components/gallery/gallery';
@@ -10,11 +12,17 @@ import RoomReviews from '../../components/room-reviews/room-reviews';
 // import RoomCard from '../../components/room-card/room-card';
 
 type RoomScreenProps = {
-  offer: Offer;
-  reviews: Review[];
+  offers: Offer[];
+  allReviews: AllReviews;
 };
 
-function RoomScreen({offer, reviews}: RoomScreenProps) {
+
+function RoomScreen({offers, allReviews}: RoomScreenProps) {
+  const {id} = useParams() as {id: string};
+  const offerId: OfferId = Number(id);
+  const offer = offers.find((item) => (item.id === offerId)) as Offer;
+  const roomReviews = allReviews[offerId];
+
   return (
     <div className="page">
       <div style={{ display: 'none' }}>
@@ -35,7 +43,7 @@ function RoomScreen({offer, reviews}: RoomScreenProps) {
                 user={offer.host}
                 description={offer.description}
               />
-              <RoomReviews reviews={reviews} />
+              <RoomReviews reviews={roomReviews} />
             </div>
           </div>
 
