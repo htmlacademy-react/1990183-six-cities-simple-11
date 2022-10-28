@@ -12,7 +12,7 @@ export enum RoomType {
   Hotel = 'hotel',
 }
 
-export enum RoomLabel {
+export enum RoomTypeLabel {
   Apartment = 'Apartment',
   Room = 'Private Room',
   House = 'House',

@@ -2,6 +2,8 @@ import { User } from './user';
 
 export type OfferId = number;
 
+export type OfferType = string;
+
 export type Location = {
   latitude: number;
   longitude: number;
@@ -15,7 +17,7 @@ export type City = {
 
 export type Offer = {
   id: OfferId;
-  type: string;
+  type: OfferType;
   title: string;
   description: string;
   previewImage: string;
