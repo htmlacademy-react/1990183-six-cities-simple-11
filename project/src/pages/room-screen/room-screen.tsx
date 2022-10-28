@@ -6,7 +6,7 @@ import Gallery from '../../components/gallery/gallery';
 import RoomHeader from '../../components/room-header/room-header';
 import RoomInside from '../../components/room-inside/room-inside';
 import Host from '../../components/host/host';
-import Reviews from '../../components/reviews/reviews';
+import RoomReviews from '../../components/room-reviews/room-reviews';
 // import RoomCard from '../../components/room-card/room-card';
 
 type RoomScreenProps = {
@@ -35,7 +35,7 @@ function RoomScreen({offer, reviews}: RoomScreenProps) {
                 user={offer.host}
                 description={offer.description}
               />
-              <Reviews reviews={reviews} />
+              <RoomReviews reviews={reviews} />
             </div>
           </div>
 
