@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
-import { AppRoute } from '../../const';
-import { Offer } from '../../types/offer';
+
 import { getLabelByOfferType } from '../../utils';
+import { Offer } from '../../types/offer';
 
 import PremiumLabel from '../premium-label/premium-label';
 
@@ -15,7 +15,7 @@ function RoomCard({offer}: RoomCardProps) {
       {offer.isPremium && <PremiumLabel />}
 
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <Link to={AppRoute.OfferItem}>
+        <Link to={`/offer/${offer.id}`}>
           <img
             className="place-card__image"
             src={offer.previewImage}
@@ -42,7 +42,7 @@ function RoomCard({offer}: RoomCardProps) {
         </div>
 
         <h2 className="place-card__name">
-          <Link to={AppRoute.OfferItem}>
+          <Link to={`/offer/${offer.id}`}>
             {offer.title}
           </Link>
         </h2>
