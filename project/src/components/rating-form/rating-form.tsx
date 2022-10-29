@@ -1,3 +1,9 @@
+import { Fragment, ChangeEvent } from 'react';
+
+type RatingFormProps = {
+  onRate: (evt: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => void;
+};
+
 const ratingStars: string[] = [
   'perfect',
   'good',
@@ -6,20 +12,21 @@ const ratingStars: string[] = [
   'terribly',
 ];
 
-function RatingForm() {
+function RatingForm({onRate}: RatingFormProps) {
   return (
     <div className="reviews__rating-form form__rating">
       {ratingStars.map((title, index, array) => {
         const value = array.length - index;
 
         return (
-          <>
+          <Fragment key={title}>
             <input
               className="form__rating-input visually-hidden"
               name="rating"
               value={value}
               id={`${value}-stars`}
               type="radio"
+              onChange={onRate}
             />
             <label
               htmlFor={`${value}-stars`}
@@ -30,7 +37,7 @@ function RatingForm() {
                 <use xlinkHref="#icon-star"></use>
               </svg>
             </label>
-          </>
+          </Fragment>
         );
       })}
     </div>
