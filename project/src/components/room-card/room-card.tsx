@@ -7,11 +7,19 @@ import PremiumLabel from '../premium-label/premium-label';
 
 type RoomCardProps = {
   offer: Offer;
+  onActiveSet: () => void;
+  onActiveUnset: () => void;
 };
 
-function RoomCard({offer}: RoomCardProps) {
+function RoomCard(props: RoomCardProps) {
+  const {offer, onActiveSet, onActiveUnset} = props;
+
   return (
-    <article className="cities__card place-card">
+    <article
+      className="cities__card place-card"
+      onMouseEnter={onActiveSet}
+      onMouseLeave={onActiveUnset}
+    >
       {offer.isPremium && <PremiumLabel cssClass="place-card__mark" />}
 
       <div className="cities__image-wrapper place-card__image-wrapper">

@@ -1,4 +1,6 @@
-import { Offer } from '../../types/offer';
+import { useState } from 'react';
+import { Offer, OfferId } from '../../types/offer';
+
 import RoomCard from '../../components/room-card/room-card';
 
 type OfferListProps = {
@@ -6,12 +8,18 @@ type OfferListProps = {
 };
 
 function OfferList({offers}: OfferListProps) {
+  const [activeCardId, setActiveCardId] = useState<null | OfferId>(null);
+
   return (
     <>
       {offers.map((offer) => (
         <RoomCard
-          key={offer.id}
+          // TODO: удалить activeCardId из ключа,
+          // когда он будет задействован в коде
+          key={`${activeCardId || 'key'}-${offer.id}`}
           offer={offer}
+          onActiveSet={() => setActiveCardId(offer.id)}
+          onActiveUnset={() => setActiveCardId(null)}
         />
       ))}
     </>
