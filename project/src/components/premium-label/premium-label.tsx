@@ -1,6 +1,10 @@
-function PremiumLabel() {
+type PremiumLabelProps = {
+  cssClass: string;
+};
+
+function PremiumLabel({cssClass}: PremiumLabelProps) {
   return (
-    <div className="place-card__mark">
+    <div className={cssClass}>
       <span>Premium</span>
     </div>
   );

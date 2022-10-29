@@ -12,7 +12,7 @@ type RoomCardProps = {
 function RoomCard({offer}: RoomCardProps) {
   return (
     <article className="cities__card place-card">
-      {offer.isPremium && <PremiumLabel />}
+      {offer.isPremium && <PremiumLabel cssClass="place-card__mark" />}
 
       <div className="cities__image-wrapper place-card__image-wrapper">
         <Link to={`/offer/${offer.id}`}>

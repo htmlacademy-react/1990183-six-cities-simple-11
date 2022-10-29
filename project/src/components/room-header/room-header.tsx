@@ -9,7 +9,7 @@ type RoomHeaderProps = {
 function RoomHeader({offer}: RoomHeaderProps) {
   return (
     <>
-      {offer.isPremium && <PremiumLabel />}
+      {offer.isPremium && <PremiumLabel cssClass="property__mark" />}
 
       <div className="property__name-wrapper">
         <h1 className="property__name">
