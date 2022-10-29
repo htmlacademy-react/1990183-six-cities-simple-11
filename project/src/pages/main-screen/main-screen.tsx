@@ -37,9 +37,10 @@ function MainScreen(props: MainScreenProps) {
 
               <Sorting />
 
-              <div className="cities__places-list places__list tabs__content">
-                <OfferList offers={offers} />
-              </div>
+              <OfferList
+                cssClass='cities__places-list tabs__content'
+                offers={offers}
+              />
             </section>
 
             <div className="cities__right-section">
