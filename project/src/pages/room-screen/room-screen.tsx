@@ -9,13 +9,14 @@ import RoomHeader from '../../components/room-header/room-header';
 import RoomInside from '../../components/room-inside/room-inside';
 import Host from '../../components/host/host';
 import RoomReviews from '../../components/room-reviews/room-reviews';
-// import RoomCard from '../../components/room-card/room-card';
+import OfferList from '../../components/offer-list/offer-list';
+
+import { offersNearBy } from '../../mocks/offers';
 
 type RoomScreenProps = {
   offers: Offer[];
   allReviews: AllReviews;
 };
-
 
 function RoomScreen({offers, allReviews}: RoomScreenProps) {
   const {id} = useParams() as {id: string};
@@ -56,9 +57,10 @@ function RoomScreen({offers, allReviews}: RoomScreenProps) {
               Other places in the neighbourhood
             </h2>
 
-            <div className="near-places__list places__list">
-              {/* {Array.from({length: 3}).map(() => <RoomCard />)} */}
-            </div>
+            <OfferList
+              cssClass="near-places__list"
+              offers={offersNearBy}
+            />
           </section>
         </div>
 

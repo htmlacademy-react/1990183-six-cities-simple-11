@@ -175,3 +175,5 @@ export const offers: Offer[] = [
     rating: 4.5,
   },
 ];
+
+export const offersNearBy: Offer[] = offers.slice(0, 2);
