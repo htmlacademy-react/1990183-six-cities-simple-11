@@ -1,21 +1,35 @@
-import {Link} from 'react-router-dom';
-import {AppRoute} from '../../const';
+import { Link } from 'react-router-dom';
 
-function RoomCard() {
+import { getLabelByOfferType } from '../../utils';
+import { Offer } from '../../types/offer';
+
+import PremiumLabel from '../premium-label/premium-label';
+
+type RoomCardProps = {
+  offer: Offer;
+  onActiveSet: () => void;
+  onActiveUnset: () => void;
+};
+
+function RoomCard(props: RoomCardProps) {
+  const {offer, onActiveSet, onActiveUnset} = props;
+
   return (
-    <article className="cities__card place-card">
-      <div className="place-card__mark">
-        <span>Premium</span>
-      </div>
+    <article
+      className="cities__card place-card"
+      onMouseEnter={onActiveSet}
+      onMouseLeave={onActiveUnset}
+    >
+      {offer.isPremium && <PremiumLabel cssClass="place-card__mark" />}
 
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <Link to={AppRoute.OfferItem}>
+        <Link to={`/offer/${offer.id}`}>
           <img
             className="place-card__image"
-            src="img/apartment-01.jpg"
+            src={offer.previewImage}
             width="260"
             height="200"
-            alt="Place image"
+            alt={offer.title}
           />
         </Link>
       </div>
@@ -23,7 +37,7 @@ function RoomCard() {
       <div className="place-card__info">
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
-            <b className="place-card__price-value">&euro;120</b>
+            <b className="place-card__price-value">&euro;{offer.price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
         </div>
@@ -36,12 +50,14 @@ function RoomCard() {
         </div>
 
         <h2 className="place-card__name">
-          <Link to={AppRoute.OfferItem}>
-            Beautiful &amp; luxurious apartment at great location
+          <Link to={`/offer/${offer.id}`}>
+            {offer.title}
           </Link>
         </h2>
 
-        <p className="place-card__type">Apartment</p>
+        <p className="place-card__type">
+          {getLabelByOfferType(offer.type)}
+        </p>
       </div>
     </article>
   );

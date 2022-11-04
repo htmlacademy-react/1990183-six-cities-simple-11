@@ -1,13 +1,19 @@
-function RoomHeader() {
+import { Offer } from '../../types/offer';
+import { getLabelByOfferType } from '../../utils';
+import PremiumLabel from '../premium-label/premium-label';
+
+type RoomHeaderProps = {
+  offer: Offer;
+};
+
+function RoomHeader({offer}: RoomHeaderProps) {
   return (
     <>
-      <div className="property__mark">
-        <span>Premium</span>
-      </div>
+      {offer.isPremium && <PremiumLabel cssClass="property__mark" />}
 
       <div className="property__name-wrapper">
         <h1 className="property__name">
-          Beautiful &amp; luxurious studio at great location
+          {offer.title}
         </h1>
       </div>
 
@@ -21,18 +27,18 @@ function RoomHeader() {
 
       <ul className="property__features">
         <li className="property__feature property__feature--entire">
-          Apartment
+          {getLabelByOfferType(offer.type)}
         </li>
         <li className="property__feature property__feature--bedrooms">
-          3 Bedrooms
+          {offer.bedrooms} Bedrooms
         </li>
         <li className="property__feature property__feature--adults">
-          Max 4 adults
+          Max {offer.maxAdults} adults
         </li>
       </ul>
 
       <div className="property__price">
-        <b className="property__price-value">&euro;120</b>
+        <b className="property__price-value">&euro;{offer.price}</b>
         <span className="property__price-text">&nbsp;night</span>
       </div>
     </>

@@ -1,14 +1,18 @@
-/* eslint-disable react/jsx-key */
+import { Offer } from '../../types/offer';
+
 import Header from '../../components/header/header';
 import LocationNav from '../../components/location-nav/location-nav';
 import Sorting from '../../components/sorting/sorting';
-import RoomCard from '../../components/room-card/room-card';
+import OfferList from '../../components/offer-list/offer-list';
 
 type MainScreenProps = {
   roomCardCount: number;
+  offers: Offer[];
 };
 
 function MainScreen(props: MainScreenProps) {
+  const {roomCardCount, offers} = props;
+
   return (
     <div className="page page--gray page--main">
       <div style={{ display: 'none' }}>
@@ -27,13 +31,16 @@ function MainScreen(props: MainScreenProps) {
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
 
-              <b className="places__found">{props.roomCardCount} places to stay in Amsterdam</b>
+              <b className="places__found">
+                {roomCardCount} places to stay in Amsterdam
+              </b>
 
               <Sorting />
 
-              <div className="cities__places-list places__list tabs__content">
-                {Array.from({length: props.roomCardCount}).map(() => <RoomCard />)}
-              </div>
+              <OfferList
+                cssClass='cities__places-list tabs__content'
+                offers={offers}
+              />
             </section>
 
             <div className="cities__right-section">

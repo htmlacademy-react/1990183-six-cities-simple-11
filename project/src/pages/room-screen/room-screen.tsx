@@ -1,13 +1,29 @@
-/* eslint-disable react/jsx-key */
+import { useParams } from 'react-router-dom';
+
+import { Offer, OfferId } from '../../types/offer';
+import { AllReviews } from '../../types/review';
+
 import Header from '../../components/header/header';
 import Gallery from '../../components/gallery/gallery';
 import RoomHeader from '../../components/room-header/room-header';
 import RoomInside from '../../components/room-inside/room-inside';
 import Host from '../../components/host/host';
-import Reviews from '../../components/reviews/reviews';
-import RoomCard from '../../components/room-card/room-card';
+import RoomReviews from '../../components/room-reviews/room-reviews';
+import OfferList from '../../components/offer-list/offer-list';
 
-function RoomScreen() {
+import { offersNearBy } from '../../mocks/offers';
+
+type RoomScreenProps = {
+  offers: Offer[];
+  allReviews: AllReviews;
+};
+
+function RoomScreen({offers, allReviews}: RoomScreenProps) {
+  const {id} = useParams() as {id: string};
+  const offerId: OfferId = Number(id);
+  const offer = offers.find((item) => (item.id === offerId)) as Offer;
+  const roomReviews = allReviews[offerId];
+
   return (
     <div className="page">
       <div style={{ display: 'none' }}>
@@ -18,14 +34,17 @@ function RoomScreen() {
 
       <main className="page__main page__main--property">
         <section className="property">
-          <Gallery />
+          <Gallery images={offer.images} alt={offer.title} />
 
           <div className="property__container container">
             <div className="property__wrapper">
-              <RoomHeader />
-              <RoomInside />
-              <Host />
-              <Reviews />
+              <RoomHeader offer={offer} />
+              <RoomInside goods={offer.goods} />
+              <Host
+                user={offer.host}
+                description={offer.description}
+              />
+              <RoomReviews reviews={roomReviews} />
             </div>
           </div>
 
@@ -34,11 +53,14 @@ function RoomScreen() {
 
         <div className="container">
           <section className="near-places places">
-            <h2 className="near-places__title">Other places in the neighbourhood</h2>
+            <h2 className="near-places__title">
+              Other places in the neighbourhood
+            </h2>
 
-            <div className="near-places__list places__list">
-              {Array.from({length: 3}).map(() => <RoomCard />)}
-            </div>
+            <OfferList
+              cssClass="near-places__list"
+              offers={offersNearBy}
+            />
           </section>
         </div>
 
