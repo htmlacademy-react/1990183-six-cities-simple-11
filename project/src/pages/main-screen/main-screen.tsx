@@ -4,6 +4,7 @@ import Header from '../../components/header/header';
 import LocationNav from '../../components/location-nav/location-nav';
 import Sorting from '../../components/sorting/sorting';
 import OfferList from '../../components/offer-list/offer-list';
+import Map from '../../components/map/map';
 
 type MainScreenProps = {
   roomCardCount: number;
@@ -44,7 +45,11 @@ function MainScreen(props: MainScreenProps) {
             </section>
 
             <div className="cities__right-section">
-              <section className="cities__map map"></section>
+              <Map
+                cssClass="cities__map"
+                city={offers[0].city}
+                points={offers.map((offer) => offer.location)}
+              />
             </div>
           </div>
         </div>

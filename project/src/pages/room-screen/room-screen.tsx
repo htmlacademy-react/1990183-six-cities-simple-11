@@ -12,6 +12,7 @@ import RoomReviews from '../../components/room-reviews/room-reviews';
 import OfferList from '../../components/offer-list/offer-list';
 
 import { offersNearBy } from '../../mocks/offers';
+import Map from '../../components/map/map';
 
 type RoomScreenProps = {
   offers: Offer[];
@@ -48,7 +49,11 @@ function RoomScreen({offers, allReviews}: RoomScreenProps) {
             </div>
           </div>
 
-          <section className="property__map map"></section>
+          <Map
+            cssClass='property__map'
+            city={offers[0].city}
+            points={offersNearBy.map((offerNearBy) => offerNearBy.location)}
+          />
         </section>
 
         <div className="container">
