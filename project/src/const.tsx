@@ -18,3 +18,12 @@ export enum RoomTypeLabel {
   House = 'House',
   Hotel = 'Hotel',
 }
+
+export const cities = [
+  'Paris',
+  'Cologne',
+  'Brussels',
+  'Amsterdam',
+  'Hamburg',
+  'Dusseldorf',
+];
