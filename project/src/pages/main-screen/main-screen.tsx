@@ -1,4 +1,3 @@
-import { getCities } from '../../offers';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { changeCity, updateOffers } from '../../store/actions';
 
@@ -9,10 +8,10 @@ import OfferList from '../../components/offer-list/offer-list';
 import Map from '../../components/map/map';
 
 function MainScreen() {
-  const cities = getCities();
-
+  const cities = useAppSelector((state) => state.cities);
   const currentCity = useAppSelector((state) => state.currentCity);
   const offers = useAppSelector((state) => state.offers);
+
   const dispatch = useAppDispatch();
 
   return (

@@ -7,6 +7,7 @@ const cities = getCities();
 const [defaultCity] = cities;
 
 const initialState = {
+  cities,
   currentCity: defaultCity,
   offers: getOffersByCity(defaultCity),
 };
