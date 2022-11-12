@@ -1,6 +1,5 @@
-import { Offer } from '../../types/offer';
-
-import { cities } from '../../const';
+import { getCities } from '../../offers';
+import { useAppSelector } from '../../hooks';
 
 import Header from '../../components/header/header';
 import LocationNav from '../../components/location-nav/location-nav';
@@ -8,13 +7,11 @@ import Sorting from '../../components/sorting/sorting';
 import OfferList from '../../components/offer-list/offer-list';
 import Map from '../../components/map/map';
 
-type MainScreenProps = {
-  roomCardCount: number;
-  offers: Offer[];
-};
+function MainScreen() {
+  const cities = getCities();
 
-function MainScreen(props: MainScreenProps) {
-  const {roomCardCount, offers} = props;
+  const currentCity = useAppSelector((state) => state.currentCity);
+  const offers = useAppSelector((state) => state.offers);
 
   return (
     <div className="page page--gray page--main">
@@ -35,7 +32,7 @@ function MainScreen(props: MainScreenProps) {
               <h2 className="visually-hidden">Places</h2>
 
               <b className="places__found">
-                {roomCardCount} places to stay in Amsterdam
+                {offers.length} places to stay in {currentCity}
               </b>
 
               <Sorting />

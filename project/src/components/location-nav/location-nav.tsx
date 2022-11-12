@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { changeCity } from '../../store/actions';
+import { changeCity, updateOffers } from '../../store/actions';
 
 type LocationNavProps = {
   locations: string[];
@@ -28,6 +28,7 @@ function LocationNav({locations}: LocationNavProps) {
                   onClick={(evt) => {
                     evt.preventDefault();
                     dispatch(changeCity(city));
+                    dispatch(updateOffers(city));
                   }}
                 >
                   <span>{city}</span>

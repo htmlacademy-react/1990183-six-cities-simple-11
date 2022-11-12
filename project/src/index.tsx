@@ -9,8 +9,6 @@ import { store } from './store';
 
 import App from './components/app/app';
 
-const PLACE_CARD_COUNT = 5;
-
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
 );
@@ -19,7 +17,6 @@ root.render(
   <React.StrictMode>
     <Provider store={store}>
       <App
-        roomCardCount={PLACE_CARD_COUNT}
         offers={offers}
         allReviews={allReviews}
       />

@@ -14,7 +14,6 @@ import LoginScreen from '../../pages/login-screen/login-screen';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
 
 type AppProps = {
-  roomCardCount: number;
   offers: Offer[];
   allReviews: AllReviews;
 };
@@ -27,10 +26,7 @@ function App(props: AppProps) {
           <Route
             path={AppRoute.Root}
             element={
-              <MainScreen
-                roomCardCount={props.roomCardCount}
-                offers={props.offers}
-              />
+              <MainScreen />
             }
           />
 
