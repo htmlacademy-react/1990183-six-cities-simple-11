@@ -1,7 +1,7 @@
 type LocationNavProps = {
   locations: string[];
   currentLocation: string;
-  onLocationChange: (city: string) => void;
+  onLocationChange: (location: string) => void;
 };
 
 function LocationNav(props: LocationNavProps) {
@@ -11,24 +11,24 @@ function LocationNav(props: LocationNavProps) {
     <div className="tabs">
       <section className="locations container">
         <ul className="locations__list tabs__list">
-          {locations.map((city) => {
-            const isActive = (city === currentLocation);
+          {locations.map((location) => {
+            const isActive = (location === currentLocation);
 
             return (
-              <li key={city} className="locations__item">
+              <li key={location} className="locations__item">
                 <a
                   className={`
                     locations__item-link
                     tabs__item
                     ${ isActive ? 'tabs__item--active' : ''}
                   `}
-                  href={`#${city}`}
+                  href={`#${location}`}
                   onClick={(evt) => {
                     evt.preventDefault();
-                    onLocationChange(city);
+                    onLocationChange(location);
                   }}
                 >
-                  <span>{city}</span>
+                  <span>{location}</span>
                 </a>
               </li>
             );
