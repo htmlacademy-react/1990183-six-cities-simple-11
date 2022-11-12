@@ -1,20 +1,18 @@
-import { useAppDispatch, useAppSelector } from '../../hooks';
-import { changeCity, updateOffers } from '../../store/actions';
-
 type LocationNavProps = {
   locations: string[];
+  currentLocation: string;
+  onLocationChange: (city: string) => void;
 };
 
-function LocationNav({locations}: LocationNavProps) {
-  const currentCity = useAppSelector((state) => state.currentCity);
-  const dispatch = useAppDispatch();
+function LocationNav(props: LocationNavProps) {
+  const { locations, currentLocation, onLocationChange } = props;
 
   return (
     <div className="tabs">
       <section className="locations container">
         <ul className="locations__list tabs__list">
           {locations.map((city) => {
-            const isActive = (city === currentCity);
+            const isActive = (city === currentLocation);
 
             return (
               <li key={city} className="locations__item">
@@ -27,8 +25,7 @@ function LocationNav({locations}: LocationNavProps) {
                   href={`#${city}`}
                   onClick={(evt) => {
                     evt.preventDefault();
-                    dispatch(changeCity(city));
-                    dispatch(updateOffers(city));
+                    onLocationChange(city);
                   }}
                 >
                   <span>{city}</span>

@@ -1,5 +1,6 @@
 import { getCities } from '../../offers';
-import { useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { changeCity, updateOffers } from '../../store/actions';
 
 import Header from '../../components/header/header';
 import LocationNav from '../../components/location-nav/location-nav';
@@ -12,6 +13,7 @@ function MainScreen() {
 
   const currentCity = useAppSelector((state) => state.currentCity);
   const offers = useAppSelector((state) => state.offers);
+  const dispatch = useAppDispatch();
 
   return (
     <div className="page page--gray page--main">
@@ -24,7 +26,14 @@ function MainScreen() {
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
 
-        <LocationNav locations={cities} />
+        <LocationNav
+          locations={cities}
+          currentLocation={currentCity}
+          onLocationChange={(city) => {
+            dispatch(changeCity(city));
+            dispatch(updateOffers(city));
+          }}
+        />
 
         <div className="cities">
           <div className="cities__places-container container">
