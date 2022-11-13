@@ -41,10 +41,18 @@ function Map(props: MapProps) {
   const {cssClass, city, points} = props;
 
   const mapRef = useRef(null);
+  const markersRef = useRef<Marker[]>([]);
   const map = useMap(mapRef, city);
 
   useEffect(() => {
     if (map) {
+      map.setView(
+        [city.location.latitude, city.location.longitude],
+        city.location.zoom
+      );
+
+      markersRef.current.forEach((markerItem) => markerItem.remove());
+
       points.forEach((point) => {
         const marker = new Marker({
           lat: point.latitude,
@@ -54,6 +62,8 @@ function Map(props: MapProps) {
         marker
           .setIcon(defaultIcon)
           .addTo(map);
+
+        markersRef.current.push(marker);
       });
     }
   }, [map, city, points]);
