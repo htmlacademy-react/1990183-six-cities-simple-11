@@ -8,9 +8,10 @@ import OfferList from '../../components/offer-list/offer-list';
 import Map from '../../components/map/map';
 
 function MainScreen() {
-  const cities = useAppSelector((state) => state.cities);
   const currentCity = useAppSelector((state) => state.currentCity);
   const offers = useAppSelector((state) => state.offers);
+  const cities = useAppSelector((state) => state.cities);
+  const cityNames = cities.map((city) => city.name);
 
   const dispatch = useAppDispatch();
 
@@ -26,11 +27,11 @@ function MainScreen() {
         <h1 className="visually-hidden">Cities</h1>
 
         <LocationNav
-          locations={cities}
-          currentLocation={currentCity}
-          onLocationChange={(city) => {
-            dispatch(changeCity(city));
-            dispatch(updateOffers(city));
+          locations={cityNames}
+          currentLocation={currentCity.name}
+          onLocationChange={(cityName) => {
+            dispatch(changeCity(cityName));
+            dispatch(updateOffers(cityName));
           }}
         />
 
@@ -40,7 +41,7 @@ function MainScreen() {
               <h2 className="visually-hidden">Places</h2>
 
               <b className="places__found">
-                {offers.length} places to stay in {currentCity}
+                {`${offers.length} places to stay in ${currentCity.name}`}
               </b>
 
               <Sorting />
@@ -54,7 +55,7 @@ function MainScreen() {
             <div className="cities__right-section">
               <Map
                 cssClass="cities__map"
-                city={offers[0].city}
+                city={currentCity}
                 points={offers.map((offer) => offer.location)}
               />
             </div>

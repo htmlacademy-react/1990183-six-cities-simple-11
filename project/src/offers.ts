@@ -1,10 +1,10 @@
 import { offers } from './mocks/offers';
 
 export const getCities = () => {
-  const cityNames = offers.map((offer) => offer.city.name);
+  const cities = offers.map((offer) => offer.city);
 
-  return [...new Set(cityNames)];
+  return [...new Set(cities)];
 };
 
-export const getOffersByCity = (city: string) =>
-  offers.filter((offer) => (offer.city.name === city));
+export const getOffersByCityName = (cityName: string) =>
+  offers.filter((offer) => (offer.city.name === cityName));
