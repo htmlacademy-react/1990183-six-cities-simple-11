@@ -4,7 +4,7 @@ import { AxiosInstance } from 'axios';
 import { Offer } from '../types/offer';
 import { AppDispatch, State } from '../types/state';
 
-import { loadOffers } from './actions';
+import { loadOffers, setOffersLoadingStatus } from './actions';
 
 export const fetchOffersAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch;
@@ -13,7 +13,11 @@ export const fetchOffersAction = createAsyncThunk<void, undefined, {
 }>(
   'data/fetchOffers',
   async (_, {dispatch, extra: api}) => {
+    dispatch(setOffersLoadingStatus(true));
+
     const {data} = await api.get<Offer[]>('/hotels');
+
     dispatch(loadOffers(data));
+    dispatch(setOffersLoadingStatus(false));
   }
 );
