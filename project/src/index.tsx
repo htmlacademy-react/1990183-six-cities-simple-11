@@ -1,12 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-
-import App from './components/app/app';
+import { Provider } from 'react-redux';
 
 import { offers } from './mocks/offers';
 import { allReviews } from './mocks/reviews';
 
-const PLACE_CARD_COUNT = 5;
+import { store } from './store';
+
+import App from './components/app/app';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
@@ -14,10 +15,11 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <App
-      roomCardCount={PLACE_CARD_COUNT}
-      offers={offers}
-      allReviews={allReviews}
-    />
+    <Provider store={store}>
+      <App
+        offers={offers}
+        allReviews={allReviews}
+      />
+    </Provider>
   </React.StrictMode>,
 );

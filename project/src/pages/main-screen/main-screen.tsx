@@ -1,4 +1,5 @@
-import { Offer } from '../../types/offer';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { changeCity, updateOffers } from '../../store/actions';
 
 import Header from '../../components/header/header';
 import LocationNav from '../../components/location-nav/location-nav';
@@ -6,13 +7,13 @@ import Sorting from '../../components/sorting/sorting';
 import OfferList from '../../components/offer-list/offer-list';
 import Map from '../../components/map/map';
 
-type MainScreenProps = {
-  roomCardCount: number;
-  offers: Offer[];
-};
+function MainScreen() {
+  const currentCity = useAppSelector((state) => state.currentCity);
+  const offers = useAppSelector((state) => state.offers);
+  const cities = useAppSelector((state) => state.cities);
+  const cityNames = cities.map((city) => city.name);
 
-function MainScreen(props: MainScreenProps) {
-  const {roomCardCount, offers} = props;
+  const dispatch = useAppDispatch();
 
   return (
     <div className="page page--gray page--main">
@@ -25,7 +26,14 @@ function MainScreen(props: MainScreenProps) {
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
 
-        <LocationNav />
+        <LocationNav
+          locations={cityNames}
+          currentLocation={currentCity.name}
+          onLocationChange={(cityName) => {
+            dispatch(changeCity(cityName));
+            dispatch(updateOffers(cityName));
+          }}
+        />
 
         <div className="cities">
           <div className="cities__places-container container">
@@ -33,7 +41,7 @@ function MainScreen(props: MainScreenProps) {
               <h2 className="visually-hidden">Places</h2>
 
               <b className="places__found">
-                {roomCardCount} places to stay in Amsterdam
+                {`${offers.length} places to stay in ${currentCity.name}`}
               </b>
 
               <Sorting />
@@ -47,7 +55,7 @@ function MainScreen(props: MainScreenProps) {
             <div className="cities__right-section">
               <Map
                 cssClass="cities__map"
-                city={offers[0].city}
+                city={currentCity}
                 points={offers.map((offer) => offer.location)}
               />
             </div>
