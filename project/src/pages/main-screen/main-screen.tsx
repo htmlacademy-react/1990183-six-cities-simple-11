@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { changeCity, updateOffers } from '../../store/actions';
+import { changeCity } from '../../store/actions';
 
 import Header from '../../components/header/header';
 import LocationNav from '../../components/location-nav/location-nav';
@@ -8,12 +8,20 @@ import OfferList from '../../components/offer-list/offer-list';
 import Map from '../../components/map/map';
 
 function MainScreen() {
+  const areOffersLoading = useAppSelector((state) => state.areOffersLoading);
+
   const currentCity = useAppSelector((state) => state.currentCity);
   const offers = useAppSelector((state) => state.offers);
   const cities = useAppSelector((state) => state.cities);
-  const cityNames = cities.map((city) => city.name);
 
   const dispatch = useAppDispatch();
+
+  if (areOffersLoading || currentCity === null) {
+    return <p>Loading...</p>;
+  }
+
+  const cityNames = cities.map((city) => city.name);
+  const currentOffers = offers.filter((offer) => offer.city.name === currentCity.name);
 
   return (
     <div className="page page--gray page--main">
@@ -29,9 +37,8 @@ function MainScreen() {
         <LocationNav
           locations={cityNames}
           currentLocation={currentCity.name}
-          onLocationChange={(cityName) => {
+          onLocationChange={(cityName: string) => {
             dispatch(changeCity(cityName));
-            dispatch(updateOffers(cityName));
           }}
         />
 
@@ -41,14 +48,14 @@ function MainScreen() {
               <h2 className="visually-hidden">Places</h2>
 
               <b className="places__found">
-                {`${offers.length} places to stay in ${currentCity.name}`}
+                {`${currentOffers.length} places to stay in ${currentCity.name}`}
               </b>
 
               <Sorting />
 
               <OfferList
                 cssClass='cities__places-list tabs__content'
-                offers={offers}
+                offers={currentOffers}
               />
             </section>
 
@@ -56,7 +63,7 @@ function MainScreen() {
               <Map
                 cssClass="cities__map"
                 city={currentCity}
-                points={offers.map((offer) => offer.location)}
+                points={currentOffers.map((offer) => offer.location)}
               />
             </div>
           </div>

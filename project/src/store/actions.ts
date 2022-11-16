@@ -6,11 +6,6 @@ export const changeCity = createAction(
   (cityName: string) => ({payload: cityName})
 );
 
-export const updateOffers = createAction(
-  'offers/update',
-  (cityName: string) => ({payload: cityName})
-);
-
 export const loadOffers = createAction(
   'offers/load',
   (offers: Offer[]) => ({payload: offers})
@@ -20,3 +15,5 @@ export const setOffersLoadingStatus = createAction(
   'offers/setOffersLoadingStatus',
   (isLoading: boolean) => ({payload: isLoading})
 );
+
+export const getCities = createAction('offers/getCities');
