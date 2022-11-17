@@ -11,8 +11,10 @@ import { AppDispatch, State } from '../types/state';
 import { getCities, loadOffers, setOffersLoadingStatus } from './offers-actions';
 import {
   loadOffer,
+  loadOffersNearBy,
   loadReviews,
   setOfferLoadingStatus,
+  setOffersNearByLoadingStatus,
   setReviewsLoadingStatus } from './offer-actions';
 
 export const fetchOffersAction = createAsyncThunk<void, undefined, {
@@ -45,6 +47,23 @@ export const fetchOfferAction = createAsyncThunk<void, OfferId, {
 
     dispatch(loadOffer(data));
     dispatch(setOfferLoadingStatus(false));
+  }
+);
+
+export const fetchOffersNearByAction = createAsyncThunk<void, OfferId, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data, fetchOffersNearBy',
+  async (id, {dispatch, extra: api}) => {
+    dispatch(setOffersNearByLoadingStatus(true));
+
+    // TODO: избавиться от магического значения
+    const {data} = await api.get<Offer[]>(`/hotels/${id}/nearby`);
+
+    dispatch(loadOffersNearBy(data));
+    dispatch(setOffersNearByLoadingStatus(false));
   }
 );
 
