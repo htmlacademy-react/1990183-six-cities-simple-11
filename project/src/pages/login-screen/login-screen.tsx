@@ -1,6 +1,17 @@
+import { Navigate } from 'react-router-dom';
+
+import { AppRoute, AuthStatus } from '../../const';
+import { useAppSelector } from '../../hooks';
+
 import Header from '../../components/header/header';
 
 function LoginScreen() {
+  const authStatus = useAppSelector((state) => state.user.authStatus);
+
+  if (authStatus === AuthStatus.Auth) {
+    return <Navigate to={AppRoute.Root} />;
+  }
+
   return (
     <div className="page page--gray page--login">
       <Header hasNavigation={false} />

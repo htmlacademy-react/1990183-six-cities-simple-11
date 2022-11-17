@@ -1,3 +1,5 @@
+import { AuthStatus } from '../../const';
+import { useAppSelector } from '../../hooks';
 import { Review } from '../../types/review';
 import ReviewForm from '../review-form/review-form';
 import ReviewList from '../review-list/review-list';
@@ -7,6 +9,8 @@ type RoomReviewsProps = {
 };
 
 function RoomReviews({reviews}: RoomReviewsProps) {
+  const authStatus = useAppSelector((state) => state.user.authStatus);
+
   return (
     <section className="property__reviews reviews">
       <h2 className="reviews__title">
@@ -16,7 +20,7 @@ function RoomReviews({reviews}: RoomReviewsProps) {
 
       <ReviewList reviews={reviews} />
 
-      <ReviewForm />
+      {authStatus === AuthStatus.Auth && <ReviewForm />}
     </section>
   );
 }
