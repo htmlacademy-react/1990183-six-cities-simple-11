@@ -25,3 +25,9 @@ export enum ApiRoute {
   Login = '/login',
   Logout = '/logout',
 }
+
+export enum AuthStatus {
+  Unknown = 'UNKNOWN',
+  Auth = 'AUTH',
+  NoAuth = 'NO_AUTH',
+}
