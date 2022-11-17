@@ -3,8 +3,6 @@ import { Provider } from 'react-redux';
 
 import { AppRoute } from '../../const';
 
-import { AllReviews } from '../../types/review';
-
 import { store } from '../../store';
 
 import MainScreen from '../../pages/main-screen/main-screen';
@@ -12,11 +10,7 @@ import RoomScreen from '../../pages/room-screen/room-screen';
 import LoginScreen from '../../pages/login-screen/login-screen';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
 
-type AppProps = {
-  allReviews: AllReviews;
-};
-
-function App(props: AppProps) {
+function App() {
   return (
     <Provider store={store}>
       <BrowserRouter>
@@ -31,9 +25,7 @@ function App(props: AppProps) {
           <Route
             path={AppRoute.OfferItem}
             element={
-              <RoomScreen
-                allReviews={props.allReviews}
-              />
+              <RoomScreen />
             }
           />
 

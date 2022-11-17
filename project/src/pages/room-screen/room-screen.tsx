@@ -4,12 +4,11 @@ import { useParams } from 'react-router-dom';
 import { offersNearBy } from '../../mocks/offers';
 
 import { store } from '../../store';
-import { fetchOfferAction } from '../../store/api-actions';
+import { fetchOfferAction, fetchReviewsAction } from '../../store/api-actions';
 
 import { useAppSelector } from '../../hooks';
 
 import { OfferId } from '../../types/offer';
-import { AllReviews } from '../../types/review';
 
 import Header from '../../components/header/header';
 import Gallery from '../../components/gallery/gallery';
@@ -20,24 +19,22 @@ import RoomReviews from '../../components/room-reviews/room-reviews';
 import OfferList from '../../components/offer-list/offer-list';
 import Map from '../../components/map/map';
 
-type RoomScreenProps = {
-  allReviews: AllReviews;
-};
-
-function RoomScreen({allReviews}: RoomScreenProps) {
+function RoomScreen() {
   const offer = useAppSelector((state) => state.offer.offer);
   const isOfferLoading = useAppSelector((state) => state.offer.isOfferLoading);
 
+  const reviews = useAppSelector((state) => state.offer.reviews);
+  const areReviewsLoading = useAppSelector((state) => state.offer.areReviewsLoading);
+
   const {id} = useParams() as {id: string};
   const offerId: OfferId = Number(id);
-  const roomReviews = allReviews[1];
 
   useEffect(() => {
     store.dispatch(fetchOfferAction(offerId));
+    store.dispatch(fetchReviewsAction(offerId));
   }, [offerId]);
 
-
-  if (isOfferLoading || offer === null) {
+  if (isOfferLoading || offer === null || areReviewsLoading) {
     return <p>Loading...</p>;
   }
 
@@ -61,7 +58,7 @@ function RoomScreen({allReviews}: RoomScreenProps) {
                 user={offer.host}
                 description={offer.description}
               />
-              <RoomReviews reviews={roomReviews} />
+              <RoomReviews reviews={reviews} />
             </div>
           </div>
 

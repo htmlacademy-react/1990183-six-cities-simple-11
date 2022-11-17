@@ -21,7 +21,7 @@ export enum RoomTypeLabel {
 
 export enum ApiRoute {
   Offers = '/hotels',
-  Comments = '/comments',
+  Reviews = '/comments',
   Login = '/login',
   Logout = '/logout',
 }
