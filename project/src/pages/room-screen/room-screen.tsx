@@ -1,6 +1,14 @@
+import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { Offer, OfferId } from '../../types/offer';
+import { offersNearBy } from '../../mocks/offers';
+
+import { store } from '../../store';
+import { fetchOfferAction } from '../../store/api-actions';
+
+import { useAppSelector } from '../../hooks';
+
+import { OfferId } from '../../types/offer';
 import { AllReviews } from '../../types/review';
 
 import Header from '../../components/header/header';
@@ -10,20 +18,28 @@ import RoomInside from '../../components/room-inside/room-inside';
 import Host from '../../components/host/host';
 import RoomReviews from '../../components/room-reviews/room-reviews';
 import OfferList from '../../components/offer-list/offer-list';
-
-import { offersNearBy } from '../../mocks/offers';
 import Map from '../../components/map/map';
 
 type RoomScreenProps = {
-  offers: Offer[];
   allReviews: AllReviews;
 };
 
-function RoomScreen({offers, allReviews}: RoomScreenProps) {
+function RoomScreen({allReviews}: RoomScreenProps) {
+  const offer = useAppSelector((state) => state.offer.offer);
+  const isOfferLoading = useAppSelector((state) => state.offer.isOfferLoading);
+
   const {id} = useParams() as {id: string};
   const offerId: OfferId = Number(id);
-  const offer = offers.find((item) => (item.id === offerId)) as Offer;
-  const roomReviews = allReviews[offerId];
+  const roomReviews = allReviews[1];
+
+  useEffect(() => {
+    store.dispatch(fetchOfferAction(offerId));
+  }, [offerId]);
+
+
+  if (isOfferLoading || offer === null) {
+    return <p>Loading...</p>;
+  }
 
   return (
     <div className="page">
@@ -51,7 +67,7 @@ function RoomScreen({offers, allReviews}: RoomScreenProps) {
 
           <Map
             cssClass='property__map'
-            city={offers[0].city}
+            city={offer.city}
             points={offersNearBy.map((offerNearBy) => offerNearBy.location)}
           />
         </section>
