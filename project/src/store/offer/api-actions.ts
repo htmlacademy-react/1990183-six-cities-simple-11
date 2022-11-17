@@ -41,8 +41,7 @@ export const fetchOffersNearByAction = createAsyncThunk<void, OfferId, {
   async (id, {dispatch, extra: api}) => {
     dispatch(setOffersNearByLoadingStatus(true));
 
-    // TODO: избавиться от магического значения
-    const {data} = await api.get<Offer[]>(`/hotels/${id}/nearby`);
+    const {data} = await api.get<Offer[]>(`${ApiRoute.Offers}/${id}/nearby`);
 
     dispatch(loadOffersNearBy(data));
     dispatch(setOffersNearByLoadingStatus(false));
