@@ -5,7 +5,7 @@ import { store } from '../../store';
 import {
   fetchOfferAction,
   fetchOffersNearByAction,
-  fetchReviewsAction } from '../../store/api-actions';
+  fetchReviewsAction } from '../../store/offer/api-actions';
 
 import { useAppSelector } from '../../hooks';
 

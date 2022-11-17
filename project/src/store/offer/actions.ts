@@ -1,7 +1,7 @@
 import { createAction } from '@reduxjs/toolkit';
 
-import { Offer } from '../types/offer';
-import { Review } from '../types/review';
+import { Offer } from '../../types/offer';
+import { Review } from '../../types/review';
 
 export const loadOffer = createAction(
   'offer/load',

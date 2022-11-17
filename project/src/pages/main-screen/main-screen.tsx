@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { changeCity } from '../../store/offers-actions';
+import { changeCity } from '../../store/offers/actions';
 
 import Header from '../../components/header/header';
 import LocationNav from '../../components/location-nav/location-nav';

@@ -2,8 +2,8 @@ import { configureStore } from '@reduxjs/toolkit';
 
 import { createAPI } from '../services/api';
 
-import { offersReducer } from './offers-reducer';
-import { offerReducer } from './offer-reducer';
+import { offersReducer } from './offers/reducer';
+import { offerReducer } from './offer/reducer';
 
 export const api = createAPI();
 

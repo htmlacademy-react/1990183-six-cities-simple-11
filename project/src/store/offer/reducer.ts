@@ -1,7 +1,7 @@
 import { createReducer } from '@reduxjs/toolkit';
 
-import { Offer } from '../types/offer';
-import { Review } from '../types/review';
+import { Offer } from '../../types/offer';
+import { Review } from '../../types/review';
 
 import {
   loadOffer,
@@ -9,7 +9,7 @@ import {
   loadReviews,
   setOfferLoadingStatus,
   setOffersNearByLoadingStatus,
-  setReviewsLoadingStatus } from './offer-actions';
+  setReviewsLoadingStatus } from './actions';
 
 type InitialState = {
   offer: Offer | null;

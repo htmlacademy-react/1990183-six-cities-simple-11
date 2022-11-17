@@ -1,12 +1,12 @@
 import { createReducer } from '@reduxjs/toolkit';
 
-import { City, Offer } from '../types/offer';
+import { City, Offer } from '../../types/offer';
 
 import {
   changeCity,
   getCities,
   loadOffers,
-  setOffersLoadingStatus } from './offers-actions';
+  setOffersLoadingStatus } from './actions';
 
 
 type InitialState = {
