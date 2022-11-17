@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { changeCity } from '../../store/actions';
+import { changeCity } from '../../store/offers-actions';
 
 import Header from '../../components/header/header';
 import LocationNav from '../../components/location-nav/location-nav';
@@ -8,11 +8,11 @@ import OfferList from '../../components/offer-list/offer-list';
 import Map from '../../components/map/map';
 
 function MainScreen() {
-  const areOffersLoading = useAppSelector((state) => state.areOffersLoading);
+  const areOffersLoading = useAppSelector((state) => state.offers.areOffersLoading);
 
-  const currentCity = useAppSelector((state) => state.currentCity);
-  const offers = useAppSelector((state) => state.offers);
-  const cities = useAppSelector((state) => state.cities);
+  const currentCity = useAppSelector((state) => state.offers.currentCity);
+  const offers = useAppSelector((state) => state.offers.offers);
+  const cities = useAppSelector((state) => state.offers.cities);
 
   const dispatch = useAppDispatch();
 

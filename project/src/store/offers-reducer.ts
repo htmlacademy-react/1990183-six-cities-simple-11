@@ -6,7 +6,7 @@ import {
   changeCity,
   getCities,
   loadOffers,
-  setOffersLoadingStatus } from './actions';
+  setOffersLoadingStatus } from './offers-actions';
 
 
 type InitialState = {
@@ -23,7 +23,7 @@ const initialState: InitialState = {
   areOffersLoading: false,
 };
 
-export const reducer = createReducer(initialState, (builder) => {
+export const offersReducer = createReducer(initialState, (builder) => {
   builder
     .addCase(loadOffers, (state, action) => {
       state.offers = action.payload;

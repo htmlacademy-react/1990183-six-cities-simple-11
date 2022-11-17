@@ -4,7 +4,7 @@ import { AxiosInstance } from 'axios';
 import { Offer } from '../types/offer';
 import { AppDispatch, State } from '../types/state';
 
-import { getCities, loadOffers, setOffersLoadingStatus } from './actions';
+import { getCities, loadOffers, setOffersLoadingStatus } from './offers-actions';
 
 export const fetchOffersAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch;
