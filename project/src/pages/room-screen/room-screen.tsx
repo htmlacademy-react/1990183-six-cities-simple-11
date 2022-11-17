@@ -19,6 +19,7 @@ import Host from '../../components/host/host';
 import RoomReviews from '../../components/room-reviews/room-reviews';
 import OfferList from '../../components/offer-list/offer-list';
 import Map from '../../components/map/map';
+import Loader from '../../components/loader/loader';
 
 function RoomScreen() {
   const offer = useAppSelector((state) => state.offer.offer);
@@ -43,7 +44,7 @@ function RoomScreen() {
   }, [offerId]);
 
   if (areDataLoading) {
-    return <p>Loading...</p>;
+    return <Loader />;
   }
 
   return (

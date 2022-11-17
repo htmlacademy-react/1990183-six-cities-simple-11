@@ -6,6 +6,7 @@ import LocationNav from '../../components/location-nav/location-nav';
 import Sorting from '../../components/sorting/sorting';
 import OfferList from '../../components/offer-list/offer-list';
 import Map from '../../components/map/map';
+import Loader from '../../components/loader/loader';
 
 function MainScreen() {
   const areOffersLoading = useAppSelector((state) => state.offers.areOffersLoading);
@@ -17,7 +18,7 @@ function MainScreen() {
   const dispatch = useAppDispatch();
 
   if (areOffersLoading || currentCity === null) {
-    return <p>Loading...</p>;
+    return <Loader />;
   }
 
   const cityNames = cities.map((city) => city.name);
