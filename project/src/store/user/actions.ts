@@ -10,5 +10,5 @@ export const setAuthStatus = createAction(
 
 export const loadUser = createAction(
   'user/load',
-  (user: AuthorizedUser) => ({payload: user})
+  (user: AuthorizedUser | null) => ({payload: user})
 );

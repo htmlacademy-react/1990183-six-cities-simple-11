@@ -1,10 +1,11 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
 
-import { ApiRoute, AuthStatus } from '../../const';
-import { saveToken } from '../../services/token';
 import { AppDispatch, State } from '../../types/state';
 import { AuthorizedUser } from '../../types/user';
+
+import { ApiRoute, AuthStatus } from '../../const';
+import { removeToken, saveToken } from '../../services/token';
 import { loadUser, setAuthStatus } from './actions';
 
 type AuthData = {
@@ -48,5 +49,19 @@ export const loginAction = createAsyncThunk<void, AuthData, {
     catch {
       dispatch(setAuthStatus(AuthStatus.NoAuth));
     }
+  }
+);
+
+export const logoutAction = createAsyncThunk<void, undefined, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'user/logout',
+  async (_, {dispatch, extra: api}) => {
+    await api.delete(ApiRoute.Logout);
+    removeToken();
+    dispatch(setAuthStatus(AuthStatus.NoAuth));
+    dispatch(loadUser(null));
   }
 );
