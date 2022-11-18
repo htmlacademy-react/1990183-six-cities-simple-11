@@ -1,12 +1,30 @@
+import { FormEvent, useRef } from 'react';
 import { Navigate } from 'react-router-dom';
 
 import { AppRoute, AuthStatus } from '../../const';
-import { useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { loginAction } from '../../store/user/api-actions';
 
 import Header from '../../components/header/header';
 
 function LoginScreen() {
   const authStatus = useAppSelector((state) => state.user.authStatus);
+
+  const dispatch = useAppDispatch();
+
+  const emailRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
+
+  const handleFormSubmit = (evt: FormEvent) => {
+    evt.preventDefault();
+
+    if (emailRef.current !== null && passwordRef.current !== null) {
+      dispatch(loginAction({
+        email: emailRef.current.value,
+        password: passwordRef.current.value,
+      }));
+    }
+  };
 
   if (authStatus === AuthStatus.Auth) {
     return <Navigate to={AppRoute.Root} />;
@@ -22,7 +40,12 @@ function LoginScreen() {
 
             <h1 className="login__title">Sign in</h1>
 
-            <form className="login__form form" action="#" method="post">
+            <form
+              className="login__form form"
+              action="#"
+              method="post"
+              onSubmit={handleFormSubmit}
+            >
               <div className="login__input-wrapper form__input-wrapper">
                 <label className="visually-hidden">E-mail</label>
                 <input
@@ -30,6 +53,7 @@ function LoginScreen() {
                   type="email"
                   name="email"
                   placeholder="Email"
+                  ref={emailRef}
                   required
                 />
               </div>
@@ -41,6 +65,7 @@ function LoginScreen() {
                   type="password"
                   name="password"
                   placeholder="Password"
+                  ref={passwordRef}
                   required
                 />
               </div>
