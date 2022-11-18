@@ -4,3 +4,8 @@ export type User = {
   avatarUrl: string;
   isPro: boolean;
 };
+
+export type AuthorizedUser = User & {
+  email: string;
+  token: string;
+};
