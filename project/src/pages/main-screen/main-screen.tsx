@@ -1,3 +1,5 @@
+import { useMemo } from 'react';
+
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { changeCity } from '../../store/offers/actions';
 
@@ -17,12 +19,25 @@ function MainScreen() {
 
   const dispatch = useAppDispatch();
 
+  const cityNames = useMemo(
+    () => cities.map((city) => city.name),
+    [cities]
+  );
+
+  const currentOffers = useMemo(
+    () => {
+      if (currentCity === null) {
+        return [];
+      }
+
+      return offers.filter((offer) => offer.city.name === currentCity.name);
+    },
+    [currentCity, offers]
+  );
+
   if (areOffersLoading || currentCity === null) {
     return <Loader />;
   }
-
-  const cityNames = cities.map((city) => city.name);
-  const currentOffers = offers.filter((offer) => offer.city.name === currentCity.name);
 
   return (
     <div className="page page--gray page--main">
