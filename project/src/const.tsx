@@ -18,3 +18,10 @@ export enum RoomTypeLabel {
   House = 'House',
   Hotel = 'Hotel',
 }
+
+export enum ApiRoute {
+  Offers = '/hotels',
+  Reviews = '/comments',
+  Login = '/login',
+  Logout = '/logout',
+}

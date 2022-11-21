@@ -1,0 +1,25 @@
+.loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+}
+
+.loader__icon {
+  width: 24px;
+  height: 24px;
+  animation: spinner 1.5s linear infinite;
+}
+.loader__icon path {
+  fill: #4481C3;
+}
+
+.loader__text {
+  margin-left: 1em;
+  font-size: 20px;
+}
+
+@keyframes spinner {
+  from { transform: rotate(0); }
+  to { transform: rotate(360deg); }
+}

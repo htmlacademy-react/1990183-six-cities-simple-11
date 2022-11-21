@@ -1,7 +1,15 @@
+import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { Offer, OfferId } from '../../types/offer';
-import { AllReviews } from '../../types/review';
+import { store } from '../../store';
+import {
+  fetchOfferAction,
+  fetchOffersNearByAction,
+  fetchReviewsAction } from '../../store/offer/api-actions';
+
+import { useAppSelector } from '../../hooks';
+
+import { OfferId } from '../../types/offer';
 
 import Header from '../../components/header/header';
 import Gallery from '../../components/gallery/gallery';
@@ -10,20 +18,34 @@ import RoomInside from '../../components/room-inside/room-inside';
 import Host from '../../components/host/host';
 import RoomReviews from '../../components/room-reviews/room-reviews';
 import OfferList from '../../components/offer-list/offer-list';
-
-import { offersNearBy } from '../../mocks/offers';
 import Map from '../../components/map/map';
+import Loader from '../../components/loader/loader';
 
-type RoomScreenProps = {
-  offers: Offer[];
-  allReviews: AllReviews;
-};
+function RoomScreen() {
+  const offer = useAppSelector((state) => state.offer.offer);
+  const isOfferLoading = useAppSelector((state) => state.offer.isOfferLoading);
 
-function RoomScreen({offers, allReviews}: RoomScreenProps) {
+  const offersNearBy = useAppSelector((state) => state.offer.offersNearBy);
+  const areOffersNearByLoading = useAppSelector((state) => state.offer.areOffersNearBy);
+
+  const reviews = useAppSelector((state) => state.offer.reviews);
+  const areReviewsLoading = useAppSelector((state) => state.offer.areReviewsLoading);
+
   const {id} = useParams() as {id: string};
   const offerId: OfferId = Number(id);
-  const offer = offers.find((item) => (item.id === offerId)) as Offer;
-  const roomReviews = allReviews[offerId];
+
+  const areDataLoading =
+    (isOfferLoading || offer === null || areOffersNearByLoading || areReviewsLoading);
+
+  useEffect(() => {
+    store.dispatch(fetchOfferAction(offerId));
+    store.dispatch(fetchOffersNearByAction(offerId));
+    store.dispatch(fetchReviewsAction(offerId));
+  }, [offerId]);
+
+  if (areDataLoading) {
+    return <Loader />;
+  }
 
   return (
     <div className="page">
@@ -45,13 +67,13 @@ function RoomScreen({offers, allReviews}: RoomScreenProps) {
                 user={offer.host}
                 description={offer.description}
               />
-              <RoomReviews reviews={roomReviews} />
+              <RoomReviews reviews={reviews} />
             </div>
           </div>
 
           <Map
             cssClass='property__map'
-            city={offers[0].city}
+            city={offer.city}
             points={offersNearBy.map((offerNearBy) => offerNearBy.location)}
           />
         </section>
