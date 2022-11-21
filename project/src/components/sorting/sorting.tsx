@@ -1,3 +1,5 @@
+import { memo } from 'react';
+
 function Sorting() {
   return (
     <form className="places__sorting" action="#" method="get">
@@ -20,4 +22,4 @@ function Sorting() {
   );
 }
 
-export default Sorting;
+export default memo(Sorting);
