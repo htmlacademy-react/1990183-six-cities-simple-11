@@ -2,18 +2,23 @@ import { useEffect } from 'react';
 
 import { useAppDispatch, useAppSelector } from '../../hooks';
 
-import { store } from '../../store';
 import { updateLayout } from '../../store/layout/actions';
 import { fetchOffersAction } from '../../store/offers/api-actions';
 
 import Loader from '../../components/loader/loader';
 import MainScreenContent from '../../components/main-screen-content/main-screen-content';
 
-store.dispatch(fetchOffersAction());
-
 function MainScreen() {
+  const offers = useAppSelector((state) => state.offers.offers);
   const areOffersLoading = useAppSelector((state) => state.offers.areOffersLoading);
+
   const dispatch = useAppDispatch();
+
+  const areDataLoading = areOffersLoading || offers === null;
+
+  useEffect(() => {
+    dispatch(fetchOffersAction());
+  }, [dispatch]);
 
   useEffect(() => {
     dispatch(updateLayout({
@@ -24,7 +29,7 @@ function MainScreen() {
   }, [dispatch]);
 
   return (
-    areOffersLoading
+    areDataLoading
       ? <Loader />
       : <MainScreenContent />
   );

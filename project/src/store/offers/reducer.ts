@@ -12,14 +12,14 @@ import {
 type InitialState = {
   cities: City[];
   currentCity: City | null;
-  offers: Offer[];
+  offers: Offer[] | null;
   areOffersLoading: boolean;
 }
 
 const initialState: InitialState = {
   cities: [],
   currentCity: null,
-  offers: [],
+  offers: null,
   areOffersLoading: false,
 };
 
@@ -34,16 +34,18 @@ export const offersReducer = createReducer(initialState, (builder) => {
     })
 
     .addCase(getCities, (state) => {
-      const cityNames: string[] = [];
+      if (state.offers !== null && state.cities.length === 0) {
+        const cityNames: string[] = [];
 
-      state.offers.forEach((offer) => {
-        if (!cityNames.includes(offer.city.name)) {
-          state.cities.push(offer.city);
-          cityNames.push(offer.city.name);
-        }
-      });
+        state.offers.forEach((offer) => {
+          if (!cityNames.includes(offer.city.name)) {
+            state.cities.push(offer.city);
+            cityNames.push(offer.city.name);
+          }
+        });
 
-      state.currentCity = state.cities[0];
+        state.currentCity = state.cities[0];
+      }
     })
 
     .addCase(changeCity, (state, action) => {

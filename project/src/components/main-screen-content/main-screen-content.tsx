@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-import { City } from '../../types/offer';
+import { City, Offer } from '../../types/offer';
 
 import { useAppDispatch, useAppSelector } from '../../hooks';
 
@@ -13,7 +13,7 @@ import Map from '../map/map';
 
 function MainScreenContent() {
   const currentCity = useAppSelector((state) => state.offers.currentCity) as City;
-  const offers = useAppSelector((state) => state.offers.offers);
+  const offers = useAppSelector((state) => state.offers.offers) as Offer[];
   const cities = useAppSelector((state) => state.offers.cities);
 
   const dispatch = useAppDispatch();
@@ -24,13 +24,7 @@ function MainScreenContent() {
   );
 
   const currentOffers = useMemo(
-    () => {
-      if (currentCity === null) {
-        return [];
-      }
-
-      return offers.filter((offer) => offer.city.name === currentCity.name);
-    },
+    () => offers.filter((offer) => offer.city.name === currentCity.name),
     [currentCity, offers]
   );
 
