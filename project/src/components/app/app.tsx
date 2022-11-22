@@ -5,6 +5,7 @@ import { AppRoute } from '../../const';
 
 import { store } from '../../store';
 
+import Layout from '../layout/layout';
 import MainScreen from '../../pages/main-screen/main-screen';
 import RoomScreen from '../../pages/room-screen/room-screen';
 import LoginScreen from '../../pages/login-screen/login-screen';
@@ -17,27 +18,28 @@ function App() {
         <Routes>
           <Route
             path={AppRoute.Root}
-            element={
-              <MainScreen />
-            }
-          />
+            element={<Layout />}
+          >
+            <Route
+              index
+              element={<MainScreen />}
+            />
 
-          <Route
-            path={AppRoute.OfferItem}
-            element={
-              <RoomScreen />
-            }
-          />
+            <Route
+              path={AppRoute.OfferItem}
+              element={<RoomScreen />}
+            />
 
-          <Route
-            path={AppRoute.Login}
-            element={<LoginScreen />}
-          />
+            <Route
+              path={AppRoute.Login}
+              element={<LoginScreen />}
+            />
 
-          <Route
-            path={AppRoute.NotFound}
-            element={<NotFoundScreen />}
-          />
+            <Route
+              path={AppRoute.NotFound}
+              element={<NotFoundScreen />}
+            />
+          </Route>
         </Routes>
       </BrowserRouter>
     </Provider>
