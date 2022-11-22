@@ -1,21 +1,19 @@
-import { PropsWithChildren } from 'react';
+import { Outlet } from 'react-router-dom';
+
+import { useAppSelector } from '../../hooks';
 import Header from '../header/header';
 
-type LayoutProps = PropsWithChildren<{
-  pageCssClass: string;
-  mainCssClass: string;
-  hasNavigation: boolean;
-}>;
+function Layout() {
+  const layoutData = useAppSelector((state) => state.layout.params);
 
-function Layout(props: LayoutProps) {
-  const {children, pageCssClass, mainCssClass, hasNavigation} = props;
+  const {pageCssClass, mainCssClass, hasHeaderNavigation} = layoutData;
 
   return (
     <div className={`page ${pageCssClass}`}>
-      <Header hasNavigation={hasNavigation} />
+      <Header hasNavigation={hasHeaderNavigation} />
 
       <main className={`page__main ${mainCssClass}`}>
-        {children}
+        <Outlet />
       </main>
     </div>
   );
