@@ -1,9 +1,11 @@
 import { Link } from 'react-router-dom';
 
-import { getLabelByOfferType } from '../../utils';
 import { Offer } from '../../types/offer';
 
+import { getLabelByOfferType } from '../../utils';
+
 import PremiumLabel from '../premium-label/premium-label';
+import Rating from '../rating/rating';
 
 type RoomCardProps = {
   offer: Offer;
@@ -42,12 +44,12 @@ function RoomCard(props: RoomCardProps) {
           </div>
         </div>
 
-        <div className="place-card__rating rating">
-          <div className="place-card__stars rating__stars">
-            <span style={{ width: '80%' }}></span>
-            <span className="visually-hidden">Rating</span>
-          </div>
-        </div>
+        <Rating
+          value={offer.rating}
+          wrapperCssClass='place-card__rating'
+          starsCssClass='place-card__stars'
+          valueCssClass={null}
+        />
 
         <h2 className="place-card__name">
           <Link to={`/offer/${offer.id}`}>

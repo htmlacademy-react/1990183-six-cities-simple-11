@@ -1,6 +1,7 @@
 import { Offer } from '../../types/offer';
 import { getLabelByOfferType } from '../../utils';
 import PremiumLabel from '../premium-label/premium-label';
+import Rating from '../rating/rating';
 
 type RoomHeaderProps = {
   offer: Offer;
@@ -17,13 +18,12 @@ function RoomHeader({offer}: RoomHeaderProps) {
         </h1>
       </div>
 
-      <div className="property__rating rating">
-        <div className="property__stars rating__stars">
-          <span style={{ width: '80%' }}></span>
-          <span className="visually-hidden">Rating</span>
-        </div>
-        <span className="property__rating-value rating__value">4.8</span>
-      </div>
+      <Rating
+        value={offer.rating}
+        wrapperCssClass='property__rating'
+        starsCssClass='property__stars'
+        valueCssClass='property__rating-value'
+      />
 
       <ul className="property__features">
         <li className="property__feature property__feature--entire">
