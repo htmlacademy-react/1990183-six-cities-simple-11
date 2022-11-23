@@ -60,8 +60,9 @@ function MainScreenContent() {
           <div className="cities__right-section">
             <Map
               cssClass="cities__map"
-              city={currentCity}
+              center={currentCity.location}
               points={currentOffers.map((offer) => offer.location)}
+              activePoint={null}
             />
           </div>
         </div>

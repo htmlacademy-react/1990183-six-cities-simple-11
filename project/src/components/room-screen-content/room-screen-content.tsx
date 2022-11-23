@@ -34,8 +34,13 @@ function RoomScreenContent() {
 
         <Map
           cssClass='property__map'
-          city={offer.city}
-          points={offersNearBy.map((offerNearBy) => offerNearBy.location)}
+          center={offer.location}
+          points={
+            offersNearBy
+              .map((offerNearBy) => offerNearBy.location)
+              .concat(offer.location)
+          }
+          activePoint={offer.location}
         />
       </section>
 
