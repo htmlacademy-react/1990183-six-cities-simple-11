@@ -3,13 +3,18 @@ import { OfferGallery } from '../../types/offer';
 type GalleryProps = {
   images: OfferGallery;
   alt: string;
+  maxLength: number;
 };
 
-function Gallery({images, alt}: GalleryProps) {
+function Gallery(props: GalleryProps) {
+  const {images, alt, maxLength} = props;
+
+  const visibleImages = images.slice(0, maxLength);
+
   return (
     <div className="property__gallery-container container">
       <div className="property__gallery">
-        {images.map((src) => (
+        {visibleImages.map((src) => (
           <div
             key={src}
             className="property__image-wrapper"
