@@ -34,6 +34,7 @@ export const offersReducer = createReducer(initialState, (builder) => {
     })
 
     .addCase(getCities, (state) => {
+      // TODO: расположить города в нужном порядке
       if (state.offers !== null && state.cities.length === 0) {
         const cityNames: string[] = [];
 
