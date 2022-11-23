@@ -1,8 +1,13 @@
 import { AuthStatus } from '../../const';
-import { useAppSelector } from '../../hooks';
+
 import { Review } from '../../types/review';
+
+import { useAppSelector } from '../../hooks';
+
 import ReviewForm from '../review-form/review-form';
 import ReviewList from '../review-list/review-list';
+
+const MAX_REVIEWS_QUANTITY = 10;
 
 type RoomReviewsProps = {
   reviews: Review[];
@@ -18,9 +23,14 @@ function RoomReviews({reviews}: RoomReviewsProps) {
         <span className="reviews__amount">{reviews.length}</span>
       </h2>
 
-      <ReviewList reviews={reviews} />
+      <ReviewList
+        reviews={reviews}
+        maxLength={MAX_REVIEWS_QUANTITY}
+      />
 
-      {authStatus === AuthStatus.Auth && <ReviewForm />}
+      {
+        (authStatus === AuthStatus.Auth) && <ReviewForm />
+      }
     </section>
   );
 }

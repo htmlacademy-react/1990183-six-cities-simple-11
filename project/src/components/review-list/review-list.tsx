@@ -3,12 +3,16 @@ import ReviewItem from '../review-item/review-item';
 
 type ReviewListProps = {
   reviews: Review[];
+  maxLength: number;
 };
 
-function ReviewList({reviews}: ReviewListProps) {
+function ReviewList(props: ReviewListProps) {
+  const {reviews, maxLength} = props;
+  const visibleReviews = reviews.slice(0, maxLength);
+
   return (
     <ul className="reviews__list">
-      {reviews.map((review) => (
+      {visibleReviews.map((review) => (
         <ReviewItem key={review.id} review={review} />
       ))}
     </ul>
