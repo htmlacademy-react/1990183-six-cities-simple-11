@@ -1,21 +1,39 @@
 import { memo, useState } from 'react';
 
-enum SortingLabel {
+import { SortType } from '../../const';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { sortOffers } from '../../store/offers/actions';
+
+enum SortLabel {
   Popular = 'Popular',
   PriceToHigh = 'Price: low to high',
   PriceToLow = 'Price: high to low',
-  TopRate = 'Top rated first',
+  TopRated = 'Top rated first',
 }
 
 function Sorting() {
+  const activeSortType = useAppSelector((state) => state.offers.sortType);
+
+  // TODO: подумать над универсальной функцией
+  const getLabelByType = (sortType: SortType) => {
+    const currentKey = Object.keys(SortType).find(
+      (key) => SortType[key as keyof typeof SortType] === sortType
+    );
+
+    return SortLabel[currentKey as keyof typeof SortLabel];
+  };
+
   const [isDropdownOpened, setDropdownOpenedStatus] = useState<boolean>(false);
-  const [activeOption, setActiveOption] = useState<string>(SortingLabel.Popular);
+  const [activeOption, setActiveOption] = useState<string>(getLabelByType(activeSortType));
+
+  const dispatch = useAppDispatch();
 
   const handleLabelClick = () => setDropdownOpenedStatus((prevStatus) => !prevStatus);
 
-  const handleOptionClick = (label: SortingLabel) => {
+  const handleOptionClick = (label: SortLabel, value: SortType) => {
     setActiveOption(label);
     setDropdownOpenedStatus(false);
+    dispatch(sortOffers(value));
   };
 
   return (
@@ -40,16 +58,17 @@ function Sorting() {
           ${isDropdownOpened ? 'places__options--opened' : ''}
         `}
       >
-        {Object.keys(SortingLabel).map((key) => {
-          const label = SortingLabel[key as keyof typeof SortingLabel];
+        {Object.keys(SortType).map((key) => {
+          const label = SortLabel[key as keyof typeof SortLabel];
+          const value = SortType[key as keyof typeof SortType];
           const activeClass = (label === activeOption) ? 'places__option--active' : '';
 
           return (
             <li
-              key={label}
+              key={value}
               className={`places__option ${activeClass}`}
               tabIndex={0}
-              onClick={() => handleOptionClick(label)}
+              onClick={() => handleOptionClick(label, value)}
             >
               {label}
             </li>

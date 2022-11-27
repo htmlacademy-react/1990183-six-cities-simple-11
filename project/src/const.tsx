@@ -31,3 +31,10 @@ export enum AuthStatus {
   Auth = 'AUTH',
   NoAuth = 'NO_AUTH',
 }
+
+export enum SortType {
+  Popular = 'popular',
+  PriceToHigh = 'price-to-hight',
+  PriceToLow = 'price-to-low',
+  TopRated = 'top-rated',
+}

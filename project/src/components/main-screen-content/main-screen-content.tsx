@@ -13,7 +13,7 @@ import Map from '../map/map';
 
 function MainScreenContent() {
   const currentCity = useAppSelector((state) => state.offers.currentCity) as City;
-  const offers = useAppSelector((state) => state.offers.offers) as Offer[];
+  const offers = useAppSelector((state) => state.offers.sortedOffers) as Offer[];
   const cities = useAppSelector((state) => state.offers.cities);
 
   const dispatch = useAppDispatch();
