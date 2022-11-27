@@ -1,5 +1,3 @@
-import { useCallback } from 'react';
-
 import { AuthStatus } from '../../const';
 
 import { Review } from '../../types/review';
@@ -18,11 +16,8 @@ type RoomReviewsProps = {
 function RoomReviews({reviews}: RoomReviewsProps) {
   const authStatus = useAppSelector((state) => state.user.authStatus);
 
-  const handleDateSort = useCallback(
-    (review: Review, nextReview: Review) =>
-      Date.parse(nextReview.date) - Date.parse(review.date),
-    []
-  );
+  const handleDateSort = (review: Review, nextReview: Review) =>
+    Date.parse(nextReview.date) - Date.parse(review.date);
 
   return (
     <section className="property__reviews reviews">

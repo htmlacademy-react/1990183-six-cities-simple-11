@@ -1,11 +1,11 @@
-const MAX_STARS_QUANTITY = 5;
-
 type RatingProps = {
   value: number;
   wrapperCssClass: string;
   starsCssClass: string;
   valueCssClass: string | null;
 };
+
+const MAX_STARS_QUANTITY = 5;
 
 function Rating(props: RatingProps) {
   const {
