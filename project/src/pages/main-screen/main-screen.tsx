@@ -20,6 +20,7 @@ function MainScreen() {
     dispatch(fetchOffersAction());
   }, [dispatch]);
 
+  // TODO: перенести эту логику в Layout
   useEffect(() => {
     dispatch(updateLayout({
       hasHeaderNavigation: true,
