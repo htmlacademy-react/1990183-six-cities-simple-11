@@ -25,3 +25,8 @@ export const sortOffers = createAction(
   'offers/sort',
   (sortType: SortType) => ({payload: sortType})
 );
+
+export const setActiveOffer = createAction(
+  'offers/setActiveOffer',
+  (activeOffer: Offer | null) => ({payload: activeOffer})
+);

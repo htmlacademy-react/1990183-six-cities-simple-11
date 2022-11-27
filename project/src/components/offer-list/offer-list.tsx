@@ -1,7 +1,8 @@
-import { useState } from 'react';
-import { Offer, OfferId } from '../../types/offer';
+import { Offer } from '../../types/offer';
 
 import RoomCard from '../../components/room-card/room-card';
+import { useAppDispatch } from '../../hooks';
+import { setActiveOffer } from '../../store/offers/actions';
 
 type OfferListProps = {
   cssClass: string;
@@ -10,18 +11,17 @@ type OfferListProps = {
 
 function OfferList(props: OfferListProps) {
   const {cssClass, offers} = props;
-  const [activeCardId, setActiveCardId] = useState<null | OfferId>(null);
+
+  const dispatch = useAppDispatch();
 
   return (
     <div className={`places__list ${cssClass}`}>
       {offers.map((offer) => (
         <RoomCard
-          // TODO: удалить activeCardId из ключа,
-          // когда он будет задействован в коде
-          key={`${activeCardId || 'key'}-${offer.id}`}
+          key={`key-${offer.id}`}
           offer={offer}
-          onActiveSet={() => setActiveCardId(offer.id)}
-          onActiveUnset={() => setActiveCardId(null)}
+          onActiveSet={() => dispatch(setActiveOffer(offer))}
+          onActiveUnset={() => dispatch(setActiveOffer(null))}
         />
       ))}
     </div>
