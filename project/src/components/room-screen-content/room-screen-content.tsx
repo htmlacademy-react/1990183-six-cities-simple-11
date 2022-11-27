@@ -10,6 +10,8 @@ import RoomReviews from '../room-reviews/room-reviews';
 import OfferList from '../offer-list/offer-list';
 import Map from '../map/map';
 
+const MAX_GALLERY_LENGTH = 6;
+
 function RoomScreenContent() {
   const offer = useAppSelector((state) => state.offer.offer) as Offer;
   const offersNearBy = useAppSelector((state) => state.offer.offersNearBy);
@@ -18,7 +20,11 @@ function RoomScreenContent() {
   return (
     <>
       <section className="property">
-        <Gallery images={offer.images} alt={offer.title} />
+        <Gallery
+          images={offer.images}
+          alt={offer.title}
+          maxLength={MAX_GALLERY_LENGTH}
+        />
 
         <div className="property__container container">
           <div className="property__wrapper">
@@ -34,8 +40,13 @@ function RoomScreenContent() {
 
         <Map
           cssClass='property__map'
-          city={offer.city}
-          points={offersNearBy.map((offerNearBy) => offerNearBy.location)}
+          center={offer.location}
+          points={
+            offersNearBy
+              .map((offerNearBy) => offerNearBy.location)
+              .concat(offer.location)
+          }
+          activePoint={offer.location}
         />
       </section>
 

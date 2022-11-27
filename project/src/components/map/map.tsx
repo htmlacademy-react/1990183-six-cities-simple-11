@@ -1,9 +1,9 @@
+import { useCallback, useEffect, useRef } from 'react';
+
 import { BaseIconOptions, Icon, Marker } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
-import { useEffect, useRef } from 'react';
-
-import { City, Location } from '../../types/offer';
+import { Location } from '../../types/offer';
 
 import useMap from '../../hooks/use-map/use-map';
 
@@ -22,33 +22,40 @@ const defaultIcon = new Icon({
   iconUrl: MarkerIconUrl.Default,
 } as BaseIconOptions);
 
-/*
-Активная иконка маркера на будущее
-
 const activeIcon = new Icon({
   ...iconParams,
   iconUrl: MarkerIconUrl.Active,
 } as BaseIconOptions);
-*/
 
 type MapProps = {
   cssClass: string;
-  city: City;
+  center: Location;
   points: Location[];
+  activePoint: Location | null;
 };
 
 function Map(props: MapProps) {
-  const {cssClass, city, points} = props;
+  const {cssClass, center, points, activePoint} = props;
 
   const mapRef = useRef(null);
   const markersRef = useRef<Marker[]>([]);
-  const map = useMap(mapRef, city);
+  const map = useMap(mapRef, center);
+
+  const isPointActive = useCallback(
+    (point: Location) => {
+      const isLatitudeMatch = (point.latitude === activePoint?.latitude);
+      const isLongitudeMatch = (point.longitude === activePoint?.longitude);
+
+      return (isLatitudeMatch && isLongitudeMatch);
+    },
+    [activePoint]
+  );
 
   useEffect(() => {
     if (map) {
       map.setView(
-        [city.location.latitude, city.location.longitude],
-        city.location.zoom
+        [center.latitude, center.longitude],
+        center.zoom
       );
 
       markersRef.current.forEach((markerItem) => markerItem.remove());
@@ -59,14 +66,15 @@ function Map(props: MapProps) {
           lng: point.longitude,
         });
 
-        marker
-          .setIcon(defaultIcon)
-          .addTo(map);
+        isPointActive(point)
+          ? marker.setIcon(activeIcon)
+          : marker.setIcon(defaultIcon);
 
+        marker.addTo(map);
         markersRef.current.push(marker);
       });
     }
-  }, [map, city, points]);
+  }, [map, center, points, activePoint, isPointActive]);
 
   return (
     <section
