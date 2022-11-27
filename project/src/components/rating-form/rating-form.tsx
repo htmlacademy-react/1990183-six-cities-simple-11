@@ -1,7 +1,7 @@
-import { Fragment, ChangeEvent } from 'react';
+import { Fragment, ChangeEvent, memo } from 'react';
 
 type RatingFormProps = {
-  onRate: (evt: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => void;
+  onRate: (evt: ChangeEvent<HTMLInputElement>) => void;
 };
 
 const ratingStars: string[] = [
@@ -44,4 +44,4 @@ function RatingForm({onRate}: RatingFormProps) {
   );
 }
 
-export default RatingForm;
+export default memo(RatingForm);

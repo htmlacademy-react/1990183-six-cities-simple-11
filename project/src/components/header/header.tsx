@@ -1,5 +1,7 @@
-import {Link} from 'react-router-dom';
-import {AppRoute} from '../../const';
+import { memo } from 'react';
+import { Link } from 'react-router-dom';
+
+import { AppRoute } from '../../const';
 
 import HeaderNav from '../header-navigation/header-navigation';
 
@@ -36,4 +38,4 @@ function Header(props: HeaderProps) {
   );
 }
 
-export default Header;
+export default memo(Header);

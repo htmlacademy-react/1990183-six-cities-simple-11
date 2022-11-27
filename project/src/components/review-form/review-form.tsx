@@ -1,22 +1,21 @@
-import { useState, ChangeEvent } from 'react';
+import { useState, ChangeEvent, useCallback } from 'react';
 import RatingForm from '../rating-form/rating-form';
 
 function ReviewForm() {
-  const formDataDefault = {
-    rating: null,
-    review: '',
-  };
+  const [, setRating] = useState<string | null>(null);
+  const [, setReview] = useState<string>('');
 
-  const [formData, setFormData] = useState(formDataDefault);
+  const ratingChangeHandle = useCallback(
+    (evt: ChangeEvent<HTMLInputElement>) => {
+      setRating(evt.target.value);
+    }, []
+  );
 
-  const fieldChangeHandle = (evt: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
-    const {name, value} = evt.target;
-
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
+  const textareaChangeHandle = useCallback(
+    (evt: ChangeEvent<HTMLTextAreaElement>) => {
+      setReview(evt.target.value);
+    }, []
+  );
 
   return (
     <form className="reviews__form form" action="#" method="post">
@@ -24,14 +23,14 @@ function ReviewForm() {
         Your review
       </label>
 
-      <RatingForm onRate={fieldChangeHandle} />
+      <RatingForm onRate={ratingChangeHandle} />
 
       <textarea
         className="reviews__textarea form__textarea"
         id="review"
         name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
-        onChange={fieldChangeHandle}
+        onChange={textareaChangeHandle}
       >
       </textarea>
 

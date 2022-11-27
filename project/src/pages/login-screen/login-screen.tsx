@@ -1,11 +1,12 @@
-import { FormEvent, useRef } from 'react';
+import { FormEvent, useEffect, useRef } from 'react';
 import { Navigate } from 'react-router-dom';
 
 import { AppRoute, AuthStatus } from '../../const';
-import { useAppDispatch, useAppSelector } from '../../hooks';
-import { loginAction } from '../../store/user/api-actions';
 
-import Header from '../../components/header/header';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+
+import { loginAction } from '../../store/user/api-actions';
+import { updateLayout } from '../../store/layout/actions';
 
 function LoginScreen() {
   const authStatus = useAppSelector((state) => state.user.authStatus);
@@ -26,67 +27,69 @@ function LoginScreen() {
     }
   };
 
+  useEffect(() => {
+    dispatch(updateLayout({
+      hasHeaderNavigation: false,
+      pageCssClass: 'page--gray page--login',
+      mainCssClass: 'page__main--login',
+    }));
+  }, [dispatch]);
+
   if (authStatus === AuthStatus.Auth) {
     return <Navigate to={AppRoute.Root} />;
   }
 
   return (
-    <div className="page page--gray page--login">
-      <Header hasNavigation={false} />
+    <div className="page__login-container container">
+      <section className="login">
 
-      <main className="page__main page__main--login">
-        <div className="page__login-container container">
-          <section className="login">
+        <h1 className="login__title">Sign in</h1>
 
-            <h1 className="login__title">Sign in</h1>
+        <form
+          className="login__form form"
+          action="#"
+          method="post"
+          onSubmit={handleFormSubmit}
+        >
+          <div className="login__input-wrapper form__input-wrapper">
+            <label className="visually-hidden">E-mail</label>
+            <input
+              className="login__input form__input"
+              type="email"
+              name="email"
+              placeholder="Email"
+              ref={emailRef}
+              required
+            />
+          </div>
 
-            <form
-              className="login__form form"
-              action="#"
-              method="post"
-              onSubmit={handleFormSubmit}
-            >
-              <div className="login__input-wrapper form__input-wrapper">
-                <label className="visually-hidden">E-mail</label>
-                <input
-                  className="login__input form__input"
-                  type="email"
-                  name="email"
-                  placeholder="Email"
-                  ref={emailRef}
-                  required
-                />
-              </div>
+          <div className="login__input-wrapper form__input-wrapper">
+            <label className="visually-hidden">Password</label>
+            <input
+              className="login__input form__input"
+              type="password"
+              name="password"
+              placeholder="Password"
+              ref={passwordRef}
+              required
+            />
+          </div>
 
-              <div className="login__input-wrapper form__input-wrapper">
-                <label className="visually-hidden">Password</label>
-                <input
-                  className="login__input form__input"
-                  type="password"
-                  name="password"
-                  placeholder="Password"
-                  ref={passwordRef}
-                  required
-                />
-              </div>
+          <button className="login__submit form__submit button" type="submit">
+            Sign in
+          </button>
+        </form>
 
-              <button className="login__submit form__submit button" type="submit">
-                Sign in
-              </button>
-            </form>
+      </section>
 
-          </section>
-
-          <section className="locations locations--login locations--current">
-            <div className="locations__item">
-              <a className="locations__item-link" href="#todo">
-                <span>Amsterdam</span>
-              </a>
-            </div>
-          </section>
-
+      <section className="locations locations--login locations--current">
+        <div className="locations__item">
+          <a className="locations__item-link" href="#todo">
+            <span>Amsterdam</span>
+          </a>
         </div>
-      </main>
+      </section>
+
     </div>
   );
 }
