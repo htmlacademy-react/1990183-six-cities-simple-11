@@ -4,12 +4,12 @@ import { AuthStatus } from '../../const';
 import { AuthorizedUser } from '../../types/user';
 import { loadUser, setAuthStatus } from './actions';
 
-type InitialState = {
+export type UserState = {
   authStatus: AuthStatus;
   user: AuthorizedUser | null;
 };
 
-const initialState: InitialState = {
+const initialState: UserState = {
   authStatus: AuthStatus.Unknown,
   user: null,
 };

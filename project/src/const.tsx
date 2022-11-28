@@ -3,6 +3,7 @@ export enum AppRoute {
   Login = '/login',
   OfferItem = '/offer/:id',
   NotFound = '*',
+  ForcedNotFound = '/404'
 }
 
 export enum RoomType {

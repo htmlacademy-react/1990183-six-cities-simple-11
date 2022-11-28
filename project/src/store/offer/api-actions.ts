@@ -1,12 +1,13 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
 
-import { ApiRoute } from '../../const';
+import { ApiRoute, AppRoute } from '../../const';
 
+import { AppDispatch, State } from '../../types/state';
 import { Offer, OfferId } from '../../types/offer';
 import { Review } from '../../types/review';
 
-import { AppDispatch, State } from '../../types/state';
+import { redirectToRoute } from '../app/actions';
 
 import {
   loadOffer,
@@ -23,12 +24,18 @@ export const fetchOfferAction = createAsyncThunk<void, OfferId, {
 }>(
   'data/fetchOffer',
   async (id, {dispatch, extra: api}) => {
-    dispatch(setOfferLoadingStatus(true));
+    try {
+      dispatch(setOfferLoadingStatus(true));
 
-    const {data} = await api.get<Offer>(`${ApiRoute.Offers}/${id}`);
+      const {data} = await api.get<Offer>(`${ApiRoute.Offers}/${id}`);
 
-    dispatch(loadOffer(data));
-    dispatch(setOfferLoadingStatus(false));
+      dispatch(loadOffer(data));
+      dispatch(setOfferLoadingStatus(false));
+    }
+
+    catch {
+      dispatch(redirectToRoute(AppRoute.ForcedNotFound));
+    }
   }
 );
 

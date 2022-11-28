@@ -11,7 +11,7 @@ import {
   setOffersNearByLoadingStatus,
   setReviewsLoadingStatus } from './actions';
 
-type InitialState = {
+export type OfferState = {
   offer: Offer | null;
   isOfferLoading: boolean;
   offersNearBy: Offer[];
@@ -20,7 +20,7 @@ type InitialState = {
   areReviewsLoading: boolean;
 };
 
-const initialState: InitialState = {
+const initialState: OfferState = {
   offer: null,
   isOfferLoading: false,
   offersNearBy: [],

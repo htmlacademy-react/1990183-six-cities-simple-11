@@ -13,7 +13,7 @@ import {
   sortOffers} from './actions';
 
 
-type InitialState = {
+export type OffersState = {
   cities: City[];
   currentCity: City | null;
   offers: Offer[] | null;
@@ -23,7 +23,7 @@ type InitialState = {
   activeOffer: Offer | null;
 }
 
-const initialState: InitialState = {
+const initialState: OffersState = {
   cities: [],
   currentCity: null,
   offers: null,
