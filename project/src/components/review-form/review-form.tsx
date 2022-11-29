@@ -11,6 +11,8 @@ enum ReviewLength {
   Max = 300,
 }
 
+// TODO: очистить форму при успешной отправке отзыва
+
 function ReviewForm() {
   const [rating, setRating] = useState<number | null>(null);
   const [review, setReview] = useState<string>('');
