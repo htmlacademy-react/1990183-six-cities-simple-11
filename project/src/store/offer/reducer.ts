@@ -4,6 +4,7 @@ import { Offer } from '../../types/offer';
 import { Review } from '../../types/review';
 
 import {
+  addReview,
   loadOffer,
   loadOffersNearBy,
   loadReviews,
@@ -48,5 +49,8 @@ export const offerReducer = createReducer(initialState, (builder) => {
     })
     .addCase(setReviewsLoadingStatus, (state, action) => {
       state.areReviewsLoading = action.payload;
+    })
+    .addCase(addReview, (state, action) => {
+      state.reviews.push(action.payload);
     });
 });

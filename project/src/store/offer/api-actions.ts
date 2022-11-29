@@ -10,6 +10,7 @@ import { Review } from '../../types/review';
 import { redirectToRoute } from '../app/actions';
 
 import {
+  addReview,
   loadOffer,
   loadOffersNearBy,
   loadReviews,
@@ -89,8 +90,9 @@ export const sendReviewAction = createAsyncThunk<void, ReviewRequestData, {
   async (requestData, {dispatch, extra: api}) => {
     const {id, comment, rating} = requestData;
 
-    await api.post<ReviewData>(`${ApiRoute.Reviews}/${id}`, {comment, rating});
+    const {data} = await api.post<Review[]>(`${ApiRoute.Reviews}/${id}`, {comment, rating});
+    const newReview = data[data.length - 1];
 
-    dispatch(fetchReviewsAction(id));
+    dispatch(addReview(newReview));
   }
 );

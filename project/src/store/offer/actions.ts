@@ -32,3 +32,8 @@ export const setReviewsLoadingStatus = createAction(
   'reviews/setLoadingStatus',
   (isLoading: boolean) => ({payload: isLoading})
 );
+
+export const addReview = createAction(
+  'reviews/add',
+  (review: Review) => ({payload: review})
+);
