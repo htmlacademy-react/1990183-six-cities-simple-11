@@ -16,6 +16,7 @@ import {
   loadReviews,
   setOfferLoadingStatus,
   setOffersNearByLoadingStatus,
+  setReviewSendingStatus,
   setReviewsLoadingStatus } from '../offer/actions';
 
 type ReviewData = {
@@ -88,11 +89,14 @@ export const sendReviewAction = createAsyncThunk<void, ReviewRequestData, {
 }>(
   'reviews/send',
   async (requestData, {dispatch, extra: api}) => {
+    dispatch(setReviewSendingStatus(true));
+
     const {id, comment, rating} = requestData;
 
     const {data} = await api.post<Review[]>(`${ApiRoute.Reviews}/${id}`, {comment, rating});
     const newReview = data[data.length - 1];
 
     dispatch(addReview(newReview));
+    dispatch(setReviewSendingStatus(false));
   }
 );

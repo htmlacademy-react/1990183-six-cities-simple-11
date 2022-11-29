@@ -1,0 +1,8 @@
+.reviews__form--disabled {
+  position: relative;
+  pointer-events: none;
+}
+
+.reviews__form--disabled > * {
+  opacity: .5;
+}

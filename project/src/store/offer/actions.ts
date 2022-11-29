@@ -37,3 +37,8 @@ export const addReview = createAction(
   'reviews/add',
   (review: Review) => ({payload: review})
 );
+
+export const setReviewSendingStatus = createAction(
+  'reviews/setSendingStatus',
+  (isSending: boolean) => ({payload: isSending})
+);

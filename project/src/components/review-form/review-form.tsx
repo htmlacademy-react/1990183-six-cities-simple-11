@@ -1,7 +1,7 @@
+import './review-form.css';
+
 import { useState, ChangeEvent, useCallback, FormEvent } from 'react';
-
 import { useAppDispatch, useAppSelector } from '../../hooks';
-
 import { sendReviewAction } from '../../store/offer/api-actions';
 
 import RatingForm from '../rating-form/rating-form';
@@ -16,6 +16,9 @@ function ReviewForm() {
   const [review, setReview] = useState<string>('');
 
   const offerId = useAppSelector((state) => state.offer.offer?.id);
+  const isSending = useAppSelector((state) => state.offer.isReviewSending);
+
+  const disabledClass = isSending ? 'reviews__form--disabled' : '';
 
   const dispatch = useAppDispatch();
 
@@ -59,7 +62,7 @@ function ReviewForm() {
 
   return (
     <form
-      className="reviews__form form"
+      className={`reviews__form form ${disabledClass}`}
       action="#"
       method="post"
       onSubmit={handleFormSubmit}
