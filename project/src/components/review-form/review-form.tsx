@@ -11,14 +11,14 @@ enum ReviewLength {
   Max = 300,
 }
 
-// TODO: очистить форму при успешной отправке отзыва
-
 function ReviewForm() {
   const [rating, setRating] = useState<number | null>(null);
   const [review, setReview] = useState<string>('');
 
   const offerId = useAppSelector((state) => state.offer.offer?.id);
   const isSending = useAppSelector((state) => state.offer.isReviewSending);
+  // TODO: если поле isReviewSendingErroneous в глобальном хранилище не понадобится, удалить его
+  // const isReviewSendingErroneous = useAppSelector((state) => state.offer.isReviewSendingErroneous);
 
   const disabledClass = isSending ? 'reviews__form--disabled' : '';
 
@@ -50,17 +50,25 @@ function ReviewForm() {
     }, []
   );
 
-  const handleFormSubmit = (evt: FormEvent) => {
-    evt.preventDefault();
+  const handleFormSubmit = useCallback(
+    (evt: FormEvent) => {
+      evt.preventDefault();
 
-    if (review !== '' && rating !== null && offerId !== undefined) {
+      if (review === '' || rating === null || offerId === undefined) {
+        return;
+      }
+
       dispatch(sendReviewAction({
         id: offerId,
         comment: review,
         rating,
       }));
-    }
-  };
+
+      // TODO: очищать поля формы только если запрос на сервер успешен
+      setReview('');
+      setRating(null);
+    }, [dispatch, offerId, rating, review]
+  );
 
   return (
     <form

@@ -10,6 +10,7 @@ import {
   loadReviews,
   setOfferLoadingStatus,
   setOffersNearByLoadingStatus,
+  setReviewSendingErrorStatus,
   setReviewSendingStatus,
   setReviewsLoadingStatus } from './actions';
 
@@ -21,6 +22,7 @@ export type OfferState = {
   reviews: Review[];
   areReviewsLoading: boolean;
   isReviewSending: boolean;
+  isReviewSendingErroneous: boolean;
 };
 
 const initialState: OfferState = {
@@ -31,6 +33,7 @@ const initialState: OfferState = {
   reviews: [],
   areReviewsLoading: false,
   isReviewSending: false,
+  isReviewSendingErroneous: false,
 };
 
 export const offerReducer = createReducer(initialState, (builder) => {
@@ -58,5 +61,8 @@ export const offerReducer = createReducer(initialState, (builder) => {
     })
     .addCase(setReviewSendingStatus, (state, action) => {
       state.isReviewSending = action.payload;
+    })
+    .addCase(setReviewSendingErrorStatus, (state, action) => {
+      state.isReviewSendingErroneous = action.payload;
     });
 });
