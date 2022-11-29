@@ -17,6 +17,15 @@ import {
   setOffersNearByLoadingStatus,
   setReviewsLoadingStatus } from '../offer/actions';
 
+type ReviewData = {
+  comment: string;
+  rating: number;
+};
+
+type ReviewRequestData = ReviewData & {
+  id: OfferId;
+};
+
 export const fetchOfferAction = createAsyncThunk<void, OfferId, {
   dispatch: AppDispatch;
   state: State;
@@ -44,7 +53,7 @@ export const fetchOffersNearByAction = createAsyncThunk<void, OfferId, {
   state: State;
   extra: AxiosInstance;
 }>(
-  'data, fetchOffersNearBy',
+  'data/fetchOffersNearBy',
   async (id, {dispatch, extra: api}) => {
     dispatch(setOffersNearByLoadingStatus(true));
 
@@ -68,5 +77,20 @@ export const fetchReviewsAction = createAsyncThunk<void, OfferId, {
 
     dispatch(loadReviews(data));
     dispatch(setReviewsLoadingStatus(false));
+  }
+);
+
+export const sendReviewAction = createAsyncThunk<void, ReviewRequestData, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'reviews/send',
+  async (requestData, {dispatch, extra: api}) => {
+    const {id, comment, rating} = requestData;
+
+    await api.post<ReviewData>(`${ApiRoute.Reviews}/${id}`, {comment, rating});
+
+    dispatch(fetchReviewsAction(id));
   }
 );

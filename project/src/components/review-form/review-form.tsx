@@ -1,4 +1,8 @@
-import { useState, ChangeEvent, useCallback } from 'react';
+import { useState, ChangeEvent, useCallback, FormEvent } from 'react';
+
+import { useAppDispatch, useAppSelector } from '../../hooks';
+
+import { sendReviewAction } from '../../store/offer/api-actions';
 
 import RatingForm from '../rating-form/rating-form';
 
@@ -11,12 +15,16 @@ function ReviewForm() {
   const [rating, setRating] = useState<number | null>(null);
   const [review, setReview] = useState<string>('');
 
+  const offerId = useAppSelector((state) => state.offer.offer?.id);
+
+  const dispatch = useAppDispatch();
+
   const isRatingEmpty = (rating === null);
   const isReviewTooShort = (review.length < ReviewLength.Min);
   const isReviewTooLong = (review.length > ReviewLength.Max);
   const isFormInValid = isRatingEmpty || isReviewTooShort || isReviewTooLong;
 
-  const ratingChangeHandle = useCallback(
+  const handleRatingChange = useCallback(
     (evt: ChangeEvent<HTMLInputElement>) => {
       const value = Number(evt.target.value);
 
@@ -24,11 +32,12 @@ function ReviewForm() {
     }, []
   );
 
-  const textareaChangeHandle = useCallback(
+  const handleTextareaChange = useCallback(
     (evt: ChangeEvent<HTMLTextAreaElement>) => {
       const value = evt.target.value;
+      const isValueTooLong = (value.length > ReviewLength.Max);
 
-      if (value.length > ReviewLength.Max) {
+      if (isValueTooLong) {
         return;
       }
 
@@ -36,15 +45,32 @@ function ReviewForm() {
     }, []
   );
 
+  const handleFormSubmit = (evt: FormEvent) => {
+    evt.preventDefault();
+
+    if (review !== '' && rating !== null && offerId !== undefined) {
+      dispatch(sendReviewAction({
+        id: offerId,
+        comment: review,
+        rating,
+      }));
+    }
+  };
+
   return (
-    <form className="reviews__form form" action="#" method="post">
+    <form
+      className="reviews__form form"
+      action="#"
+      method="post"
+      onSubmit={handleFormSubmit}
+    >
       <label className="reviews__label form__label" htmlFor="review">
         Your review
       </label>
 
       <RatingForm
         rating={rating}
-        onRate={ratingChangeHandle}
+        onRate={handleRatingChange}
       />
 
       <textarea
@@ -52,7 +78,7 @@ function ReviewForm() {
         id="review"
         name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
-        onChange={textareaChangeHandle}
+        onChange={handleTextareaChange}
         value={review}
       >
       </textarea>
