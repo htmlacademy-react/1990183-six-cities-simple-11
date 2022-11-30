@@ -66,6 +66,7 @@ export const offersReducer = createReducer(initialState, (builder) => {
         return;
       }
 
+      // TODO: переделать сортировку с помощью createSelector
       state.sortType = action.payload;
       state.sortedOffers = getSortedOffers(state.offers, state.sortType);
     })

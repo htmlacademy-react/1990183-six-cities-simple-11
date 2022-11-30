@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from 'react';
+import { useMemo } from 'react';
 
 import { Offer } from '../../types/offer';
 
@@ -7,7 +7,6 @@ import { CITIES } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 
 import { changeCity } from '../../store/offers/actions';
-import { updateLayout } from '../../store/layout/actions';
 
 import LocationNav from '../location-nav/location-nav';
 import CityContent from '../city-content/city-content';
@@ -25,17 +24,6 @@ function MainScreenContent() {
   );
 
   const isOfferListEmpty = (currentOffers.length === 0);
-
-  // TODO: перенести эту логику в Layout
-  useEffect(() => {
-    if (isOfferListEmpty) {
-      dispatch(updateLayout({
-        hasHeaderNavigation: true,
-        pageCssClass: 'page--gray page--main',
-        mainCssClass: 'page__main--index page__main--index-empty',
-      }));
-    }
-  }, [dispatch, isOfferListEmpty]);
 
   const handleLocationChange = (city: string) => {
     dispatch(changeCity(city));

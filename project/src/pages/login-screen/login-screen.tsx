@@ -1,4 +1,4 @@
-import { FormEvent, useEffect, useRef } from 'react';
+import { FormEvent, useRef } from 'react';
 import { Navigate } from 'react-router-dom';
 
 import { AppRoute, AuthStatus } from '../../const';
@@ -6,7 +6,6 @@ import { AppRoute, AuthStatus } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 
 import { loginAction } from '../../store/user/api-actions';
-import { updateLayout } from '../../store/layout/actions';
 
 function LoginScreen() {
   const authStatus = useAppSelector((state) => state.user.authStatus);
@@ -26,14 +25,6 @@ function LoginScreen() {
       }));
     }
   };
-
-  useEffect(() => {
-    dispatch(updateLayout({
-      hasHeaderNavigation: false,
-      pageCssClass: 'page--gray page--login',
-      mainCssClass: 'page__main--login',
-    }));
-  }, [dispatch]);
 
   if (authStatus === AuthStatus.Auth) {
     return <Navigate to={AppRoute.Root} />;

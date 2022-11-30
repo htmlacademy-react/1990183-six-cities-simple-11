@@ -1,8 +1,19 @@
+import { useEffect } from 'react';
+
 type CityContentEmptyProps = {
   city: string;
 };
 
 function CityContentEmpty({city}: CityContentEmptyProps) {
+  useEffect(() => {
+    const mainElement = document.querySelector('.page__main');
+    const className = 'page__main--index-empty';
+
+    mainElement?.classList.add(className);
+
+    return () => mainElement?.classList.remove(className);
+  });
+
   return (
     <div className="cities">
       <div className="cities__places-container cities__places-container--empty container">

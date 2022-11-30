@@ -7,7 +7,9 @@ import HeaderSignOut from '../header-sign-out/header-sign-out';
 
 function HeaderNav() {
   const authStatus = useAppSelector((state) => state.user.authStatus);
-  const isUserLogged = authStatus === AuthStatus.Auth;
+  const isUserLogged = (authStatus === AuthStatus.Auth);
+
+  // TODO: починить отображение данных о юзере
 
   return (
     <nav className="header__nav">
