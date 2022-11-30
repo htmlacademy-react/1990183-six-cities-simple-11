@@ -9,8 +9,6 @@ function HeaderNav() {
   const authStatus = useAppSelector((state) => state.user.authStatus);
   const isUserLogged = (authStatus === AuthStatus.Auth);
 
-  // TODO: починить отображение данных о юзере
-
   return (
     <nav className="header__nav">
       <ul className="header__nav-list">
