@@ -9,15 +9,11 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { changeCity } from '../../store/offers/actions';
 
 import LocationNav from '../location-nav/location-nav';
-import OfferList from '../offer-list/offer-list';
-import Sorting from '../sorting/sorting';
-import Map from '../map/map';
+import CityContent from '../city-content/city-content';
 
 function MainScreenContent() {
   const currentCity = useAppSelector((state) => state.offers.currentCity) as string;
   const offers = useAppSelector((state) => state.offers.sortedOffers) as Offer[];
-  const activeOffer = useAppSelector((state) => state.offers.activeOffer);
-  const activeLocation = activeOffer?.location ?? null;
 
   const dispatch = useAppDispatch();
 
@@ -40,33 +36,7 @@ function MainScreenContent() {
         onLocationChange={handleLocationChange}
       />
 
-      <div className="cities">
-        <div className="cities__places-container container">
-          <section className="cities__places places">
-            <h2 className="visually-hidden">Places</h2>
-
-            <b className="places__found">
-              {`${currentOffers.length} places to stay in ${currentCity}`}
-            </b>
-
-            <Sorting />
-
-            <OfferList
-              cssClass='cities__places-list tabs__content'
-              offers={currentOffers}
-            />
-          </section>
-
-          <div className="cities__right-section">
-            <Map
-              cssClass="cities__map"
-              center={currentOffers[0].city.location}
-              points={currentOffers.map((offer) => offer.location)}
-              activePoint={activeLocation}
-            />
-          </div>
-        </div>
-      </div>
+      <CityContent offers={currentOffers} />
     </>
   );
 }
