@@ -6,7 +6,7 @@ import { SortType } from '../../const';
 
 export const changeCity = createAction(
   'offers/changeCity',
-  (cityName: string) => ({payload: cityName})
+  (city: string) => ({payload: city})
 );
 
 export const loadOffers = createAction(
@@ -18,8 +18,6 @@ export const setOffersLoadingStatus = createAction(
   'offers/setOffersLoadingStatus',
   (isLoading: boolean) => ({payload: isLoading})
 );
-
-export const getCities = createAction('offers/getCities');
 
 export const sortOffers = createAction(
   'offers/sort',

@@ -39,3 +39,12 @@ export enum SortType {
   PriceToLow = 'price-to-low',
   TopRated = 'top-rated',
 }
+
+export const CITIES = [
+  'Paris',
+  'Cologne',
+  'Brussels',
+  'Amsterdam',
+  'Hamburg',
+  'Dusseldorf',
+];

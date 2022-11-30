@@ -7,7 +7,7 @@ import { Offer } from '../../types/offer';
 
 import { AppDispatch, State } from '../../types/state';
 
-import { getCities, loadOffers, setOffersLoadingStatus } from './actions';
+import { loadOffers, setOffersLoadingStatus } from './actions';
 
 export const fetchOffersAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch;
@@ -21,7 +21,6 @@ export const fetchOffersAction = createAsyncThunk<void, undefined, {
     const {data} = await api.get<Offer[]>(ApiRoute.Offers);
 
     dispatch(loadOffers(data));
-    dispatch(getCities());
     dispatch(setOffersLoadingStatus(false));
   }
 );

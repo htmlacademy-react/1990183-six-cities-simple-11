@@ -1,6 +1,8 @@
 import { useMemo } from 'react';
 
-import { City, Offer } from '../../types/offer';
+import { Offer } from '../../types/offer';
+
+import { CITIES } from '../../const';
 
 import { useAppDispatch, useAppSelector } from '../../hooks';
 
@@ -12,34 +14,30 @@ import Sorting from '../sorting/sorting';
 import Map from '../map/map';
 
 function MainScreenContent() {
-  const currentCity = useAppSelector((state) => state.offers.currentCity) as City;
+  const currentCity = useAppSelector((state) => state.offers.currentCity) as string;
   const offers = useAppSelector((state) => state.offers.sortedOffers) as Offer[];
-  const cities = useAppSelector((state) => state.offers.cities);
   const activeOffer = useAppSelector((state) => state.offers.activeOffer);
   const activeLocation = activeOffer?.location ?? null;
 
   const dispatch = useAppDispatch();
 
-  const cityNames = useMemo(
-    () => cities.map((city) => city.name),
-    [cities]
-  );
-
   const currentOffers = useMemo(
-    () => offers.filter((offer) => offer.city.name === currentCity.name),
+    () => offers.filter((offer) => offer.city.name === currentCity),
     [currentCity, offers]
   );
+
+  const handleLocationChange = (city: string) => {
+    dispatch(changeCity(city));
+  };
 
   return (
     <>
       <h1 className="visually-hidden">Cities</h1>
 
       <LocationNav
-        locations={cityNames}
-        currentLocation={currentCity.name}
-        onLocationChange={(cityName: string) => {
-          dispatch(changeCity(cityName));
-        }}
+        locations={CITIES}
+        currentLocation={currentCity}
+        onLocationChange={handleLocationChange}
       />
 
       <div className="cities">
@@ -48,7 +46,7 @@ function MainScreenContent() {
             <h2 className="visually-hidden">Places</h2>
 
             <b className="places__found">
-              {`${currentOffers.length} places to stay in ${currentCity.name}`}
+              {`${currentOffers.length} places to stay in ${currentCity}`}
             </b>
 
             <Sorting />
@@ -62,7 +60,7 @@ function MainScreenContent() {
           <div className="cities__right-section">
             <Map
               cssClass="cities__map"
-              center={currentCity.location}
+              center={currentOffers[0].city.location}
               points={currentOffers.map((offer) => offer.location)}
               activePoint={activeLocation}
             />

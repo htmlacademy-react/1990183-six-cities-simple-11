@@ -1,12 +1,11 @@
 import { createReducer } from '@reduxjs/toolkit';
 
-import { City, Offer } from '../../types/offer';
+import { Offer } from '../../types/offer';
 
-import { SortType } from '../../const';
+import { CITIES, SortType } from '../../const';
 
 import {
   changeCity,
-  getCities,
   loadOffers,
   setActiveOffer,
   setOffersLoadingStatus,
@@ -14,8 +13,7 @@ import {
 
 
 export type OffersState = {
-  cities: City[];
-  currentCity: City | null;
+  currentCity: string | null;
   offers: Offer[] | null;
   sortedOffers: Offer[] | null;
   sortType: SortType;
@@ -24,8 +22,7 @@ export type OffersState = {
 }
 
 const initialState: OffersState = {
-  cities: [],
-  currentCity: null,
+  currentCity: CITIES[0],
   offers: null,
   sortedOffers: null,
   sortType: SortType.Popular,
@@ -60,25 +57,8 @@ export const offersReducer = createReducer(initialState, (builder) => {
       state.areOffersLoading = action.payload;
     })
 
-    .addCase(getCities, (state) => {
-      // TODO: расположить города в нужном порядке
-      if (state.offers !== null && state.cities.length === 0) {
-        const cityNames: string[] = [];
-
-        state.offers.forEach((offer) => {
-          if (!cityNames.includes(offer.city.name)) {
-            state.cities.push(offer.city);
-            cityNames.push(offer.city.name);
-          }
-        });
-
-        state.currentCity = state.cities[0];
-      }
-    })
-
     .addCase(changeCity, (state, action) => {
-      const cityName = action.payload;
-      state.currentCity = state.cities.find((city) => (city.name === cityName)) as City;
+      state.currentCity = action.payload;
     })
 
     .addCase(sortOffers, (state, action) => {
