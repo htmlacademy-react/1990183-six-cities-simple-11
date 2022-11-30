@@ -1,6 +1,6 @@
 import './review-form.css';
 
-import { useState, ChangeEvent, useCallback, FormEvent } from 'react';
+import { useState, ChangeEvent, useCallback, FormEvent, useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { sendReviewAction } from '../../store/offer/api-actions';
 
@@ -17,8 +17,7 @@ function ReviewForm() {
 
   const offerId = useAppSelector((state) => state.offer.offer?.id);
   const isSending = useAppSelector((state) => state.offer.isReviewSending);
-  // TODO: если поле isReviewSendingErroneous в глобальном хранилище не понадобится, удалить его
-  // const isReviewSendingErroneous = useAppSelector((state) => state.offer.isReviewSendingErroneous);
+  const isSentSuccessfully = useAppSelector((state) => state.offer.isReviewSentSuccessfully);
 
   const disabledClass = isSending ? 'reviews__form--disabled' : '';
 
@@ -63,12 +62,15 @@ function ReviewForm() {
         comment: review,
         rating,
       }));
-
-      // TODO: очищать поля формы только если запрос на сервер успешен
-      setReview('');
-      setRating(null);
     }, [dispatch, offerId, rating, review]
   );
+
+  useEffect(() => {
+    if (isSentSuccessfully) {
+      setReview('');
+      setRating(null);
+    }
+  }, [isSentSuccessfully]);
 
   return (
     <form

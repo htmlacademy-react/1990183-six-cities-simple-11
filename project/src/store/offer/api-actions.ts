@@ -16,7 +16,7 @@ import {
   loadReviews,
   setOfferLoadingStatus,
   setOffersNearByLoadingStatus,
-  setReviewSendingErrorStatus,
+  setReviewSentSuccessfullyStatus,
   setReviewSendingStatus,
   setReviewsLoadingStatus } from '../offer/actions';
 
@@ -99,11 +99,11 @@ export const sendReviewAction = createAsyncThunk<void, ReviewRequestData, {
       const newReview = data[data.length - 1];
 
       dispatch(addReview(newReview));
-      dispatch(setReviewSendingErrorStatus(false));
+      dispatch(setReviewSentSuccessfullyStatus(true));
     }
 
     catch {
-      dispatch(setReviewSendingErrorStatus(true));
+      dispatch(setReviewSentSuccessfullyStatus(false));
     }
 
     dispatch(setReviewSendingStatus(false));

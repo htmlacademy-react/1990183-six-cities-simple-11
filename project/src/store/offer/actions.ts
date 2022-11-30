@@ -43,7 +43,7 @@ export const setReviewSendingStatus = createAction(
   (isSending: boolean) => ({payload: isSending})
 );
 
-export const setReviewSendingErrorStatus = createAction(
-  'reviews/setSendingErrorStatus',
-  (isErroneous: boolean) => ({payload: isErroneous})
+export const setReviewSentSuccessfullyStatus = createAction(
+  'reviews/setSentSuccessfullyStatus',
+  (isSuccess: boolean) => ({payload: isSuccess})
 );
