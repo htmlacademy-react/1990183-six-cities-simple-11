@@ -13,12 +13,12 @@ export enum RoomType {
   Hotel = 'hotel',
 }
 
-export enum RoomTypeLabel {
-  Apartment = 'Apartment',
-  Room = 'Private Room',
-  House = 'House',
-  Hotel = 'Hotel',
-}
+export const RoomTypeLabel = {
+  [RoomType.Apartment]: 'Apartment',
+  [RoomType.Room]: 'Private Room',
+  [RoomType.House]: 'House',
+  [RoomType.Hotel]: 'Hotel',
+} as const;
 
 export enum ApiRoute {
   Offers = '/hotels',

@@ -1,5 +1,7 @@
 import { Offer } from '../../types/offer';
-import { getLabelByOfferType } from '../../utils';
+
+import { RoomType, RoomTypeLabel } from '../../const';
+
 import PremiumLabel from '../premium-label/premium-label';
 import Rating from '../rating/rating';
 
@@ -27,7 +29,7 @@ function RoomHeader({offer}: RoomHeaderProps) {
 
       <ul className="property__features">
         <li className="property__feature property__feature--entire">
-          {getLabelByOfferType(offer.type)}
+          {RoomTypeLabel[offer.type as RoomType]}
         </li>
         <li className="property__feature property__feature--bedrooms">
           {offer.bedrooms} Bedrooms

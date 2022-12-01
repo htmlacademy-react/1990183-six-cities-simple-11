@@ -1,22 +1,7 @@
-import { RoomTypeLabel, RoomType } from './const';
-
-import { OfferType } from './types/offer';
-
-type RoomTypeKey = keyof typeof RoomType;
-type RoomTypeLabelKey = keyof typeof RoomTypeLabel;
-
 enum LayoutSelector {
   Page = '.page',
   Main = '.page__main',
 }
-
-export const getLabelByOfferType = (type: OfferType): string => {
-  const keys = Object.keys(RoomType);
-  const key = keys.find((item) =>
-    (RoomType[item as RoomTypeKey] === type));
-
-  return RoomTypeLabel[key as RoomTypeLabelKey];
-};
 
 export const formatDate = (isoDate: string) => {
   const date = new Date(isoDate);
@@ -33,7 +18,6 @@ const toggleCssClassTo = (classNames: string[] | string, selector: string, remov
 
   if (typeof classNames === 'string') {
     classNames = [classNames];
-    // console.log(classNames);
   }
 
   if (removeFlag) {
