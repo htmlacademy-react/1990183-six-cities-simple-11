@@ -14,7 +14,7 @@ function Rating(props: RatingProps) {
     starsCssClass,
     valueCssClass } = props;
 
-  const percentValue = value / MAX_STARS_QUANTITY * 100;
+  const percentValue = Math.round(value) / MAX_STARS_QUANTITY * 100;
 
   return (
     <div className={`${wrapperCssClass} rating`}>
