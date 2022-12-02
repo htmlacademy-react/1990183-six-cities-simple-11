@@ -7,6 +7,8 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 
 import { loginAction } from '../../store/user/api-actions';
 
+import RandomLocation from '../../components/random-location/random-location';
+
 function LoginScreen() {
   const authStatus = useAppSelector((state) => state.user.authStatus);
 
@@ -73,13 +75,7 @@ function LoginScreen() {
 
       </section>
 
-      <section className="locations locations--login locations--current">
-        <div className="locations__item">
-          <a className="locations__item-link" href="#todo">
-            <span>Amsterdam</span>
-          </a>
-        </div>
-      </section>
+      <RandomLocation />
 
     </div>
   );
