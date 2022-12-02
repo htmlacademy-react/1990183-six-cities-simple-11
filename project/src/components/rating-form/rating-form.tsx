@@ -1,6 +1,7 @@
 import { Fragment, ChangeEvent, memo } from 'react';
 
 type RatingFormProps = {
+  rating: number | null;
   onRate: (evt: ChangeEvent<HTMLInputElement>) => void;
 };
 
@@ -12,7 +13,9 @@ const ratingStars: string[] = [
   'terribly',
 ];
 
-function RatingForm({onRate}: RatingFormProps) {
+function RatingForm(props: RatingFormProps) {
+  const {rating, onRate} = props;
+
   return (
     <div className="reviews__rating-form form__rating">
       {ratingStars.map((title, index, array) => {
@@ -26,6 +29,7 @@ function RatingForm({onRate}: RatingFormProps) {
               value={value}
               id={`${value}-stars`}
               type="radio"
+              checked={rating === value}
               onChange={onRate}
             />
             <label

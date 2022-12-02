@@ -1,5 +1,7 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
+
+import browserHistory from '../../browser-history';
 
 import { AppRoute } from '../../const';
 
@@ -10,11 +12,12 @@ import MainScreen from '../../pages/main-screen/main-screen';
 import RoomScreen from '../../pages/room-screen/room-screen';
 import LoginScreen from '../../pages/login-screen/login-screen';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
+import HistoryRoute from '../history-route/history-route';
 
 function App() {
   return (
     <Provider store={store}>
-      <BrowserRouter>
+      <HistoryRoute history={browserHistory}>
         <Routes>
           <Route
             path={AppRoute.Root}
@@ -41,7 +44,7 @@ function App() {
             />
           </Route>
         </Routes>
-      </BrowserRouter>
+      </HistoryRoute>
     </Provider>
   );
 }

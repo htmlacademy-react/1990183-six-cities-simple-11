@@ -13,8 +13,10 @@ import Map from '../map/map';
 
 function MainScreenContent() {
   const currentCity = useAppSelector((state) => state.offers.currentCity) as City;
-  const offers = useAppSelector((state) => state.offers.offers) as Offer[];
+  const offers = useAppSelector((state) => state.offers.sortedOffers) as Offer[];
   const cities = useAppSelector((state) => state.offers.cities);
+  const activeOffer = useAppSelector((state) => state.offers.activeOffer);
+  const activeLocation = activeOffer?.location ?? null;
 
   const dispatch = useAppDispatch();
 
@@ -62,7 +64,7 @@ function MainScreenContent() {
               cssClass="cities__map"
               center={currentCity.location}
               points={currentOffers.map((offer) => offer.location)}
-              activePoint={null}
+              activePoint={activeLocation}
             />
           </div>
         </div>

@@ -1,13 +1,14 @@
 import { createReducer } from '@reduxjs/toolkit';
 
 import { LayoutData } from '../../types/store';
+
 import { updateLayout } from './actions';
 
-type InitialState = {
+export type LayoutState = {
   params: LayoutData;
 };
 
-const initialState: InitialState = {
+const initialState: LayoutState = {
   params: {
     pageCssClass: '',
     mainCssClass: '',

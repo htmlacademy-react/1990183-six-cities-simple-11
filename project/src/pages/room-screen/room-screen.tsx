@@ -27,6 +27,7 @@ function RoomScreen() {
   const {id} = useParams();
   const offerId = Number(id);
 
+  // TODO: перенести эту логику в модель
   useEffect(() => {
     dispatch(fetchOfferAction(offerId));
     dispatch(fetchOffersNearByAction(offerId));

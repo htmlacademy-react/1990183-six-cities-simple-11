@@ -1,5 +1,8 @@
 import { createAction } from '@reduxjs/toolkit';
+
 import { Offer } from '../../types/offer';
+
+import { SortType } from '../../const';
 
 export const changeCity = createAction(
   'offers/changeCity',
@@ -17,3 +20,13 @@ export const setOffersLoadingStatus = createAction(
 );
 
 export const getCities = createAction('offers/getCities');
+
+export const sortOffers = createAction(
+  'offers/sort',
+  (sortType: SortType) => ({payload: sortType})
+);
+
+export const setActiveOffer = createAction(
+  'offers/setActiveOffer',
+  (activeOffer: Offer | null) => ({payload: activeOffer})
+);

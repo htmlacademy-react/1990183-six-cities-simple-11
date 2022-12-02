@@ -3,6 +3,7 @@ export enum AppRoute {
   Login = '/login',
   OfferItem = '/offer/:id',
   NotFound = '*',
+  ForcedNotFound = '/404'
 }
 
 export enum RoomType {
@@ -30,4 +31,11 @@ export enum AuthStatus {
   Unknown = 'UNKNOWN',
   Auth = 'AUTH',
   NoAuth = 'NO_AUTH',
+}
+
+export enum SortType {
+  Popular = 'popular',
+  PriceToHigh = 'price-to-hight',
+  PriceToLow = 'price-to-low',
+  TopRated = 'top-rated',
 }

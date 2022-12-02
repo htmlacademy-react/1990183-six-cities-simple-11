@@ -4,29 +4,36 @@ import { Offer } from '../../types/offer';
 import { Review } from '../../types/review';
 
 import {
+  addReview,
   loadOffer,
   loadOffersNearBy,
   loadReviews,
   setOfferLoadingStatus,
   setOffersNearByLoadingStatus,
+  setReviewSentSuccessfullyStatus,
+  setReviewSendingStatus,
   setReviewsLoadingStatus } from './actions';
 
-type InitialState = {
+export type OfferState = {
   offer: Offer | null;
   isOfferLoading: boolean;
   offersNearBy: Offer[];
   areOffersNearBy: boolean;
   reviews: Review[];
   areReviewsLoading: boolean;
+  isReviewSending: boolean;
+  isReviewSentSuccessfully: boolean;
 };
 
-const initialState: InitialState = {
+const initialState: OfferState = {
   offer: null,
   isOfferLoading: false,
   offersNearBy: [],
   areOffersNearBy: false,
   reviews: [],
   areReviewsLoading: false,
+  isReviewSending: false,
+  isReviewSentSuccessfully: false,
 };
 
 export const offerReducer = createReducer(initialState, (builder) => {
@@ -48,5 +55,14 @@ export const offerReducer = createReducer(initialState, (builder) => {
     })
     .addCase(setReviewsLoadingStatus, (state, action) => {
       state.areReviewsLoading = action.payload;
+    })
+    .addCase(addReview, (state, action) => {
+      state.reviews.push(action.payload);
+    })
+    .addCase(setReviewSendingStatus, (state, action) => {
+      state.isReviewSending = action.payload;
+    })
+    .addCase(setReviewSentSuccessfullyStatus, (state, action) => {
+      state.isReviewSentSuccessfully = action.payload;
     });
 });
