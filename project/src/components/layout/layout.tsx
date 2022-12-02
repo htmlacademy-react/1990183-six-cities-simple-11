@@ -3,15 +3,14 @@ import { Outlet } from 'react-router-dom';
 
 import { AppRoute } from '../../const';
 
-import { useAppDispatch, useAppSelector } from '../../hooks';
-import useCurrentRoute from '../../hooks/use-current-route/use-current-router';
-
 import { setHeaderNavigationStatus } from '../../store/app/actions';
+
+import { useAppDispatch } from '../../hooks';
+import useCurrentRoute from '../../hooks/use-current-route/use-current-router';
 
 import Header from '../header/header';
 
 function Layout() {
-  const hasHeaderNavigation = useAppSelector((state) => state.app.hasHeaderNavigation);
   const dispatch = useAppDispatch();
   const currentRoute = useCurrentRoute();
 
@@ -46,7 +45,7 @@ function Layout() {
 
   return (
     <div className={`page ${pageCssClass}`}>
-      <Header hasNavigation={hasHeaderNavigation} />
+      <Header />
 
       <main className={`page__main ${mainCssClass}`}>
         <Outlet />

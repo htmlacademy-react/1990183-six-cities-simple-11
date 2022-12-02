@@ -6,8 +6,13 @@ import HeaderSignIn from '../header-sign-in/header-sign-in';
 import HeaderSignOut from '../header-sign-out/header-sign-out';
 
 function HeaderNav() {
+  const hasHeaderNavigation = useAppSelector((state) => state.app.hasHeaderNavigation);
   const authStatus = useAppSelector((state) => state.user.authStatus);
   const isUserLogged = (authStatus === AuthStatus.Auth);
+
+  if (!hasHeaderNavigation) {
+    return null;
+  }
 
   return (
     <nav className="header__nav">
