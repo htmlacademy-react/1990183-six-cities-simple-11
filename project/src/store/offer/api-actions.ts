@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { AxiosInstance } from 'axios';
+import { AxiosError, AxiosInstance } from 'axios';
 
 import { ApiRoute, AppRoute } from '../../const';
 
@@ -19,6 +19,7 @@ import {
   setReviewSentSuccessfullyStatus,
   setReviewSendingStatus,
   setReviewsLoadingStatus } from '../offer/actions';
+import { toast } from 'react-toastify';
 
 type ReviewData = {
   comment: string;
@@ -102,7 +103,13 @@ export const sendReviewAction = createAsyncThunk<void, ReviewRequestData, {
       dispatch(setReviewSentSuccessfullyStatus(true));
     }
 
-    catch {
+    catch (error) {
+      const axiosError = error as AxiosError<{error: string}>;
+
+      if (axiosError.response) {
+        toast.error(axiosError.response.data.error);
+      }
+
       dispatch(setReviewSentSuccessfullyStatus(false));
     }
 
