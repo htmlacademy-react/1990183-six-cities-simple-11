@@ -8,6 +8,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { loginAction } from '../../store/user/api-actions';
 
 import RandomLocation from '../../components/random-location/random-location';
+import { toast } from 'react-toastify';
 
 function LoginScreen() {
   const authStatus = useAppSelector((state) => state.user.authStatus);
@@ -20,12 +21,30 @@ function LoginScreen() {
   const handleFormSubmit = (evt: FormEvent) => {
     evt.preventDefault();
 
-    if (emailRef.current !== null && passwordRef.current !== null) {
-      dispatch(loginAction({
-        email: emailRef.current.value,
-        password: passwordRef.current.value,
-      }));
+    if (emailRef.current === null || passwordRef.current === null) {
+      toast.error('All fields must be filled');
+      return;
     }
+
+    if (!/.+@.+\..+/.test(emailRef.current.value)) {
+      toast.error('Email must be correct');
+      return;
+    }
+
+    if (!/[\d]/.test(passwordRef.current.value)) {
+      toast.error('Password must contain at least one number');
+      return;
+    }
+
+    if (!/[A-Za-z]/.test(passwordRef.current.value)) {
+      toast.error('Password must contain at least one letter');
+      return;
+    }
+
+    dispatch(loginAction({
+      email: emailRef.current.value,
+      password: passwordRef.current.value,
+    }));
   };
 
   if (authStatus === AuthStatus.Auth) {
