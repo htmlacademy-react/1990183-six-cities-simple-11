@@ -17,7 +17,6 @@ function OfferList(props: OfferListProps) {
   return (
     <div className={`places__list ${cssClass}`}>
       {offers.map((offer) => (
-        //TODO: подумать как оптимизировать выделение активного маркера на карте
         <RoomCard
           key={`key-${offer.id}`}
           offer={offer}
