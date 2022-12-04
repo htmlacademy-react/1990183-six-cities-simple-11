@@ -8,6 +8,7 @@ import {
   changeCity,
   loadOffers,
   setActiveOffer,
+  setCurrentOffersEmptyStatus,
   setOffersLoadingStatus,
   sortOffers } from './actions';
 
@@ -18,6 +19,7 @@ export type OffersState = {
   sortType: SortType;
   areOffersLoading: boolean;
   activeOffer: Offer | null;
+  areCurrentOffersEmpty: boolean;
 }
 
 const initialState: OffersState = {
@@ -26,6 +28,7 @@ const initialState: OffersState = {
   sortType: SortType.Popular,
   areOffersLoading: false,
   activeOffer: null,
+  areCurrentOffersEmpty: false,
 };
 
 export const offersReducer = createReducer(initialState, (builder) => {
@@ -52,5 +55,9 @@ export const offersReducer = createReducer(initialState, (builder) => {
 
     .addCase(setActiveOffer, (state, action) => {
       state.activeOffer = action.payload;
+    })
+
+    .addCase(setCurrentOffersEmptyStatus, (state, action) => {
+      state.areCurrentOffersEmpty = action.payload;
     });
 });

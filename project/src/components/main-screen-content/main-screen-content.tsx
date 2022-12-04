@@ -6,7 +6,7 @@ import { CITIES } from '../../const';
 
 import { useAppDispatch, useAppSelector } from '../../hooks';
 
-import { changeCity } from '../../store/offers/actions';
+import { changeCity, setCurrentOffersEmptyStatus } from '../../store/offers/actions';
 import { selectSortedOffers } from '../../store/selectors/select-sorted-offers';
 
 import LocationNav from '../location-nav/location-nav';
@@ -29,6 +29,10 @@ function MainScreenContent() {
   const handleLocationChange = (city: string) => {
     dispatch(changeCity(city));
   };
+
+  isOfferListEmpty
+    ? dispatch(setCurrentOffersEmptyStatus(true))
+    : dispatch(setCurrentOffersEmptyStatus(false));
 
   return (
     <>

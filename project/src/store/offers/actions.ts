@@ -28,3 +28,8 @@ export const setActiveOffer = createAction(
   'offers/setActiveOffer',
   (activeOffer: Offer | null) => ({payload: activeOffer})
 );
+
+export const setCurrentOffersEmptyStatus = createAction(
+  'offers/setCurrentOffersEmptyStatus',
+  (isEmpty: boolean) => ({payload: isEmpty})
+);

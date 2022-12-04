@@ -5,12 +5,13 @@ import { AppRoute } from '../../const';
 
 import { setHeaderNavigationStatus } from '../../store/app/actions';
 
-import { useAppDispatch } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import useCurrentRoute from '../../hooks/use-current-route/use-current-router';
 
 import Header from '../header/header';
 
 function Layout() {
+  const areCurrentOffersEmpty = useAppSelector((state) => state.offers.areCurrentOffersEmpty);
   const dispatch = useAppDispatch();
   const currentRoute = useCurrentRoute();
 
@@ -24,7 +25,11 @@ function Layout() {
     switch (currentRoute) {
       case AppRoute.Root:
         setPageCssClass('page--gray page--main');
-        setMainCssClass('page__main--index');
+
+        areCurrentOffersEmpty
+          ? setMainCssClass('page__main--index page__main--index-empty')
+          : setMainCssClass('page__main--index');
+
         dispatch(setHeaderNavigationStatus(true));
         break;
 
@@ -41,7 +46,7 @@ function Layout() {
         dispatch(setHeaderNavigationStatus(false));
         break;
     }
-  }, [currentRoute, dispatch]);
+  }, [areCurrentOffersEmpty, currentRoute, dispatch]);
 
   return (
     <div className={`page ${pageCssClass}`}>
