@@ -4,33 +4,24 @@ import { SortType } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { sortOffers } from '../../store/offers/actions';
 
-enum SortLabel {
-  Popular = 'Popular',
-  PriceToHigh = 'Price: low to high',
-  PriceToLow = 'Price: high to low',
-  TopRated = 'Top rated first',
-}
+const SortLabel = {
+  [SortType.Popular]: 'Popular',
+  [SortType.PriceToHigh]: 'Price: low to high',
+  [SortType.PriceToLow]: 'Price: high to low',
+  [SortType.TopRated]: 'Top rated first',
+} as const;
 
 function Sorting() {
   const activeSortType = useAppSelector((state) => state.offers.sortType);
 
-  // TODO: подумать над универсальной функцией
-  const getLabelByType = (sortType: SortType) => {
-    const currentKey = Object.keys(SortType).find(
-      (key) => SortType[key as keyof typeof SortType] === sortType
-    );
-
-    return SortLabel[currentKey as keyof typeof SortLabel];
-  };
-
   const [isDropdownOpened, setDropdownOpenedStatus] = useState<boolean>(false);
-  const [activeOption, setActiveOption] = useState<string>(getLabelByType(activeSortType));
+  const [activeOption, setActiveOption] = useState<string>(SortLabel[activeSortType]);
 
   const dispatch = useAppDispatch();
 
   const handleLabelClick = () => setDropdownOpenedStatus((prevStatus) => !prevStatus);
 
-  const handleOptionClick = (label: SortLabel, value: SortType) => {
+  const handleOptionClick = (label: string, value: SortType) => {
     setActiveOption(label);
     setDropdownOpenedStatus(false);
     dispatch(sortOffers(value));
@@ -38,7 +29,7 @@ function Sorting() {
 
   return (
     <form className="places__sorting" action="#" method="get">
-      <span className="places__sorting-caption">Sort by </span>
+      <span className="places__sorting-caption">Sort by</span>{' '}
 
       <span
         className="places__sorting-type"
@@ -58,9 +49,8 @@ function Sorting() {
           ${isDropdownOpened ? 'places__options--opened' : ''}
         `}
       >
-        {Object.keys(SortType).map((key) => {
-          const label = SortLabel[key as keyof typeof SortLabel];
-          const value = SortType[key as keyof typeof SortType];
+        {Object.values(SortType).map((value) => {
+          const label = SortLabel[value];
           const activeClass = (label === activeOption) ? 'places__option--active' : '';
 
           return (

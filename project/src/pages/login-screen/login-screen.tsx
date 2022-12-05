@@ -1,4 +1,4 @@
-import { FormEvent, useEffect, useRef } from 'react';
+import { FormEvent, useRef } from 'react';
 import { Navigate } from 'react-router-dom';
 
 import { AppRoute, AuthStatus } from '../../const';
@@ -6,7 +6,9 @@ import { AppRoute, AuthStatus } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 
 import { loginAction } from '../../store/user/api-actions';
-import { updateLayout } from '../../store/layout/actions';
+
+import RandomLocation from '../../components/random-location/random-location';
+import { toast } from 'react-toastify';
 
 function LoginScreen() {
   const authStatus = useAppSelector((state) => state.user.authStatus);
@@ -19,21 +21,31 @@ function LoginScreen() {
   const handleFormSubmit = (evt: FormEvent) => {
     evt.preventDefault();
 
-    if (emailRef.current !== null && passwordRef.current !== null) {
-      dispatch(loginAction({
-        email: emailRef.current.value,
-        password: passwordRef.current.value,
-      }));
+    if (emailRef.current === null || passwordRef.current === null) {
+      toast.error('All fields must be filled');
+      return;
     }
-  };
 
-  useEffect(() => {
-    dispatch(updateLayout({
-      hasHeaderNavigation: false,
-      pageCssClass: 'page--gray page--login',
-      mainCssClass: 'page__main--login',
+    if (!/.+@.+\..+/.test(emailRef.current.value)) {
+      toast.error('Email must be correct');
+      return;
+    }
+
+    if (!/[\d]/.test(passwordRef.current.value)) {
+      toast.error('Password must contain at least one number');
+      return;
+    }
+
+    if (!/[A-Za-z]/.test(passwordRef.current.value)) {
+      toast.error('Password must contain at least one letter');
+      return;
+    }
+
+    dispatch(loginAction({
+      email: emailRef.current.value,
+      password: passwordRef.current.value,
     }));
-  }, [dispatch]);
+  };
 
   if (authStatus === AuthStatus.Auth) {
     return <Navigate to={AppRoute.Root} />;
@@ -82,13 +94,7 @@ function LoginScreen() {
 
       </section>
 
-      <section className="locations locations--login locations--current">
-        <div className="locations__item">
-          <a className="locations__item-link" href="#todo">
-            <span>Amsterdam</span>
-          </a>
-        </div>
-      </section>
+      <RandomLocation />
 
     </div>
   );

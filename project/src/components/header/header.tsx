@@ -5,11 +5,7 @@ import { AppRoute } from '../../const';
 
 import HeaderNav from '../header-navigation/header-navigation';
 
-type HeaderProps = {
-  hasNavigation: boolean;
-};
-
-function Header(props: HeaderProps) {
+function Header() {
   return (
     <header className="header">
       <div className="container">
@@ -30,7 +26,7 @@ function Header(props: HeaderProps) {
             </Link>
           </div>
 
-          {props.hasNavigation && <HeaderNav />}
+          <HeaderNav />
 
         </div>
       </div>

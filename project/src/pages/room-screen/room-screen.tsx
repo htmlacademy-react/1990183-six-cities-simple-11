@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { updateLayout } from '../../store/layout/actions';
 import {
   fetchOfferAction,
   fetchOffersNearByAction,
@@ -27,20 +26,11 @@ function RoomScreen() {
   const {id} = useParams();
   const offerId = Number(id);
 
-  // TODO: перенести эту логику в модель
   useEffect(() => {
     dispatch(fetchOfferAction(offerId));
     dispatch(fetchOffersNearByAction(offerId));
     dispatch(fetchReviewsAction(offerId));
   }, [dispatch, offerId]);
-
-  useEffect(() => {
-    dispatch(updateLayout({
-      hasHeaderNavigation: true,
-      pageCssClass: '',
-      mainCssClass: 'page__main--property',
-    }));
-  }, [dispatch]);
 
   return (
     areDataLoading

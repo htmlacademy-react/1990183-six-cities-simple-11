@@ -1,9 +1,15 @@
 import { Review } from '../../types/review';
-import { formatDate } from '../../utils';
+
 import Rating from '../rating/rating';
 
 type ReviewItemProps = {
   review: Review;
+};
+
+const formatDate = (isoDate: string) => {
+  const date = new Date(isoDate);
+
+  return date.toLocaleString('en-US', { month: 'long', year: 'numeric' });
 };
 
 function ReviewItem({review}: ReviewItemProps) {

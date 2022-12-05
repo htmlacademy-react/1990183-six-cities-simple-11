@@ -53,9 +53,13 @@ function Map(props: MapProps) {
 
   useEffect(() => {
     if (map) {
-      map.setView(
+      map.panTo(
         [center.latitude, center.longitude],
-        center.zoom
+        {
+          animate: true,
+          duration: 2,
+          easeLinearity: .5,
+        }
       );
 
       markersRef.current.forEach((markerItem) => markerItem.remove());

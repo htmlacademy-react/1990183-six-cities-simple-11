@@ -1,8 +1,7 @@
 import { Link } from 'react-router-dom';
+import { RoomType, RoomTypeLabel } from '../../const';
 
 import { Offer } from '../../types/offer';
-
-import { getLabelByOfferType } from '../../utils';
 
 import PremiumLabel from '../premium-label/premium-label';
 import Rating from '../rating/rating';
@@ -58,7 +57,7 @@ function RoomCard(props: RoomCardProps) {
         </h2>
 
         <p className="place-card__type">
-          {getLabelByOfferType(offer.type)}
+          {RoomTypeLabel[offer.type as RoomType]}
         </p>
       </div>
     </article>

@@ -7,13 +7,13 @@ import { redirect } from './middlewares/redirect';
 import { offersReducer, OffersState } from './offers/reducer';
 import { offerReducer, OfferState } from './offer/reducer';
 import { userReducer, UserState } from './user/reducer';
-import { layoutReducer, LayoutState } from './layout/reducer';
+import { appReducer, AppState } from './app/reducer';
 
 export type CombineReducer = {
   offers: OffersState;
   offer: OfferState;
   user: UserState;
-  layout: LayoutState;
+  app: AppState;
 };
 
 export const api = createAPI();
@@ -23,7 +23,7 @@ export const store = configureStore({
     offers: offersReducer,
     offer: offerReducer,
     user: userReducer,
-    layout: layoutReducer,
+    app: appReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
