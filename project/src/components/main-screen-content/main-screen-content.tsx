@@ -7,15 +7,15 @@ import { CITIES } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 
 import { changeCity, setCurrentOffersEmptyStatus } from '../../store/offers/actions';
-import { selectSortedOffers } from '../../store/selectors/select-sorted-offers';
+import { getCurrentCity, getSortedOffers } from '../../store/offers/selectors';
 
 import LocationNav from '../location-nav/location-nav';
 import CityContent from '../city-content/city-content';
 import CityContentEmpty from '../city-content-empty/city-content-empty';
 
 function MainScreenContent() {
-  const currentCity = useAppSelector((state) => state.offers.currentCity) as string;
-  const sortedOffers = useAppSelector((state) => selectSortedOffers(state.offers)) as Offer[];
+  const currentCity = useAppSelector(getCurrentCity) as string;
+  const sortedOffers = useAppSelector(getSortedOffers) as Offer[];
 
   const dispatch = useAppDispatch();
 

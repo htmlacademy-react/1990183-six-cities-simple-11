@@ -18,7 +18,7 @@ export type OfferState = {
   offer: Offer | null;
   isOfferLoading: boolean;
   offersNearBy: Offer[];
-  areOffersNearBy: boolean;
+  areOffersNearByLoading: boolean;
   reviews: Review[];
   areReviewsLoading: boolean;
   isReviewSending: boolean;
@@ -29,7 +29,7 @@ const initialState: OfferState = {
   offer: null,
   isOfferLoading: false,
   offersNearBy: [],
-  areOffersNearBy: false,
+  areOffersNearByLoading: false,
   reviews: [],
   areReviewsLoading: false,
   isReviewSending: false,
@@ -48,7 +48,7 @@ export const offerReducer = createReducer(initialState, (builder) => {
       state.offersNearBy = action.payload;
     })
     .addCase(setOffersNearByLoadingStatus, (state, action) => {
-      state.areOffersNearBy = action.payload;
+      state.areOffersNearByLoading = action.payload;
     })
     .addCase(loadReviews, (state, action) => {
       state.reviews = action.payload;

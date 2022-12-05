@@ -4,6 +4,7 @@ import { Outlet } from 'react-router-dom';
 import { AppRoute } from '../../const';
 
 import { setHeaderNavigationStatus } from '../../store/app/actions';
+import { getCurrentOffersEmptyStatus } from '../../store/offers/selectors';
 
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import useCurrentRoute from '../../hooks/use-current-route/use-current-router';
@@ -11,7 +12,7 @@ import useCurrentRoute from '../../hooks/use-current-route/use-current-router';
 import Header from '../header/header';
 
 function Layout() {
-  const areCurrentOffersEmpty = useAppSelector((state) => state.offers.areCurrentOffersEmpty);
+  const areCurrentOffersEmpty = useAppSelector(getCurrentOffersEmptyStatus);
   const dispatch = useAppDispatch();
   const currentRoute = useCurrentRoute();
 

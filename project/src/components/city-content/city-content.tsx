@@ -1,5 +1,7 @@
 import { Offer } from '../../types/offer';
 
+import { getActiveOffer } from '../../store/offers/selectors';
+
 import { useAppSelector } from '../../hooks';
 
 import OfferList from '../offer-list/offer-list';
@@ -11,7 +13,7 @@ type CityContentProps = {
 };
 
 function CityContent({offers}: CityContentProps) {
-  const activeOffer = useAppSelector((state) => state.offers.activeOffer);
+  const activeOffer = useAppSelector(getActiveOffer);
   const activeLocation = activeOffer?.location ?? null;
 
   const cityName = offers[0].city.name;

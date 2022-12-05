@@ -25,8 +25,8 @@ export type OffersState = {
 const initialState: OffersState = {
   currentCity: CITIES[0],
   offers: null,
-  sortType: SortType.Popular,
   areOffersLoading: false,
+  sortType: SortType.Popular,
   activeOffer: null,
   areCurrentOffersEmpty: false,
 };

@@ -1,17 +1,18 @@
 import { FormEvent, useRef } from 'react';
 import { Navigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 import { AppRoute, AuthStatus } from '../../const';
 
 import { useAppDispatch, useAppSelector } from '../../hooks';
 
 import { loginAction } from '../../store/user/api-actions';
+import { getAuthStatus } from '../../store/user/selectors';
 
 import RandomLocation from '../../components/random-location/random-location';
-import { toast } from 'react-toastify';
 
 function LoginScreen() {
-  const authStatus = useAppSelector((state) => state.user.authStatus);
+  const authStatus = useAppSelector(getAuthStatus);
 
   const dispatch = useAppDispatch();
 

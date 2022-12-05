@@ -6,17 +6,23 @@ import {
   fetchOffersNearByAction,
   fetchReviewsAction } from '../../store/offer/api-actions';
 
+import {
+  getOffer,
+  getOfferLoadingStatus,
+  getOffersNearByLoadingStatus,
+  getReviewsLoadingStatus } from '../../store/offer/selectors';
+
 import { useAppDispatch, useAppSelector } from '../../hooks';
 
 import Loader from '../../components/loader/loader';
 import RoomScreenContent from '../../components/room-screen-content/room-screen-content';
 
 function RoomScreen() {
-  const offer = useAppSelector((state) => state.offer.offer);
+  const offer = useAppSelector(getOffer);
 
-  const isOfferLoading = useAppSelector((state) => state.offer.isOfferLoading);
-  const areOffersNearByLoading = useAppSelector((state) => state.offer.areOffersNearBy);
-  const areReviewsLoading = useAppSelector((state) => state.offer.areReviewsLoading);
+  const isOfferLoading = useAppSelector(getOfferLoadingStatus);
+  const areOffersNearByLoading = useAppSelector(getOffersNearByLoadingStatus);
+  const areReviewsLoading = useAppSelector(getReviewsLoadingStatus);
 
   const areDataLoading =
     (offer === null || isOfferLoading || areOffersNearByLoading || areReviewsLoading);

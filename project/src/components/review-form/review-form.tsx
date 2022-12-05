@@ -1,8 +1,14 @@
 import './review-form.css';
 
 import { useState, ChangeEvent, useCallback, FormEvent, useEffect } from 'react';
+
 import { useAppDispatch, useAppSelector } from '../../hooks';
+
 import { sendReviewAction } from '../../store/offer/api-actions';
+import {
+  getOffer,
+  getReviewSendingStatus,
+  getReviewSentSuccessfullyStatus } from '../../store/offer/selectors';
 
 import RatingForm from '../rating-form/rating-form';
 
@@ -15,9 +21,10 @@ function ReviewForm() {
   const [rating, setRating] = useState<number | null>(null);
   const [review, setReview] = useState<string>('');
 
-  const offerId = useAppSelector((state) => state.offer.offer?.id);
-  const isSending = useAppSelector((state) => state.offer.isReviewSending);
-  const isSentSuccessfully = useAppSelector((state) => state.offer.isReviewSentSuccessfully);
+  const offer = useAppSelector(getOffer);
+  const offerId = offer?.id;
+  const isSending = useAppSelector(getReviewSendingStatus);
+  const isSentSuccessfully = useAppSelector(getReviewSentSuccessfullyStatus);
 
   const disabledClass = isSending ? 'reviews__form--disabled' : '';
 

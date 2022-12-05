@@ -1,8 +1,11 @@
 import { memo, useState } from 'react';
 
 import { SortType } from '../../const';
-import { useAppDispatch, useAppSelector } from '../../hooks';
+
 import { sortOffers } from '../../store/offers/actions';
+import { getSortType } from '../../store/offers/selectors';
+
+import { useAppDispatch, useAppSelector } from '../../hooks';
 
 const SortLabel = {
   [SortType.Popular]: 'Popular',
@@ -12,7 +15,7 @@ const SortLabel = {
 } as const;
 
 function Sorting() {
-  const activeSortType = useAppSelector((state) => state.offers.sortType);
+  const activeSortType = useAppSelector(getSortType);
 
   const [isDropdownOpened, setDropdownOpenedStatus] = useState<boolean>(false);
   const [activeOption, setActiveOption] = useState<string>(SortLabel[activeSortType]);

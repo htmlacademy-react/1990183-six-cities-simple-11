@@ -1,7 +1,9 @@
+import { getUser } from '../../store/user/selectors';
+
 import { useAppSelector } from '../../hooks';
 
 function HeaderProfile() {
-  const user = useAppSelector((state) => state.user.user);
+  const user = useAppSelector(getUser);
 
   if (user === null) {
     return null;
