@@ -4,10 +4,10 @@ import { createAPI } from '../services/api';
 
 import { redirect } from './middlewares/redirect';
 
-import { offersReducer, OffersState } from './offers/reducer';
-import { offerReducer, OfferState } from './offer/reducer';
-import { userReducer, UserState } from './user/reducer';
-import { appReducer, AppState } from './app/reducer';
+import { offersReducer, OffersState } from './offers/offers-reducer';
+import { offerReducer, OfferState } from './offer/offer-reducer';
+import { userReducer, UserState } from './user/user-reducer';
+import { appReducer, AppState } from './app/app-reducer';
 
 export type CombineReducer = {
   offers: OffersState;
