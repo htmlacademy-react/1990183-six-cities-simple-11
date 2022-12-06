@@ -42,6 +42,7 @@ function Layout() {
       case AppRoute.Login:
       case AppRoute.NotFound:
       case AppRoute.ForcedNotFound:
+      case AppRoute.Disconnect:
         setPageCssClass('page--gray page--login');
         setMainCssClass('page__main--login');
         dispatch(setHeaderNavigationStatus(false));

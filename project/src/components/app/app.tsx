@@ -13,6 +13,7 @@ import RoomScreen from '../../pages/room-screen/room-screen';
 import LoginScreen from '../../pages/login-screen/login-screen';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
 import HistoryRoute from '../history-route/history-route';
+import DisconnectScreen from '../../pages/disconnect-screen/disconnect-screen';
 
 function App() {
   return (
@@ -36,6 +37,11 @@ function App() {
             <Route
               path={AppRoute.Login}
               element={<LoginScreen />}
+            />
+
+            <Route
+              path={AppRoute.Disconnect}
+              element={<DisconnectScreen />}
             />
 
             <Route
