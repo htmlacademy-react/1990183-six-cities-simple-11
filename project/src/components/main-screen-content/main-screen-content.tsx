@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 
 import { Offer } from '../../types/offer';
 
@@ -30,9 +30,11 @@ function MainScreenContent() {
     dispatch(changeCity(city));
   };
 
-  isOfferListEmpty
-    ? dispatch(setCurrentOffersEmptyStatus(true))
-    : dispatch(setCurrentOffersEmptyStatus(false));
+  useEffect(() => {
+    isOfferListEmpty
+      ? dispatch(setCurrentOffersEmptyStatus(true))
+      : dispatch(setCurrentOffersEmptyStatus(false));
+  }, [dispatch, isOfferListEmpty]);
 
   return (
     <>
