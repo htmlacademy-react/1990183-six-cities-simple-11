@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import { AppRoute } from '../../const';
 
-import HeaderNav from '../header-navigation/header-navigation';
+import HeaderNavigation from '../header-navigation/header-navigation';
 
 function Header() {
   return (
@@ -26,7 +26,7 @@ function Header() {
             </Link>
           </div>
 
-          <HeaderNav />
+          <HeaderNavigation />
 
         </div>
       </div>

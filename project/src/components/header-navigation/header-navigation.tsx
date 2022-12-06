@@ -9,7 +9,7 @@ import HeaderProfile from '../header-profile/header-profile';
 import HeaderSignIn from '../header-sign-in/header-sign-in';
 import HeaderSignOut from '../header-sign-out/header-sign-out';
 
-function HeaderNav() {
+function HeaderNavigation() {
   const hasHeaderNavigation = useAppSelector(checkHeaderNavigation);
   const authStatus = useAppSelector(getAuthStatus);
   const isUserLogged = (authStatus === AuthStatus.Auth);
@@ -37,4 +37,4 @@ function HeaderNav() {
   );
 }
 
-export default HeaderNav;
+export default HeaderNavigation;

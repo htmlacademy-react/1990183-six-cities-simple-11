@@ -1,10 +1,10 @@
-type LocationNavProps = {
+type LocationNavigationProps = {
   locations: string[];
   currentLocation: string;
   onLocationChange: (location: string) => void;
 };
 
-function LocationNav(props: LocationNavProps) {
+function LocationNavigation(props: LocationNavigationProps) {
   const { locations, currentLocation, onLocationChange } = props;
 
   return (
@@ -39,4 +39,4 @@ function LocationNav(props: LocationNavProps) {
   );
 }
 
-export default LocationNav;
+export default LocationNavigation;

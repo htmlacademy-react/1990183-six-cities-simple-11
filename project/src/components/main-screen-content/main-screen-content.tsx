@@ -9,7 +9,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { changeCity, setCurrentOffersEmptyStatus } from '../../store/offers/actions';
 import { getCurrentCity, getSortedOffers } from '../../store/offers/selectors';
 
-import LocationNav from '../location-nav/location-nav';
+import LocationNavigation from '../location-navigation/location-navigation';
 import CityContent from '../city-content/city-content';
 import CityContentEmpty from '../city-content-empty/city-content-empty';
 
@@ -40,7 +40,7 @@ function MainScreenContent() {
     <>
       <h1 className="visually-hidden">Cities</h1>
 
-      <LocationNav
+      <LocationNavigation
         locations={CITIES}
         currentLocation={currentCity}
         onLocationChange={handleLocationChange}
