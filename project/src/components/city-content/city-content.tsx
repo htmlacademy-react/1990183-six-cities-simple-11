@@ -2,11 +2,13 @@ import { Offer } from '../../types/offer';
 
 import { getActiveOffer } from '../../store/offers/selectors';
 
-import { useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 
 import OfferList from '../offer-list/offer-list';
 import Sorting from '../sorting/sorting';
 import Map from '../map/map';
+import { useEffect } from 'react';
+import { setActiveOffer } from '../../store/offers/actions';
 
 type CityContentProps = {
   offers: Offer[];
@@ -16,7 +18,13 @@ function CityContent({offers}: CityContentProps) {
   const activeOffer = useAppSelector(getActiveOffer);
   const activeLocation = activeOffer?.location ?? null;
 
+  const dispatch = useAppDispatch();
+
   const cityName = offers[0].city.name;
+
+  useEffect(() => () => {
+    dispatch(setActiveOffer(null));
+  }, [dispatch]);
 
   return (
     <div className="cities">
