@@ -74,11 +74,18 @@ function ReviewForm() {
   );
 
   useEffect(() => {
-    if (isSentSuccessfully) {
+    let isMounted = true;
+
+    if (isMounted && isSentSuccessfully) {
       setReview('');
       setRating(null);
     }
+
     dispatch(setReviewSentSuccessfullyStatus(false));
+
+    return () => {
+      isMounted = false;
+    };
   }, [dispatch, isSentSuccessfully]);
 
   return (

@@ -46,10 +46,6 @@ export const offersReducer = createReducer(initialState, (builder) => {
     })
 
     .addCase(sortOffers, (state, action) => {
-      if (state.offers === null) {
-        return;
-      }
-
       state.sortType = action.payload;
     })
 

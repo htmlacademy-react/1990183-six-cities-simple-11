@@ -20,34 +20,42 @@ function Layout() {
   const [mainCssClass, setMainCssClass] = useState<string>('');
 
   useEffect(() => {
-    setPageCssClass('');
-    setMainCssClass('');
+    let isMounted = true;
 
-    switch (currentRoute) {
-      case AppRoute.Root:
-        setPageCssClass('page--gray page--main');
+    if (isMounted) {
+      setPageCssClass('');
+      setMainCssClass('');
 
-        areCurrentOffersEmpty
-          ? setMainCssClass('page__main--index page__main--index-empty')
-          : setMainCssClass('page__main--index');
+      switch (currentRoute) {
+        case AppRoute.Root:
+          setPageCssClass('page--gray page--main');
 
-        dispatch(setHeaderNavigationStatus(true));
-        break;
+          areCurrentOffersEmpty
+            ? setMainCssClass('page__main--index page__main--index-empty')
+            : setMainCssClass('page__main--index');
 
-      case AppRoute.Offer:
-        setMainCssClass('page__main--property');
-        dispatch(setHeaderNavigationStatus(true));
-        break;
+          dispatch(setHeaderNavigationStatus(true));
+          break;
 
-      case AppRoute.Login:
-      case AppRoute.NotFound:
-      case AppRoute.ForcedNotFound:
-      case AppRoute.Disconnect:
-        setPageCssClass('page--gray page--login');
-        setMainCssClass('page__main--login');
-        dispatch(setHeaderNavigationStatus(false));
-        break;
+        case AppRoute.Offer:
+          setMainCssClass('page__main--property');
+          dispatch(setHeaderNavigationStatus(true));
+          break;
+
+        case AppRoute.Login:
+        case AppRoute.NotFound:
+        case AppRoute.ForcedNotFound:
+        case AppRoute.Disconnect:
+          setPageCssClass('page--gray page--login');
+          setMainCssClass('page__main--login');
+          dispatch(setHeaderNavigationStatus(false));
+          break;
+      }
     }
+
+    return () => {
+      isMounted = false;
+    };
   }, [areCurrentOffersEmpty, currentRoute, dispatch]);
 
   return (
