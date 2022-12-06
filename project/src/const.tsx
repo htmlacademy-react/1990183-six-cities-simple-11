@@ -1,7 +1,7 @@
 export enum AppRoute {
   Root = '/',
   Login = '/login',
-  OfferItem = '/offer/:id',
+  Offer = '/offer/:id',
   NotFound = '*',
   ForcedNotFound = '/404'
 }
@@ -22,7 +22,9 @@ export const RoomTypeLabel = {
 
 export enum ApiRoute {
   Offers = '/hotels',
-  Reviews = '/comments',
+  Offer = '/hotels/:id',
+  OffersNearBy = '/hotels/:id/nearby',
+  Reviews = '/comments/:id',
   Login = '/login',
   Logout = '/logout',
 }

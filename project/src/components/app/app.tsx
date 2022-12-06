@@ -29,7 +29,7 @@ function App() {
             />
 
             <Route
-              path={AppRoute.OfferItem}
+              path={AppRoute.Offer}
               element={<RoomScreen />}
             />
 

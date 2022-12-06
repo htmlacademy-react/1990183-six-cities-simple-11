@@ -1,3 +1,4 @@
+import { generatePath } from 'react-router-dom';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
 
@@ -39,7 +40,7 @@ export const fetchOfferAction = createAsyncThunk<void, OfferId, {
     try {
       dispatch(setOfferLoadingStatus(true));
 
-      const {data} = await api.get<Offer>(`${ApiRoute.Offers}/${id}`);
+      const {data} = await api.get<Offer>(generatePath(ApiRoute.Offer, {id: String(id)}));
 
       dispatch(loadOffer(data));
       dispatch(setOfferLoadingStatus(false));
@@ -60,7 +61,7 @@ export const fetchOffersNearByAction = createAsyncThunk<void, OfferId, {
   async (id, {dispatch, extra: api}) => {
     dispatch(setOffersNearByLoadingStatus(true));
 
-    const {data} = await api.get<Offer[]>(`${ApiRoute.Offers}/${id}/nearby`);
+    const {data} = await api.get<Offer[]>(generatePath(ApiRoute.OffersNearBy, {id: String(id)}));
 
     dispatch(loadOffersNearBy(data));
     dispatch(setOffersNearByLoadingStatus(false));
@@ -76,7 +77,7 @@ export const fetchReviewsAction = createAsyncThunk<void, OfferId, {
   async (id, {dispatch, extra: api}) => {
     dispatch(setReviewsLoadingStatus(true));
 
-    const {data} = await api.get<Review[]>(`${ApiRoute.Reviews}/${id}`);
+    const {data} = await api.get<Review[]>(generatePath(ApiRoute.Reviews, {id: String(id)}));
 
     dispatch(loadReviews(data));
     dispatch(setReviewsLoadingStatus(false));
@@ -95,7 +96,10 @@ export const sendReviewAction = createAsyncThunk<void, ReviewRequestData, {
     try {
       const {id, comment, rating} = requestData;
 
-      const {data} = await api.post<Review[]>(`${ApiRoute.Reviews}/${id}`, {comment, rating});
+      const {data} = await api.post<Review[]>(
+        generatePath(ApiRoute.Reviews, {id: String(id)}),
+        {comment, rating}
+      );
       const newReview = data[data.length - 1];
 
       dispatch(addReview(newReview));

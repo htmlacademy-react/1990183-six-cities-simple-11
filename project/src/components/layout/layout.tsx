@@ -34,7 +34,7 @@ function Layout() {
         dispatch(setHeaderNavigationStatus(true));
         break;
 
-      case AppRoute.OfferItem:
+      case AppRoute.Offer:
         setMainCssClass('page__main--property');
         dispatch(setHeaderNavigationStatus(true));
         break;
