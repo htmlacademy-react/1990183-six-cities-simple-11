@@ -4,53 +4,36 @@ import { AxiosInstance } from 'axios';
 import { AppDispatch, State } from '../../types/state';
 import { AuthorizedUser } from '../../types/user';
 
-import { ApiRoute, AuthStatus } from '../../const';
+import { ApiRoute } from '../../const';
 import { removeToken, saveToken } from '../../services/token';
-import { loadUser, setAuthStatus } from './actions';
 
 type AuthData = {
   email: string;
   password: string;
 };
 
-export const checkAuthAction = createAsyncThunk<void, undefined, {
+export const checkAuthAction = createAsyncThunk<AuthorizedUser, undefined, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
 }>(
   'user/checkAuth',
-  async (_, {dispatch, extra: api}) => {
-    try {
-      const {data} = await api.get<AuthorizedUser>(ApiRoute.Login);
-
-      dispatch(loadUser(data));
-      dispatch(setAuthStatus(AuthStatus.Auth));
-    }
-
-    catch {
-      dispatch(setAuthStatus(AuthStatus.NoAuth));
-    }
+  async (_, {extra: api}) => {
+    const {data} = await api.get<AuthorizedUser>(ApiRoute.Login);
+    return data;
   }
 );
 
-export const loginAction = createAsyncThunk<void, AuthData, {
+export const loginAction = createAsyncThunk<AuthorizedUser, AuthData, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
 }>(
   'user/login',
-  async (authData, {dispatch, extra: api}) => {
-    try {
-      const {data} = await api.post<AuthorizedUser>(ApiRoute.Login, authData);
-
-      saveToken(data.token);
-      dispatch(loadUser(data));
-      dispatch(setAuthStatus(AuthStatus.Auth));
-    }
-
-    catch {
-      dispatch(setAuthStatus(AuthStatus.NoAuth));
-    }
+  async (authData, {extra: api}) => {
+    const {data} = await api.post<AuthorizedUser>(ApiRoute.Login, authData);
+    saveToken(data.token);
+    return data;
   }
 );
 
@@ -60,9 +43,8 @@ export const logoutAction = createAsyncThunk<void, undefined, {
   extra: AxiosInstance;
 }>(
   'user/logout',
-  async (_, {dispatch, extra: api}) => {
+  async (_, {extra: api}) => {
     await api.delete(ApiRoute.Logout);
     removeToken();
-    dispatch(setAuthStatus(AuthStatus.NoAuth));
   }
 );
