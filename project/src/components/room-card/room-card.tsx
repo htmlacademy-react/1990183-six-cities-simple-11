@@ -1,5 +1,5 @@
-import { Link } from 'react-router-dom';
-import { RoomType, RoomTypeLabel } from '../../const';
+import { generatePath, Link } from 'react-router-dom';
+import { AppRoute, RoomType, RoomTypeLabel } from '../../const';
 
 import { Offer } from '../../types/offer';
 
@@ -24,7 +24,7 @@ function RoomCard(props: RoomCardProps) {
       {offer.isPremium && <PremiumLabel cssClass="place-card__mark" />}
 
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <Link to={`/offer/${offer.id}`}>
+        <Link to={generatePath(AppRoute.Offer, {id: String(offer.id)})}>
           <img
             className="place-card__image"
             src={offer.previewImage}
@@ -51,7 +51,7 @@ function RoomCard(props: RoomCardProps) {
         />
 
         <h2 className="place-card__name">
-          <Link to={`/offer/${offer.id}`}>
+          <Link to={generatePath(AppRoute.Offer, {id: String(offer.id)})}>
             {offer.title}
           </Link>
         </h2>

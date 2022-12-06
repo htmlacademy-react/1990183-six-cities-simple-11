@@ -11,6 +11,7 @@ import {
   checkReviewSentSuccessfullyStatus } from '../../store/offer/selectors';
 
 import RatingForm from '../rating-form/rating-form';
+import { setReviewSentSuccessfullyStatus } from '../../store/offer/actions';
 
 enum ReviewLength {
   Min = 50,
@@ -77,7 +78,8 @@ function ReviewForm() {
       setReview('');
       setRating(null);
     }
-  }, [isSentSuccessfully]);
+    dispatch(setReviewSentSuccessfullyStatus(false));
+  }, [dispatch, isSentSuccessfully]);
 
   return (
     <form
