@@ -6,7 +6,7 @@ import { CITIES } from '../../const';
 
 import { useAppDispatch, useAppSelector } from '../../hooks';
 
-import { changeCity, setCurrentOffersEmptyStatus } from '../../store/offers/actions';
+import { changeCity, setCurrentOffersEmptyStatus } from '../../store/offers/offers';
 import { getCurrentCity, getSortedOffers } from '../../store/offers/selectors';
 
 import LocationNavigation from '../location-navigation/location-navigation';

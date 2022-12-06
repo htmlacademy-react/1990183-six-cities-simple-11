@@ -4,7 +4,7 @@ import { createAPI } from '../services/api';
 
 import { redirect } from './middlewares/redirect';
 
-import { offersReducer, OffersState } from './offers/offers-reducer';
+import { offers, OffersState } from './offers/offers';
 import { offerReducer, OfferState } from './offer/offer-reducer';
 import { user, UserState } from './user/user';
 import { appReducer, AppState } from './app/app-reducer';
@@ -20,7 +20,7 @@ export const api = createAPI();
 
 export const store = configureStore({
   reducer: {
-    offers: offersReducer,
+    offers: offers.reducer,
     offer: offerReducer,
     user: user.reducer,
     app: appReducer,

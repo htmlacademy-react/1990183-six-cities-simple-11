@@ -5,7 +5,7 @@ import { AppRoute, CITIES } from '../../const';
 
 import { useAppDispatch } from '../../hooks';
 
-import { changeCity } from '../../store/offers/actions';
+import { changeCity } from '../../store/offers/offers';
 
 const getRandomCity = () => {
   const randomIndex = Math.floor(Math.random() * CITIES.length);

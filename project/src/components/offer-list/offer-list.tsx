@@ -2,7 +2,7 @@ import { Offer } from '../../types/offer';
 
 import RoomCard from '../../components/room-card/room-card';
 import { useAppDispatch } from '../../hooks';
-import { setActiveOffer } from '../../store/offers/actions';
+import { setActiveOffer } from '../../store/offers/offers';
 
 type OfferListProps = {
   cssClass: string;

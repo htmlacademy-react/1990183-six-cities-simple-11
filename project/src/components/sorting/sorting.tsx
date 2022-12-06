@@ -2,7 +2,7 @@ import { memo, useState } from 'react';
 
 import { SortType } from '../../const';
 
-import { sortOffers } from '../../store/offers/actions';
+import { sortOffers } from '../../store/offers/offers';
 import { getSortType } from '../../store/offers/selectors';
 
 import { useAppDispatch, useAppSelector } from '../../hooks';

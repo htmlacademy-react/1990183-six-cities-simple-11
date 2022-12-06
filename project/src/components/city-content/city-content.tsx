@@ -1,14 +1,15 @@
+import { useEffect } from 'react';
+
 import { Offer } from '../../types/offer';
 
 import { getActiveOffer } from '../../store/offers/selectors';
+import { setActiveOffer } from '../../store/offers/offers';
 
 import { useAppDispatch, useAppSelector } from '../../hooks';
 
 import OfferList from '../offer-list/offer-list';
 import Sorting from '../sorting/sorting';
 import Map from '../map/map';
-import { useEffect } from 'react';
-import { setActiveOffer } from '../../store/offers/actions';
 
 type CityContentProps = {
   offers: Offer[];
