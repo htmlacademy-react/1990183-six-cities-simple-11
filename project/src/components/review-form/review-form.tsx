@@ -7,8 +7,8 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { sendReviewAction } from '../../store/offer/api-actions';
 import {
   getOffer,
-  getReviewSendingStatus,
-  getReviewSentSuccessfullyStatus } from '../../store/offer/selectors';
+  checkReviewSendingStatus,
+  checkReviewSentSuccessfullyStatus } from '../../store/offer/selectors';
 
 import RatingForm from '../rating-form/rating-form';
 
@@ -23,8 +23,8 @@ function ReviewForm() {
 
   const offer = useAppSelector(getOffer);
   const offerId = offer?.id;
-  const isSending = useAppSelector(getReviewSendingStatus);
-  const isSentSuccessfully = useAppSelector(getReviewSentSuccessfullyStatus);
+  const isSending = useAppSelector(checkReviewSendingStatus);
+  const isSentSuccessfully = useAppSelector(checkReviewSentSuccessfullyStatus);
 
   const disabledClass = isSending ? 'reviews__form--disabled' : '';
 

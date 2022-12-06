@@ -1,3 +1,3 @@
 import { State } from '../../types/state';
 
-export const getHeaderNavigationAvailability = (state: State) => state.app.hasHeaderNavigation;
+export const checkHeaderNavigation = (state: State) => state.app.hasHeaderNavigation;

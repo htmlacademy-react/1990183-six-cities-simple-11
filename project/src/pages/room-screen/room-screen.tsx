@@ -8,9 +8,9 @@ import {
 
 import {
   getOffer,
-  getOfferLoadingStatus,
-  getOffersNearByLoadingStatus,
-  getReviewsLoadingStatus } from '../../store/offer/selectors';
+  checkOfferLoadingStatus,
+  checkOffersNearByLoadingStatus,
+  checkReviewsLoadingStatus } from '../../store/offer/selectors';
 
 import { useAppDispatch, useAppSelector } from '../../hooks';
 
@@ -20,9 +20,9 @@ import RoomScreenContent from '../../components/room-screen-content/room-screen-
 function RoomScreen() {
   const offer = useAppSelector(getOffer);
 
-  const isOfferLoading = useAppSelector(getOfferLoadingStatus);
-  const areOffersNearByLoading = useAppSelector(getOffersNearByLoadingStatus);
-  const areReviewsLoading = useAppSelector(getReviewsLoadingStatus);
+  const isOfferLoading = useAppSelector(checkOfferLoadingStatus);
+  const areOffersNearByLoading = useAppSelector(checkOffersNearByLoadingStatus);
+  const areReviewsLoading = useAppSelector(checkReviewsLoadingStatus);
 
   const areDataLoading =
     (offer === null || isOfferLoading || areOffersNearByLoading || areReviewsLoading);

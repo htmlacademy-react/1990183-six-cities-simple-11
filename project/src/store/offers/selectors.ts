@@ -6,11 +6,11 @@ import { Offer } from '../../types/offer';
 import { State } from '../../types/state';
 
 export const getOffers = (state: State) => state.offers.offers;
-export const getOffersLoadingStatus = (state: State) => state.offers.areOffersLoading;
+export const checkOffersLoadingStatus = (state: State) => state.offers.areOffersLoading;
 export const getCurrentCity = (state: State) => state.offers.currentCity;
 export const getSortType = (state: State) => state.offers.sortType;
 export const getActiveOffer = (state: State) => state.offers.activeOffer;
-export const getCurrentOffersEmptyStatus = (state: State) => state.offers.areCurrentOffersEmpty;
+export const checkCurrentOffersEmptyStatus = (state: State) => state.offers.areCurrentOffersEmpty;
 
 export const getSortedOffers = createSelector(
   [getSortType, getOffers],
