@@ -11,7 +11,7 @@ import {
   checkReviewSentSuccessfullyStatus } from '../../store/offer/selectors';
 
 import RatingForm from '../rating-form/rating-form';
-import { setReviewSentSuccessfullyStatus } from '../../store/offer/actions';
+import { setReviewSentSuccessfullyStatus } from '../../store/offer/offer';
 
 enum ReviewLength {
   Min = 50,

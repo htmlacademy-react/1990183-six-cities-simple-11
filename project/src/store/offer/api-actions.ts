@@ -10,17 +10,6 @@ import { Review } from '../../types/review';
 
 import { redirectToRoute } from '../app/actions';
 
-import {
-  addReview,
-  loadOffer,
-  loadOffersNearBy,
-  loadReviews,
-  setOfferLoadingStatus,
-  setOffersNearByLoadingStatus,
-  setReviewSentSuccessfullyStatus,
-  setReviewSendingStatus,
-  setReviewsLoadingStatus } from '../offer/actions';
-
 type ReviewData = {
   comment: string;
   rating: number;
@@ -30,7 +19,7 @@ type ReviewRequestData = ReviewData & {
   id: OfferId;
 };
 
-export const fetchOfferAction = createAsyncThunk<void, OfferId, {
+export const fetchOfferAction = createAsyncThunk<Offer | null, OfferId, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
@@ -38,78 +27,56 @@ export const fetchOfferAction = createAsyncThunk<void, OfferId, {
   'data/fetchOffer',
   async (id, {dispatch, extra: api}) => {
     try {
-      dispatch(setOfferLoadingStatus(true));
-
       const {data} = await api.get<Offer>(generatePath(ApiRoute.Offer, {id: String(id)}));
-
-      dispatch(loadOffer(data));
-      dispatch(setOfferLoadingStatus(false));
+      return data;
     }
 
     catch {
       dispatch(redirectToRoute(AppRoute.ForcedNotFound));
+      return null;
     }
   }
 );
 
-export const fetchOffersNearByAction = createAsyncThunk<void, OfferId, {
+export const fetchOffersNearByAction = createAsyncThunk<Offer[], OfferId, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
 }>(
   'data/fetchOffersNearBy',
-  async (id, {dispatch, extra: api}) => {
-    dispatch(setOffersNearByLoadingStatus(true));
-
+  async (id, {extra: api}) => {
     const {data} = await api.get<Offer[]>(generatePath(ApiRoute.OffersNearBy, {id: String(id)}));
-
-    dispatch(loadOffersNearBy(data));
-    dispatch(setOffersNearByLoadingStatus(false));
+    return data;
   }
 );
 
-export const fetchReviewsAction = createAsyncThunk<void, OfferId, {
+export const fetchReviewsAction = createAsyncThunk<Review[], OfferId, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
 }>(
   'data/fetchComments',
-  async (id, {dispatch, extra: api}) => {
-    dispatch(setReviewsLoadingStatus(true));
-
+  async (id, {extra: api}) => {
     const {data} = await api.get<Review[]>(generatePath(ApiRoute.Reviews, {id: String(id)}));
-
-    dispatch(loadReviews(data));
-    dispatch(setReviewsLoadingStatus(false));
+    return data;
   }
 );
 
-export const sendReviewAction = createAsyncThunk<void, ReviewRequestData, {
+export const sendReviewAction = createAsyncThunk<Review, ReviewRequestData, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
 }>(
   'reviews/send',
-  async (requestData, {dispatch, extra: api}) => {
-    dispatch(setReviewSendingStatus(true));
+  async (requestData, {extra: api}) => {
+    const {id, comment, rating} = requestData;
 
-    try {
-      const {id, comment, rating} = requestData;
+    const {data} = await api.post<Review[]>(
+      generatePath(ApiRoute.Reviews, {id: String(id)}),
+      {comment, rating}
+    );
+    const newReview = data[data.length - 1];
 
-      const {data} = await api.post<Review[]>(
-        generatePath(ApiRoute.Reviews, {id: String(id)}),
-        {comment, rating}
-      );
-      const newReview = data[data.length - 1];
-
-      dispatch(addReview(newReview));
-      dispatch(setReviewSentSuccessfullyStatus(true));
-    }
-
-    catch (error) {
-      dispatch(setReviewSentSuccessfullyStatus(false));
-    }
-
-    dispatch(setReviewSendingStatus(false));
+    return newReview;
   }
 );
