@@ -1,6 +1,7 @@
-import { address, datatype, image, internet, lorem, name } from 'faker';
+import { address, datatype, date, image, internet, lorem, name } from 'faker';
 
 import { City, Location, Offer, OfferGallery, OfferGoods } from '../types/offer';
+import { Review } from '../types/review';
 import { AuthorizedUser, User } from '../types/user';
 
 export const createFakeUser = (): User => ({
@@ -56,3 +57,14 @@ export const createFakeOffers = (): Offer[] =>
 
 export const createFakeOffersNearBy = (): Offer[] =>
   Array.from({length: 3}, createFakeOffer);
+
+export const createFakeReview = (): Review => ({
+  id: datatype.number(),
+  date: String(date.past()),
+  rating: datatype.number({min: 0, max: 5, precision: 0.1}),
+  user: createFakeUser(),
+  comment: lorem.paragraph(),
+});
+
+export const createFakeReviews = (): Review[] =>
+  Array.from({length: 3}, createFakeReview);
