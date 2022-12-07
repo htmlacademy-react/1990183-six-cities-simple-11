@@ -1,10 +1,16 @@
 import { datatype } from 'faker';
-import { CITIES, SortType } from '../../const';
 
+import { CITIES, SortType } from '../../const';
 import { createFakeCity, createFakeOffer, createFakeOffers } from '../../utils/mocks';
 
 import { fetchOffersAction } from './api-actions';
-import { changeCity, offers, OffersState, setActiveOffer, setCurrentOffersEmptyStatus, sortOffers } from './offers';
+import {
+  changeCity,
+  offers,
+  OffersState,
+  setActiveOffer,
+  setCurrentOffersEmptyStatus,
+  sortOffers } from './offers';
 
 const fakeOffer = createFakeOffer();
 const fakeOffers = createFakeOffers();
