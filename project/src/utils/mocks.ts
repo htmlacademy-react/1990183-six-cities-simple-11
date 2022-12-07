@@ -1,13 +1,19 @@
-import { address, datatype, image, lorem, name } from 'faker';
+import { address, datatype, image, internet, lorem, name } from 'faker';
 
 import { City, Location, Offer, OfferGallery, OfferGoods } from '../types/offer';
-import { User } from '../types/user';
+import { AuthorizedUser, User } from '../types/user';
 
 export const createFakeUser = (): User => ({
   id: datatype.number(),
   name: name.findName(),
   avatarUrl: image.avatar(),
   isPro: datatype.boolean(),
+});
+
+export const createFakeAuthorizedUser = (): AuthorizedUser => ({
+  ...createFakeUser(),
+  email: internet.email(),
+  token: internet.password(),
 });
 
 export const createFakeLocation = (): Location => ({
