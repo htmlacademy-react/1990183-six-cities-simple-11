@@ -8,7 +8,7 @@ import { AppDispatch, State } from '../../types/state';
 import { Offer, OfferId } from '../../types/offer';
 import { Review } from '../../types/review';
 
-import { redirectToRoute } from '../app/actions';
+import { redirectToRoute } from '../actions';
 
 type ReviewData = {
   comment: string;

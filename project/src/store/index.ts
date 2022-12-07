@@ -7,7 +7,7 @@ import { redirect } from './middlewares/redirect';
 import { offers, OffersState } from './offers/offers';
 import { offer, OfferState } from './offer/offer';
 import { user, UserState } from './user/user';
-import { appReducer, AppState } from './app/app-reducer';
+import { app, AppState } from './app/app';
 
 export type CombineReducer = {
   offers: OffersState;
@@ -23,7 +23,7 @@ export const store = configureStore({
     offers: offers.reducer,
     offer: offer.reducer,
     user: user.reducer,
-    app: appReducer,
+    app: app.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

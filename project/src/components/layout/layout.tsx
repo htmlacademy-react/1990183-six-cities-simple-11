@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom';
 
 import { AppRoute } from '../../const';
 
-import { setHeaderNavigationStatus } from '../../store/app/actions';
+import { setHeaderNavigationStatus } from '../../store/app/app';
 import { checkCurrentOffersEmptyStatus } from '../../store/offers/selectors';
 
 import { useAppDispatch, useAppSelector } from '../../hooks';

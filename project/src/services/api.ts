@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import { AppRoute } from '../const';
 
 import { store } from '../store';
-import { redirectToRoute } from '../store/app/actions';
+import { redirectToRoute } from '../store/actions';
 
 import { getToken } from './token';
 
