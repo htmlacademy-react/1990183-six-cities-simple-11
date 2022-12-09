@@ -24,7 +24,10 @@ function RoomCard(props: RoomCardProps) {
       {offer.isPremium && <PremiumLabel cssClass="place-card__mark" />}
 
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <Link to={generatePath(AppRoute.Offer, {id: String(offer.id)})}>
+        <Link
+          to={generatePath(AppRoute.Offer, {id: String(offer.id)})}
+          data-testid="link"
+        >
           <img
             className="place-card__image"
             src={offer.previewImage}

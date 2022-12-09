@@ -2,11 +2,6 @@ import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 import { StatusCodes } from 'http-status-codes';
 import { toast } from 'react-toastify';
 
-import { AppRoute } from '../const';
-
-import { store } from '../store';
-import { redirectToRoute } from '../store/actions';
-
 import { getToken } from './token';
 
 const BACKEND_URL = 'https://11.react.pages.academy/six-cities-simple';
@@ -46,10 +41,6 @@ export const createAPI = () => {
     (error: AxiosError<{error: string}>) => {
       if (error.response && shouldDisplayError(error.response)) {
         toast.error(error.message);
-      }
-
-      if (error.response?.status === 0) {
-        store.dispatch(redirectToRoute(AppRoute.Disconnect));
       }
 
       throw error;

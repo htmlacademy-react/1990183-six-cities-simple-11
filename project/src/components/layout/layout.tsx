@@ -45,7 +45,6 @@ function Layout() {
         case AppRoute.Login:
         case AppRoute.NotFound:
         case AppRoute.ForcedNotFound:
-        case AppRoute.Disconnect:
           setPageCssClass('page--gray page--login');
           setMainCssClass('page__main--login');
           dispatch(setHeaderNavigationStatus(false));
@@ -62,7 +61,7 @@ function Layout() {
     <div className={`page ${pageCssClass}`}>
       <Header />
 
-      <main className={`page__main ${mainCssClass}`}>
+      <main className={`page__main ${mainCssClass}`} data-testid="main-content">
         <Outlet />
       </main>
     </div>

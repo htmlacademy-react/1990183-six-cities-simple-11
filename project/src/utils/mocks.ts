@@ -29,10 +29,10 @@ export const createFakeCity = (): City => ({
 });
 
 export const createFakeGallery = (): OfferGallery =>
-  Array.from({length: 6}, () => image.abstract());
+  Array.from({length: 6}, (_, index) => `${image.abstract()}?v${index}`);
 
 export const createFakeGoods = (): OfferGoods =>
-  Array.from({length: 8}, () => lorem.word());
+  Array.from({length: 8}, (_, index) => `${lorem.word()}-${index}`);
 
 export const createFakeOffer = (): Offer => ({
   id: datatype.number({min: 0, max: 1000}),

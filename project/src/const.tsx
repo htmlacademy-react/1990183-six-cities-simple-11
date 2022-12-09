@@ -4,7 +4,6 @@ export enum AppRoute {
   Offer = '/offer/:id',
   NotFound = '*',
   ForcedNotFound = '/404',
-  Disconnect = '/disconnect',
 }
 
 export enum RoomType {

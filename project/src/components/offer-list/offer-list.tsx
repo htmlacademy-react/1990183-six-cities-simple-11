@@ -15,10 +15,10 @@ function OfferList(props: OfferListProps) {
   const dispatch = useAppDispatch();
 
   return (
-    <div className={`places__list ${cssClass}`}>
+    <div className={`places__list ${cssClass}`} data-testid="offer-list">
       {offers.map((offer) => (
         <RoomCard
-          key={`key-${offer.id}`}
+          key={`${offer.title}-${offer.id}`}
           offer={offer}
           onActiveSet={() => dispatch(setActiveOffer(offer))}
           onActiveUnset={() => dispatch(setActiveOffer(null))}

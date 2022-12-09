@@ -8,7 +8,7 @@ type HostProps = {
 
 function Host({user, description}: HostProps) {
   return (
-    <div className="property__host">
+    <div className="property__host" data-testid="host">
       <h2 className="property__host-title">Meet the host</h2>
 
       <div className="property__host-user user">
@@ -16,7 +16,8 @@ function Host({user, description}: HostProps) {
           <img
             className="property__avatar user__avatar"
             src={user.avatarUrl}
-            width="74" height="74" alt="Host avatar"
+            width="74" height="74"
+            alt="Host avatar"
           />
         </div>
 

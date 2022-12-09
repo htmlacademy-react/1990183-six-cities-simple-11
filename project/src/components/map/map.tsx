@@ -80,6 +80,7 @@ function Map(props: MapProps) {
     <section
       className={`map ${cssClass}`}
       ref={mapRef}
+      data-testid="map"
     >
     </section>
   );

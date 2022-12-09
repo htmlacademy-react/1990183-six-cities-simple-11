@@ -7,6 +7,7 @@ function HeaderSignIn() {
       <Link
         className="header__nav-link header__nav-link--profile"
         to={AppRoute.Login}
+        data-testid="link-sign-in"
       >
         <div className="header__avatar-wrapper user__avatar-wrapper"></div>
         <span className="header__login">Sign in</span>

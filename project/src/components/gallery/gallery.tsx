@@ -13,7 +13,7 @@ function Gallery(props: GalleryProps) {
 
   return (
     <div className="property__gallery-container container">
-      <div className="property__gallery">
+      <div className="property__gallery" data-testid="gallery">
         {visibleImages.map((src) => (
           <div
             key={src}

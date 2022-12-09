@@ -20,7 +20,7 @@ function HeaderNavigation() {
 
   return (
     <nav className="header__nav">
-      <ul className="header__nav-list">
+      <ul className="header__nav-list" data-testid="items">
 
         {
           isUserLogged ?

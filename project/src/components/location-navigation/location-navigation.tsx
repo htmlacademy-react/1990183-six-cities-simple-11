@@ -8,7 +8,7 @@ function LocationNavigation(props: LocationNavigationProps) {
   const { locations, currentLocation, onLocationChange } = props;
 
   return (
-    <div className="tabs">
+    <div className="tabs" data-testid="location-navigation">
       <section className="locations container">
         <ul className="locations__list tabs__list">
           {locations.map((location) => {

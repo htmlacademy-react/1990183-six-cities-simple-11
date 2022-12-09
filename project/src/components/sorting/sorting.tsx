@@ -31,7 +31,7 @@ function Sorting() {
   };
 
   return (
-    <form className="places__sorting" action="#" method="get">
+    <form className="places__sorting" action="#" method="get" data-testid="sorting">
       <span className="places__sorting-caption">Sort by</span>{' '}
 
       <span
@@ -62,6 +62,7 @@ function Sorting() {
               className={`places__option ${activeClass}`}
               tabIndex={0}
               onClick={() => handleOptionClick(label, value)}
+              data-testid="sorting-item"
             >
               {label}
             </li>

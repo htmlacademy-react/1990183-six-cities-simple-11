@@ -38,7 +38,7 @@ function MainScreenContent() {
 
   return (
     <>
-      <h1 className="visually-hidden">Cities</h1>
+      <h1 className="visually-hidden" data-testid="main-screen-title">Cities</h1>
 
       <LocationNavigation
         locations={CITIES}

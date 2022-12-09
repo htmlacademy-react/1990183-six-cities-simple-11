@@ -21,7 +21,7 @@ function RoomScreenContent() {
 
   return (
     <>
-      <section className="property">
+      <section className="property" data-testid="room-screen">
         <Gallery
           images={offer.images}
           alt={offer.title}

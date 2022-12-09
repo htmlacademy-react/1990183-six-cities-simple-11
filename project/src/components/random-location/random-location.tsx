@@ -33,6 +33,7 @@ function RandomLocation() {
           className="locations__item-link"
           href="#location"
           onClick={handleLocationClick}
+          data-testid="link"
         >
           <span>{location}</span>
         </a>

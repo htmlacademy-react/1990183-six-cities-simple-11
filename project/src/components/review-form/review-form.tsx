@@ -111,6 +111,7 @@ function ReviewForm() {
         placeholder="Tell how was your stay, what you like and what can be improved"
         onChange={handleTextareaChange}
         value={review}
+        data-testid="review-textarea"
       >
       </textarea>
 

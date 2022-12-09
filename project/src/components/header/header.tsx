@@ -11,10 +11,11 @@ function Header() {
       <div className="container">
         <div className="header__wrapper">
 
-          <div className="header__left">
+          <div className="header__left" data-testid="header-content">
             <Link
               className="header__logo-link header__logo-link--active"
               to={AppRoute.Root}
+              data-testid="link-logo"
             >
               <img
                 className="header__logo"
