@@ -32,7 +32,7 @@ describe('Component: ReviewForm', () => {
       </Provider>
     );
 
-    const fakeText = lorem.paragraph();
+    const fakeText = lorem.paragraph().slice(0, 299);
     const textareaElement = screen.getByTestId('review-textarea');
 
     expect(screen.getByLabelText('Your review')).toBeInTheDocument();
