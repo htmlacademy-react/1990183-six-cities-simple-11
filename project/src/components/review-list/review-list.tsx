@@ -13,7 +13,7 @@ function ReviewList(props: ReviewListProps) {
   const visibleReviews = reviews.slice(0, maxLength).sort(onSort);
 
   return (
-    <ul className="reviews__list">
+    <ul className="reviews__list" data-testid="list">
       {visibleReviews.map((review) => (
         <ReviewItem key={review.id} review={review} />
       ))}

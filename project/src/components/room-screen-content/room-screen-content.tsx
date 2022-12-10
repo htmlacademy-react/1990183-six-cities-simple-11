@@ -1,5 +1,7 @@
 import { Offer } from '../../types/offer';
 
+import { getOffer, getOffersNearBy, getReviews } from '../../store/offer/selectors';
+
 import { useAppSelector } from '../../hooks';
 
 import Gallery from '../gallery/gallery';
@@ -13,13 +15,13 @@ import Map from '../map/map';
 const MAX_GALLERY_LENGTH = 6;
 
 function RoomScreenContent() {
-  const offer = useAppSelector((state) => state.offer.offer) as Offer;
-  const offersNearBy = useAppSelector((state) => state.offer.offersNearBy);
-  const reviews = useAppSelector((state) => state.offer.reviews);
+  const offer = useAppSelector(getOffer) as Offer;
+  const offersNearBy = useAppSelector(getOffersNearBy);
+  const reviews = useAppSelector(getReviews);
 
   return (
     <>
-      <section className="property">
+      <section className="property" data-testid="room-screen">
         <Gallery
           images={offer.images}
           alt={offer.title}

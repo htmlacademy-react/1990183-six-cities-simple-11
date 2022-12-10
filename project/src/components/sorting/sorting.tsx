@@ -1,8 +1,11 @@
 import { memo, useState } from 'react';
 
 import { SortType } from '../../const';
+
+import { sortOffers } from '../../store/offers/offers';
+import { getSortType } from '../../store/offers/selectors';
+
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { sortOffers } from '../../store/offers/actions';
 
 const SortLabel = {
   [SortType.Popular]: 'Popular',
@@ -12,7 +15,7 @@ const SortLabel = {
 } as const;
 
 function Sorting() {
-  const activeSortType = useAppSelector((state) => state.offers.sortType);
+  const activeSortType = useAppSelector(getSortType);
 
   const [isDropdownOpened, setDropdownOpenedStatus] = useState<boolean>(false);
   const [activeOption, setActiveOption] = useState<string>(SortLabel[activeSortType]);
@@ -28,7 +31,7 @@ function Sorting() {
   };
 
   return (
-    <form className="places__sorting" action="#" method="get">
+    <form className="places__sorting" action="#" method="get" data-testid="sorting">
       <span className="places__sorting-caption">Sort by</span>{' '}
 
       <span
@@ -59,6 +62,7 @@ function Sorting() {
               className={`places__option ${activeClass}`}
               tabIndex={0}
               onClick={() => handleOptionClick(label, value)}
+              data-testid="sorting-item"
             >
               {label}
             </li>

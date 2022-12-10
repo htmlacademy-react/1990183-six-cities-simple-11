@@ -1,13 +1,17 @@
 import { AuthStatus } from '../../const';
+
 import { useAppSelector } from '../../hooks';
+
+import { checkHeaderNavigation } from '../../store/app/selectors';
+import { getAuthStatus } from '../../store/user/selectors';
 
 import HeaderProfile from '../header-profile/header-profile';
 import HeaderSignIn from '../header-sign-in/header-sign-in';
 import HeaderSignOut from '../header-sign-out/header-sign-out';
 
-function HeaderNav() {
-  const hasHeaderNavigation = useAppSelector((state) => state.app.hasHeaderNavigation);
-  const authStatus = useAppSelector((state) => state.user.authStatus);
+function HeaderNavigation() {
+  const hasHeaderNavigation = useAppSelector(checkHeaderNavigation);
+  const authStatus = useAppSelector(getAuthStatus);
   const isUserLogged = (authStatus === AuthStatus.Auth);
 
   if (!hasHeaderNavigation) {
@@ -16,7 +20,7 @@ function HeaderNav() {
 
   return (
     <nav className="header__nav">
-      <ul className="header__nav-list">
+      <ul className="header__nav-list" data-testid="items">
 
         {
           isUserLogged ?
@@ -33,4 +37,4 @@ function HeaderNav() {
   );
 }
 
-export default HeaderNav;
+export default HeaderNavigation;

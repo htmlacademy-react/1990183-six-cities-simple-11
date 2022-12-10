@@ -17,7 +17,10 @@ function RatingForm(props: RatingFormProps) {
   const {rating, onRate} = props;
 
   return (
-    <div className="reviews__rating-form form__rating">
+    <div
+      className="reviews__rating-form form__rating"
+      data-testid="rating-form"
+    >
       {ratingStars.map((title, index, array) => {
         const value = array.length - index;
 

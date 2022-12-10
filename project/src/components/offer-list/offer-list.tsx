@@ -2,7 +2,7 @@ import { Offer } from '../../types/offer';
 
 import RoomCard from '../../components/room-card/room-card';
 import { useAppDispatch } from '../../hooks';
-import { setActiveOffer } from '../../store/offers/actions';
+import { setActiveOffer } from '../../store/offers/offers';
 
 type OfferListProps = {
   cssClass: string;
@@ -15,10 +15,10 @@ function OfferList(props: OfferListProps) {
   const dispatch = useAppDispatch();
 
   return (
-    <div className={`places__list ${cssClass}`}>
+    <div className={`places__list ${cssClass}`} data-testid="offer-list">
       {offers.map((offer) => (
         <RoomCard
-          key={`key-${offer.id}`}
+          key={`${offer.title}-${offer.id}`}
           offer={offer}
           onActiveSet={() => dispatch(setActiveOffer(offer))}
           onActiveUnset={() => dispatch(setActiveOffer(null))}

@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 
 import { Offer } from '../../types/offer';
 
@@ -6,16 +6,16 @@ import { CITIES } from '../../const';
 
 import { useAppDispatch, useAppSelector } from '../../hooks';
 
-import { changeCity, setCurrentOffersEmptyStatus } from '../../store/offers/actions';
-import { selectSortedOffers } from '../../store/selectors/select-sorted-offers';
+import { changeCity, setCurrentOffersEmptyStatus } from '../../store/offers/offers';
+import { getCurrentCity, getSortedOffers } from '../../store/offers/selectors';
 
-import LocationNav from '../location-nav/location-nav';
+import LocationNavigation from '../location-navigation/location-navigation';
 import CityContent from '../city-content/city-content';
 import CityContentEmpty from '../city-content-empty/city-content-empty';
 
 function MainScreenContent() {
-  const currentCity = useAppSelector((state) => state.offers.currentCity) as string;
-  const sortedOffers = useAppSelector((state) => selectSortedOffers(state.offers)) as Offer[];
+  const currentCity = useAppSelector(getCurrentCity) as string;
+  const sortedOffers = useAppSelector(getSortedOffers) as Offer[];
 
   const dispatch = useAppDispatch();
 
@@ -30,15 +30,17 @@ function MainScreenContent() {
     dispatch(changeCity(city));
   };
 
-  isOfferListEmpty
-    ? dispatch(setCurrentOffersEmptyStatus(true))
-    : dispatch(setCurrentOffersEmptyStatus(false));
+  useEffect(() => {
+    isOfferListEmpty
+      ? dispatch(setCurrentOffersEmptyStatus(true))
+      : dispatch(setCurrentOffersEmptyStatus(false));
+  }, [dispatch, isOfferListEmpty]);
 
   return (
     <>
-      <h1 className="visually-hidden">Cities</h1>
+      <h1 className="visually-hidden" data-testid="main-screen-title">Cities</h1>
 
-      <LocationNav
+      <LocationNavigation
         locations={CITIES}
         currentLocation={currentCity}
         onLocationChange={handleLocationChange}

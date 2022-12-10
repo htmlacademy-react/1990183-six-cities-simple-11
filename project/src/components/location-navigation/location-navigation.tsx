@@ -1,14 +1,14 @@
-type LocationNavProps = {
+type LocationNavigationProps = {
   locations: string[];
   currentLocation: string;
   onLocationChange: (location: string) => void;
 };
 
-function LocationNav(props: LocationNavProps) {
+function LocationNavigation(props: LocationNavigationProps) {
   const { locations, currentLocation, onLocationChange } = props;
 
   return (
-    <div className="tabs">
+    <div className="tabs" data-testid="location-navigation">
       <section className="locations container">
         <ul className="locations__list tabs__list">
           {locations.map((location) => {
@@ -27,6 +27,7 @@ function LocationNav(props: LocationNavProps) {
                     evt.preventDefault();
                     onLocationChange(location);
                   }}
+                  data-testid="link-location"
                 >
                   <span>{location}</span>
                 </a>
@@ -39,4 +40,4 @@ function LocationNav(props: LocationNavProps) {
   );
 }
 
-export default LocationNav;
+export default LocationNavigation;

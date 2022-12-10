@@ -1,16 +1,19 @@
 import { createSelector } from '@reduxjs/toolkit';
 
-import { Offer } from '../../types/offer';
-
 import { SortType } from '../../const';
 
-import { OffersState } from '../offers/reducer';
+import { Offer } from '../../types/offer';
+import { State } from '../../types/state';
 
-const selectOffers = (state: OffersState) => state.offers;
-const selectSortType = (state: OffersState) => state.sortType;
+export const getOffers = (state: State) => state.offers.offers;
+export const checkOffersLoadingStatus = (state: State) => state.offers.areOffersLoading;
+export const getCurrentCity = (state: State) => state.offers.currentCity;
+export const getSortType = (state: State) => state.offers.sortType;
+export const getActiveOffer = (state: State) => state.offers.activeOffer;
+export const checkCurrentOffersEmptyStatus = (state: State) => state.offers.areCurrentOffersEmpty;
 
-export const selectSortedOffers = createSelector(
-  [selectSortType, selectOffers],
+export const getSortedOffers = createSelector(
+  [getSortType, getOffers],
   (sortType: SortType, offers: Offer[] | null): Offer[] | null => {
     if (offers === null) {
       return null;

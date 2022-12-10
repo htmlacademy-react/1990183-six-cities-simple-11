@@ -3,7 +3,8 @@ import { Outlet } from 'react-router-dom';
 
 import { AppRoute } from '../../const';
 
-import { setHeaderNavigationStatus } from '../../store/app/actions';
+import { setHeaderNavigationStatus } from '../../store/app/app';
+import { checkCurrentOffersEmptyStatus } from '../../store/offers/selectors';
 
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import useCurrentRoute from '../../hooks/use-current-route/use-current-router';
@@ -11,7 +12,7 @@ import useCurrentRoute from '../../hooks/use-current-route/use-current-router';
 import Header from '../header/header';
 
 function Layout() {
-  const areCurrentOffersEmpty = useAppSelector((state) => state.offers.areCurrentOffersEmpty);
+  const areCurrentOffersEmpty = useAppSelector(checkCurrentOffersEmptyStatus);
   const dispatch = useAppDispatch();
   const currentRoute = useCurrentRoute();
 
@@ -19,40 +20,48 @@ function Layout() {
   const [mainCssClass, setMainCssClass] = useState<string>('');
 
   useEffect(() => {
-    setPageCssClass('');
-    setMainCssClass('');
+    let isMounted = true;
 
-    switch (currentRoute) {
-      case AppRoute.Root:
-        setPageCssClass('page--gray page--main');
+    if (isMounted) {
+      setPageCssClass('');
+      setMainCssClass('');
 
-        areCurrentOffersEmpty
-          ? setMainCssClass('page__main--index page__main--index-empty')
-          : setMainCssClass('page__main--index');
+      switch (currentRoute) {
+        case AppRoute.Root:
+          setPageCssClass('page--gray page--main');
 
-        dispatch(setHeaderNavigationStatus(true));
-        break;
+          areCurrentOffersEmpty
+            ? setMainCssClass('page__main--index page__main--index-empty')
+            : setMainCssClass('page__main--index');
 
-      case AppRoute.OfferItem:
-        setMainCssClass('page__main--property');
-        dispatch(setHeaderNavigationStatus(true));
-        break;
+          dispatch(setHeaderNavigationStatus(true));
+          break;
 
-      case AppRoute.Login:
-      case AppRoute.NotFound:
-      case AppRoute.ForcedNotFound:
-        setPageCssClass('page--gray page--login');
-        setMainCssClass('page__main--login');
-        dispatch(setHeaderNavigationStatus(false));
-        break;
+        case AppRoute.Offer:
+          setMainCssClass('page__main--property');
+          dispatch(setHeaderNavigationStatus(true));
+          break;
+
+        case AppRoute.Login:
+        case AppRoute.NotFound:
+        case AppRoute.ForcedNotFound:
+          setPageCssClass('page--gray page--login');
+          setMainCssClass('page__main--login');
+          dispatch(setHeaderNavigationStatus(false));
+          break;
+      }
     }
+
+    return () => {
+      isMounted = false;
+    };
   }, [areCurrentOffersEmpty, currentRoute, dispatch]);
 
   return (
     <div className={`page ${pageCssClass}`}>
       <Header />
 
-      <main className={`page__main ${mainCssClass}`}>
+      <main className={`page__main ${mainCssClass}`} data-testid="main-content">
         <Outlet />
       </main>
     </div>

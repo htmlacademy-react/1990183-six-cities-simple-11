@@ -1,17 +1,18 @@
 import { FormEvent, useRef } from 'react';
 import { Navigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 import { AppRoute, AuthStatus } from '../../const';
 
 import { useAppDispatch, useAppSelector } from '../../hooks';
 
 import { loginAction } from '../../store/user/api-actions';
+import { getAuthStatus } from '../../store/user/selectors';
 
 import RandomLocation from '../../components/random-location/random-location';
-import { toast } from 'react-toastify';
 
 function LoginScreen() {
-  const authStatus = useAppSelector((state) => state.user.authStatus);
+  const authStatus = useAppSelector(getAuthStatus);
 
   const dispatch = useAppDispatch();
 
@@ -52,7 +53,7 @@ function LoginScreen() {
   }
 
   return (
-    <div className="page__login-container container">
+    <div className="page__login-container container" data-testid="login-screen">
       <section className="login">
 
         <h1 className="login__title">Sign in</h1>
@@ -64,26 +65,30 @@ function LoginScreen() {
           onSubmit={handleFormSubmit}
         >
           <div className="login__input-wrapper form__input-wrapper">
-            <label className="visually-hidden">E-mail</label>
+            <label className="visually-hidden" htmlFor='email'>E-mail</label>
             <input
               className="login__input form__input"
               type="email"
               name="email"
+              id="email"
               placeholder="Email"
               ref={emailRef}
               required
+              data-testid="email"
             />
           </div>
 
           <div className="login__input-wrapper form__input-wrapper">
-            <label className="visually-hidden">Password</label>
+            <label className="visually-hidden" htmlFor='password'>Password</label>
             <input
               className="login__input form__input"
               type="password"
               name="password"
+              id="password"
               placeholder="Password"
               ref={passwordRef}
               required
+              data-testid="password"
             />
           </div>
 

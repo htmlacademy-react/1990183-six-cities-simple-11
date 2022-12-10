@@ -53,13 +53,9 @@ function Map(props: MapProps) {
 
   useEffect(() => {
     if (map) {
-      map.panTo(
+      map.flyTo(
         [center.latitude, center.longitude],
-        {
-          animate: true,
-          duration: 2,
-          easeLinearity: .5,
-        }
+        center.zoom
       );
 
       markersRef.current.forEach((markerItem) => markerItem.remove());
@@ -84,6 +80,7 @@ function Map(props: MapProps) {
     <section
       className={`map ${cssClass}`}
       ref={mapRef}
+      data-testid="map"
     >
     </section>
   );

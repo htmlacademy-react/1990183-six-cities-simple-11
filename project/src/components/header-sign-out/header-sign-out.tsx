@@ -17,6 +17,7 @@ function HeaderSignOut() {
         className="header__nav-link"
         href="#signout"
         onClick={handleSignOutClick}
+        data-testid="link-sign-out"
       >
         <span className="header__signout">Sign out</span>
       </a>

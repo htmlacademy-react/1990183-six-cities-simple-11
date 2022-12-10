@@ -4,10 +4,10 @@ import { createAPI } from '../services/api';
 
 import { redirect } from './middlewares/redirect';
 
-import { offersReducer, OffersState } from './offers/reducer';
-import { offerReducer, OfferState } from './offer/reducer';
-import { userReducer, UserState } from './user/reducer';
-import { appReducer, AppState } from './app/reducer';
+import { offers, OffersState } from './offers/offers';
+import { offer, OfferState } from './offer/offer';
+import { user, UserState } from './user/user';
+import { app, AppState } from './app/app';
 
 export type CombineReducer = {
   offers: OffersState;
@@ -20,10 +20,10 @@ export const api = createAPI();
 
 export const store = configureStore({
   reducer: {
-    offers: offersReducer,
-    offer: offerReducer,
-    user: userReducer,
-    app: appReducer,
+    offers: offers.reducer,
+    offer: offer.reducer,
+    user: user.reducer,
+    app: app.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

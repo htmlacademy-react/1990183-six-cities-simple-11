@@ -4,7 +4,7 @@ type PremiumLabelProps = {
 
 function PremiumLabel({cssClass}: PremiumLabelProps) {
   return (
-    <div className={cssClass}>
+    <div className={cssClass} data-testid="label-premium">
       <span>Premium</span>
     </div>
   );

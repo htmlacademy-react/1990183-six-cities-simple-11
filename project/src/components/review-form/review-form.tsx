@@ -1,10 +1,17 @@
 import './review-form.css';
 
 import { useState, ChangeEvent, useCallback, FormEvent, useEffect } from 'react';
+
 import { useAppDispatch, useAppSelector } from '../../hooks';
+
 import { sendReviewAction } from '../../store/offer/api-actions';
+import {
+  getOffer,
+  checkReviewSendingStatus,
+  checkReviewSentSuccessfullyStatus } from '../../store/offer/selectors';
 
 import RatingForm from '../rating-form/rating-form';
+import { setReviewSentSuccessfullyStatus } from '../../store/offer/offer';
 
 enum ReviewLength {
   Min = 50,
@@ -15,9 +22,10 @@ function ReviewForm() {
   const [rating, setRating] = useState<number | null>(null);
   const [review, setReview] = useState<string>('');
 
-  const offerId = useAppSelector((state) => state.offer.offer?.id);
-  const isSending = useAppSelector((state) => state.offer.isReviewSending);
-  const isSentSuccessfully = useAppSelector((state) => state.offer.isReviewSentSuccessfully);
+  const offer = useAppSelector(getOffer);
+  const offerId = offer?.id;
+  const isSending = useAppSelector(checkReviewSendingStatus);
+  const isSentSuccessfully = useAppSelector(checkReviewSentSuccessfullyStatus);
 
   const disabledClass = isSending ? 'reviews__form--disabled' : '';
 
@@ -66,11 +74,19 @@ function ReviewForm() {
   );
 
   useEffect(() => {
-    if (isSentSuccessfully) {
+    let isMounted = true;
+
+    if (isMounted && isSentSuccessfully) {
       setReview('');
       setRating(null);
     }
-  }, [isSentSuccessfully]);
+
+    dispatch(setReviewSentSuccessfullyStatus(false));
+
+    return () => {
+      isMounted = false;
+    };
+  }, [dispatch, isSentSuccessfully]);
 
   return (
     <form
@@ -95,6 +111,7 @@ function ReviewForm() {
         placeholder="Tell how was your stay, what you like and what can be improved"
         onChange={handleTextareaChange}
         value={review}
+        data-testid="review-textarea"
       >
       </textarea>
 

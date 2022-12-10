@@ -6,7 +6,7 @@ type RoomInsideProps = {
 
 function RoomInside({goods}: RoomInsideProps) {
   return (
-    <div className="property__inside">
+    <div className="property__inside" data-testid="room-inside">
       <h2 className="property__inside-title">What&apos;s inside</h2>
 
       <ul className="property__inside-list">
