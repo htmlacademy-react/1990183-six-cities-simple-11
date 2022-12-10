@@ -12,14 +12,20 @@ const history = createMemoryHistory();
 
 describe('Component: ReviewItem', () => {
   it('should render correctly', () => {
+    const fakeClass = 'fake-class';
+
     render(
       <Provider store={store}>
         <HistoryRoute history={history}>
-          <PremiumLabel cssClass="fake-class" />
+          <PremiumLabel cssClass={fakeClass} />
         </HistoryRoute>
       </Provider>
     );
 
+    const labelElement = screen.getByTestId('label-premium');
+
+    expect(labelElement).toBeInTheDocument();
+    expect(labelElement).toHaveClass(fakeClass);
     expect(screen.getByText('Premium')).toBeInTheDocument();
   });
 });

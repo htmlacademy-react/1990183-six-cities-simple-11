@@ -27,6 +27,7 @@ function LocationNavigation(props: LocationNavigationProps) {
                     evt.preventDefault();
                     onLocationChange(location);
                   }}
+                  data-testid="link-location"
                 >
                   <span>{location}</span>
                 </a>
